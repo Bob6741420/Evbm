@@ -143,7 +143,6 @@
         radial-gradient(ellipse 80% 60% at 50% 40%, rgba(92,58,30,0.25) 0%, transparent 70%),
         radial-gradient(ellipse 60% 40% at 50% 70%, rgba(92,26,26,0.2) 0%, transparent 70%),
         var(--bg);
-      overflow: hidden;
     }
 
     /* Animated background grid */
@@ -1227,7 +1226,7 @@
   let fCols, fRows, fGrid, fNext;
 
   function initFire() {
-    fireCanvas.width  = fireCanvas.offsetWidth;
+    fireCanvas.width  = window.innerWidth;
     fireCanvas.height = 160;
     fCols = Math.ceil(fireCanvas.width / CELL);
     fRows = Math.ceil(160 / CELL);
