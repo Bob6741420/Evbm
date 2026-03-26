@@ -869,11 +869,13 @@
 
     /* ---- HERO FIRE CANVAS ---- */
     #hero-fire-canvas {
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%; height: 160px;
+      display: block;
+      width: 100%;
+      height: 200px;
+      margin-top: -200px;
+      position: relative;
+      z-index: 10;
       pointer-events: none;
-      z-index: 2;
     }
 
     /* ---- CHAMPION PULSE ---- */
@@ -951,8 +953,9 @@
 
   <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
 
-  <canvas id="hero-fire-canvas"></canvas>
 </div>
+
+<canvas id="hero-fire-canvas"></canvas>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
@@ -1222,64 +1225,55 @@
   // ---- Hero fire canvas ----
   const fireCanvas = document.getElementById('hero-fire-canvas');
   const fctx = fireCanvas.getContext('2d');
-  const CELL = 8; // pixel size
+  const CELL = 8;
   let fCols, fRows, fGrid, fNext;
 
   function initFire() {
     fireCanvas.width  = window.innerWidth;
-    fireCanvas.height = 160;
+    fireCanvas.height = 200;
     fCols = Math.ceil(fireCanvas.width / CELL);
-    fRows = Math.ceil(160 / CELL);
+    fRows = Math.ceil(200 / CELL);
     fGrid = new Float32Array(fCols * fRows).fill(0);
     fNext = new Float32Array(fCols * fRows).fill(0);
-    // seed bottom row
     for (let x = 0; x < fCols; x++) fGrid[(fRows - 1) * fCols + x] = 1;
   }
 
   function stepFire() {
-    // seed bottom row with flicker
-    for (let x = 0; x < fCols; x++) {
-      fGrid[(fRows - 1) * fCols + x] = 0.8 + Math.random() * 0.2;
-    }
+    for (let x = 0; x < fCols; x++)
+      fGrid[(fRows - 1) * fCols + x] = 0.85 + Math.random() * 0.15;
     for (let y = 0; y < fRows - 1; y++) {
       for (let x = 0; x < fCols; x++) {
-        const below = fGrid[(y + 1) * fCols + x];
-        const bleft = fGrid[(y + 1) * fCols + Math.max(x - 1, 0)];
-        const bright = fGrid[(y + 1) * fCols + Math.min(x + 1, fCols - 1)];
-        const avg = (below + bleft + bright) / 3;
-        fNext[y * fCols + x] = Math.max(0, avg - 0.04 - Math.random() * 0.02);
+        const b  = fGrid[(y + 1) * fCols + x];
+        const bl = fGrid[(y + 1) * fCols + Math.max(x - 1, 0)];
+        const br = fGrid[(y + 1) * fCols + Math.min(x + 1, fCols - 1)];
+        fNext[y * fCols + x] = Math.max(0, (b + bl + br) / 3 - 0.035 - Math.random() * 0.02);
       }
     }
-    const tmp = fGrid; fGrid = fNext; fNext = tmp;
+    [fGrid, fNext] = [fNext, fGrid];
   }
 
   function drawFire() {
-    fctx.clearRect(0, 0, fireCanvas.width, 160);
+    fctx.clearRect(0, 0, fireCanvas.width, 200);
     for (let y = 0; y < fRows; y++) {
       for (let x = 0; x < fCols; x++) {
         const v = fGrid[y * fCols + x];
-        if (v < 0.01) continue;
-        // map value to fire color
-        let r, g, b, a;
-        if (v > 0.8) { r=255; g=255; b=Math.floor((v-0.8)/0.2*180); a=v; }
-        else if (v > 0.5) { r=255; g=Math.floor((v-0.5)/0.3*255); b=0; a=v; }
-        else if (v > 0.2) { r=255; g=0; b=0; a=v; }
-        else { r=180; g=0; b=0; a=v*2; }
-        fctx.fillStyle = `rgba(${r},${g},${b},${Math.min(a,1)})`;
+        if (v < 0.02) continue;
+        let r, g, b;
+        if      (v > 0.8) { r=255; g=255; b=Math.floor((v-0.8)*5*200); }
+        else if (v > 0.5) { r=255; g=Math.floor((v-0.5)*3.33*255); b=0; }
+        else if (v > 0.2) { r=255; g=0; b=0; }
+        else              { r=Math.floor(v*5*180); g=0; b=0; }
+        fctx.fillStyle = `rgb(${r},${g},${b})`;
+        fctx.globalAlpha = Math.min(v + 0.1, 1);
         fctx.fillRect(x * CELL, y * CELL, CELL, CELL);
       }
     }
+    fctx.globalAlpha = 1;
   }
 
   initFire();
   window.addEventListener('resize', initFire);
-
-  function fireLoop() {
-    stepFire();
-    drawFire();
-    requestAnimationFrame(fireLoop);
-  }
-  requestAnimationFrame(fireLoop);
+  (function fireLoop() { stepFire(); drawFire(); requestAnimationFrame(fireLoop); })();
 
   // ---- Fire particle system — emits from hero bottom ----
   const PARTICLES_PER_FIRE = 25;
