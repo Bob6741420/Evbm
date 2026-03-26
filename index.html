@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #1a1a1e;
-      --bg2:       #141418;
+      --bg:        #0d0d16;
+      --bg2:       #09090f;
       --brown-dark:#5C3A1E;
       --brown-mid: #8B5E3C;
       --brown-light:#C4845A;
@@ -1178,6 +1178,76 @@
       pointer-events: none;
     }
 
+    /* ---- MC TERRAIN (hero bottom) ---- */
+    .mc-terrain {
+      position: absolute;
+      bottom: 158px;
+      left: 0; right: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .mc-terrain-grass {
+      height: 16px;
+      background: repeating-linear-gradient(90deg,
+        #3E8018 0px,  #3E8018 15px,
+        #4A9A1E 15px, #4A9A1E 30px,
+        #2D6010 30px, #2D6010 31px,
+        #5AAE24 31px, #5AAE24 46px,
+        #3E8018 46px, #3E8018 61px,
+        #336614 61px, #336614 62px
+      );
+      border-top: 2px solid #285010;
+    }
+    .mc-terrain-dirt {
+      height: 12px;
+      background: repeating-linear-gradient(90deg,
+        #6B4C2A 0px,  #6B4C2A 15px,
+        #5C3A1E 15px, #5C3A1E 30px,
+        #7A5534 30px, #7A5534 31px,
+        #5C3A1E 31px, #5C3A1E 46px
+      );
+    }
+    .mc-terrain-stone {
+      height: 8px;
+      background: repeating-linear-gradient(90deg,
+        #666 0px, #666 15px,
+        #777 15px, #777 30px,
+        #555 30px, #555 31px
+      );
+    }
+
+    /* ---- GRASS BLOCK SECTION DIVIDER ---- */
+    .grass-divider {
+      height: 28px;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .grass-divider::before {
+      content: '';
+      display: block;
+      height: 14px;
+      background: repeating-linear-gradient(90deg,
+        #3E8018 0px,  #3E8018 15px,
+        #4A9A1E 15px, #4A9A1E 30px,
+        #2D6010 30px, #2D6010 31px,
+        #5AAE24 31px, #5AAE24 46px,
+        #3E8018 46px, #3E8018 60px
+      );
+      border-top: 2px solid #1e4008;
+    }
+    .grass-divider::after {
+      content: '';
+      display: block;
+      height: 14px;
+      background: repeating-linear-gradient(90deg,
+        #6B4C2A 0px,  #6B4C2A 15px,
+        #5C3A1E 15px, #5C3A1E 30px,
+        #7A5534 30px, #7A5534 31px,
+        #5C3A1E 31px, #5C3A1E 46px
+      );
+    }
+
     /* ---- MC TIP ---- */
     .mc-tip {
       font-family: 'VT323', monospace;
@@ -1271,6 +1341,11 @@
 
   <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
 
+  <div class="mc-terrain" aria-hidden="true">
+    <div class="mc-terrain-grass"></div>
+    <div class="mc-terrain-dirt"></div>
+    <div class="mc-terrain-stone"></div>
+  </div>
   <canvas id="hero-fire-canvas"></canvas>
 </div>
 
@@ -1281,6 +1356,7 @@
   </div>
 </div>
 
+<div class="grass-divider"></div>
 <!-- FEATURES -->
 <div id="features">
   <div class="inner">
@@ -1346,6 +1422,7 @@
 </section>
 
 
+<div class="grass-divider"></div>
 <!-- RANKS -->
 <div id="ranks">
   <div class="inner">
@@ -1480,6 +1557,7 @@
   </div>
 </div>
 
+<div class="grass-divider"></div>
 <!-- CTA -->
 <div id="cta">
   <div class="inner">
@@ -1761,6 +1839,17 @@
     return hero ? hero.getBoundingClientRect().bottom : window.innerHeight;
   }
 
+  const MC_BLOCK_COLORS = [
+    '#7E5835','#6B4C2A',  // dirt
+    '#7A7A7A','#696969',  // stone
+    '#4A8A1E','#3E7010',  // grass
+    '#F5D479','#C8A030',  // gold
+    '#E05555','#B83232',  // redstone
+    '#6FF0FF','#00B8D4',  // diamond
+    '#C4845A','#A06030',  // wood planks
+    '#B8A050','#A08040',  // sand
+  ];
+
   function makeParticle(fireX, W) {
     const life = 0.6 + Math.random() * 0.8;
     return {
@@ -1770,8 +1859,9 @@
       vy: -(1.5 + Math.random() * 3.5),
       life,
       maxLife: life,
-      size: 4 + Math.floor(Math.random() * 3) * 4,
+      size: 8 + Math.floor(Math.random() * 2) * 8,
       wobble: (Math.random() - 0.5) * 0.04,
+      blockColor: MC_BLOCK_COLORS[Math.floor(Math.random() * MC_BLOCK_COLORS.length)],
     };
   }
 
@@ -1779,6 +1869,22 @@
   let H = window.innerHeight;
   canvas.width = W;
   canvas.height = H;
+
+  // Starfield
+  const stars = Array.from({length: 220}, () => ({
+    x: Math.floor(Math.random() * W / 2) * 2,
+    y: Math.floor(Math.random() * H * 0.65 / 2) * 2,
+    size: Math.random() < 0.1 ? 4 : 2,
+    color: ['#ffffff','#ffffd8','#c8d8ff','#ffd8a8','#d0ffff'][Math.floor(Math.random()*5)],
+    phase: Math.random() * Math.PI * 2,
+    speed: 0.01 + Math.random() * 0.025,
+  }));
+
+  // Pixel moon
+  const moon = {
+    x: Math.floor(W * 0.83 / 8) * 8,
+    y: Math.floor(H * 0.07 / 8) * 8,
+  };
 
   let fireXs = getFireXs(W);
   let particles = [];
@@ -1798,6 +1904,12 @@
     canvas.width = W;
     canvas.height = H;
     fireXs = getFireXs(W);
+    stars.forEach(s => {
+      s.x = Math.floor(Math.random() * W / 2) * 2;
+      s.y = Math.floor(Math.random() * H * 0.65 / 2) * 2;
+    });
+    moon.x = Math.floor(W * 0.83 / 8) * 8;
+    moon.y = Math.floor(H * 0.07 / 8) * 8;
   });
 
   function fireColor(t) {
@@ -1823,24 +1935,49 @@
     canvas.height = H;
     ctx.clearRect(0, 0, W, H);
 
-    particles.forEach((p, idx) => {
-      const t = 1 - (p.life / p.maxLife); // 0=new, 1=dead
-      const alpha = t < 0.1 ? t * 10 * 0.6 : (1 - t) * 0.6;
-      const [r, g, b] = fireColor(t);
-
+    // --- Starfield ---
+    const now = performance.now() / 1000;
+    stars.forEach(s => {
+      const alpha = Math.max(0, 0.15 + Math.sin(s.phase + now * s.speed) * 0.45);
       ctx.globalAlpha = alpha;
-      ctx.fillStyle = `rgb(${r},${g},${b})`;
-      // pixel-snapped position
+      ctx.fillStyle = s.color;
+      ctx.fillRect(s.x, s.y, s.size, s.size);
+    });
+
+    // --- Pixel moon ---
+    ctx.globalAlpha = 0.7;
+    ctx.fillStyle = '#FFFFD0';
+    ctx.fillRect(moon.x, moon.y, 40, 40);
+    ctx.globalAlpha = 0.25;
+    ctx.fillStyle = '#B0B060';
+    ctx.fillRect(moon.x + 8,  moon.y + 8,  10, 10);
+    ctx.fillRect(moon.x + 26, moon.y + 20,  7,  7);
+    ctx.fillRect(moon.x + 6,  moon.y + 26,  5,  5);
+
+    // --- Minecraft block particles ---
+    particles.forEach((p, idx) => {
+      const t = 1 - (p.life / p.maxLife);
+      const alpha = t < 0.08 ? t * 12.5 * 0.65 : (1 - t) * 0.65;
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = p.blockColor;
       const px = Math.round(p.x / 4) * 4;
       const py = Math.round(p.y / 4) * 4;
-      ctx.fillRect(px - p.size / 2, py - p.size / 2, p.size, p.size);
+      const s = p.size;
+      ctx.fillRect(px - s/2, py - s/2, s, s);
+      // block highlight (top-left edge)
+      ctx.globalAlpha = alpha * 0.4;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(px - s/2, py - s/2, s, 2);
+      ctx.fillRect(px - s/2, py - s/2, 2, s);
+      // block shadow (bottom-right edge)
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(px - s/2, py + s/2 - 2, s, 2);
+      ctx.fillRect(px + s/2 - 2, py - s/2, 2, s);
 
-      // update
       p.vx += p.wobble;
-      p.x += p.vx;
-      p.y += p.vy;
+      p.x  += p.vx;
+      p.y  += p.vy;
       p.life -= 0.016;
-
       if (p.life <= 0) {
         particles[idx] = {...makeParticle(p.fireX, W), fireX: p.fireX};
       }
