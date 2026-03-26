@@ -1696,16 +1696,7 @@
     return Array.from({length: NUM_FIRES}, (_, i) => (W / (NUM_FIRES + 1)) * (i + 1));
   }
 
-  const MC_BLOCK_COLORS = [
-    '#7E5835','#6B4C2A',  // dirt
-    '#7A7A7A','#696969',  // stone
-    '#4A8A1E','#3E7010',  // grass
-    '#F5D479','#C8A030',  // gold
-    '#E05555','#B83232',  // redstone
-    '#6FF0FF','#00B8D4',  // diamond
-    '#C4845A','#A06030',  // wood planks
-    '#B8A050','#A08040',  // sand
-  ];
+  const PARTICLE_COLORS = ['#F5D479','#C4845A','#E05555','#FF7070','#FFE89A','#8B5E3C'];
 
   function makeParticle(fireX, W) {
     const life = 0.6 + Math.random() * 0.8;
@@ -1716,9 +1707,9 @@
       vy: -(1.5 + Math.random() * 3.5),
       life,
       maxLife: life,
-      size: 8 + Math.floor(Math.random() * 2) * 8,
+      size: 4 + Math.floor(Math.random() * 3) * 4,
       wobble: (Math.random() - 0.5) * 0.04,
-      blockColor: MC_BLOCK_COLORS[Math.floor(Math.random() * MC_BLOCK_COLORS.length)],
+      color: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
     };
   }
 
@@ -1726,22 +1717,6 @@
   let H = window.innerHeight;
   canvas.width = W;
   canvas.height = H;
-
-  // Starfield
-  const stars = Array.from({length: 220}, () => ({
-    x: Math.floor(Math.random() * W / 2) * 2,
-    y: Math.floor(Math.random() * H * 0.65 / 2) * 2,
-    size: Math.random() < 0.1 ? 4 : 2,
-    color: ['#ffffff','#ffffd8','#c8d8ff','#ffd8a8','#d0ffff'][Math.floor(Math.random()*5)],
-    phase: Math.random() * Math.PI * 2,
-    speed: 0.01 + Math.random() * 0.025,
-  }));
-
-  // Pixel moon
-  const moon = {
-    x: Math.floor(W * 0.83 / 8) * 8,
-    y: Math.floor(H * 0.07 / 8) * 8,
-  };
 
   let fireXs = getFireXs(W);
   let particles = [];
@@ -1760,75 +1735,23 @@
     canvas.width = W;
     canvas.height = H;
     fireXs = getFireXs(W);
-    stars.forEach(s => {
-      s.x = Math.floor(Math.random() * W / 2) * 2;
-      s.y = Math.floor(Math.random() * H * 0.65 / 2) * 2;
-    });
-    moon.x = Math.floor(W * 0.83 / 8) * 8;
-    moon.y = Math.floor(H * 0.07 / 8) * 8;
   });
-
-  function fireColor(t) {
-    // t = 0 (birth, bottom) → 1 (death, top)
-    // bottom: bright white-yellow → orange → red → dark red/transparent
-    if (t < 0.2) {
-      // white-yellow core
-      const r = 255, g = Math.floor(255 - t * 5 * 100), b = Math.floor(200 - t * 5 * 200);
-      return [r, Math.max(g,150), Math.max(b,0)];
-    } else if (t < 0.5) {
-      const s = (t - 0.2) / 0.3;
-      const r = 255, g = Math.floor(150 - s * 120), b = 0;
-      return [r, Math.max(g, 30), b];
-    } else {
-      const s = (t - 0.5) / 0.5;
-      const r = Math.floor(255 - s * 130), g = Math.floor(30 - s * 30), b = 0;
-      return [Math.max(r, 60), Math.max(g, 0), 0];
-    }
-  }
 
   function draw() {
     canvas.width = W;
     canvas.height = H;
     ctx.clearRect(0, 0, W, H);
 
-    // --- Starfield ---
-    const now = performance.now() / 1000;
-    stars.forEach(s => {
-      const alpha = Math.max(0, 0.15 + Math.sin(s.phase + now * s.speed) * 0.45);
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = s.color;
-      ctx.fillRect(s.x, s.y, s.size, s.size);
-    });
-
-    // --- Pixel moon ---
-    ctx.globalAlpha = 0.7;
-    ctx.fillStyle = '#FFFFD0';
-    ctx.fillRect(moon.x, moon.y, 40, 40);
-    ctx.globalAlpha = 0.25;
-    ctx.fillStyle = '#B0B060';
-    ctx.fillRect(moon.x + 8,  moon.y + 8,  10, 10);
-    ctx.fillRect(moon.x + 26, moon.y + 20,  7,  7);
-    ctx.fillRect(moon.x + 6,  moon.y + 26,  5,  5);
-
-    // --- Minecraft block particles ---
+    // --- Particles ---
     particles.forEach((p, idx) => {
       const t = 1 - (p.life / p.maxLife);
       const alpha = t < 0.08 ? t * 12.5 * 0.65 : (1 - t) * 0.65;
       ctx.globalAlpha = alpha;
-      ctx.fillStyle = p.blockColor;
+      ctx.fillStyle = p.color;
       const px = Math.round(p.x / 4) * 4;
       const py = Math.round(p.y / 4) * 4;
       const s = p.size;
       ctx.fillRect(px - s/2, py - s/2, s, s);
-      // block highlight (top-left edge)
-      ctx.globalAlpha = alpha * 0.4;
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(px - s/2, py - s/2, s, 2);
-      ctx.fillRect(px - s/2, py - s/2, 2, s);
-      // block shadow (bottom-right edge)
-      ctx.fillStyle = '#000000';
-      ctx.fillRect(px - s/2, py + s/2 - 2, s, 2);
-      ctx.fillRect(px + s/2 - 2, py - s/2, 2, s);
 
       p.vx += p.wobble;
       p.x  += p.vx;
