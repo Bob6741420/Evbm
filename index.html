@@ -868,34 +868,13 @@
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
     }
 
-    /* ---- HERO FIRE ---- */
-    .hero-fire {
+    /* ---- HERO FIRE CANVAS ---- */
+    #hero-fire-canvas {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 80px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 0;
+      bottom: 0; left: 0;
+      width: 100%; height: 160px;
       pointer-events: none;
       z-index: 2;
-    }
-
-    .flame-col {
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      width: 16px;
-    }
-
-    .flame-px {
-      width: 16px;
-      animation: flamePx 0.3s steps(1) infinite alternate;
-    }
-
-    @keyframes flamePx {
-      0%   { opacity: 1; }
-      100% { opacity: 0.4; }
     }
 
     /* ---- CHAMPION PULSE ---- */
@@ -973,8 +952,7 @@
 
   <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
 
-  <!-- Pixel fire bar -->
-  <div class="hero-fire" id="heroFire"></div>
+  <canvas id="hero-fire-canvas"></canvas>
 </div>
 
 <!-- MARQUEE -->
@@ -1242,32 +1220,67 @@
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
 
-  // ---- Pixel fire bar (hero bottom) ----
-  const heroFireEl = document.getElementById('heroFire');
-  const FLAME_COLS = Math.floor(window.innerWidth / 16);
-  const FLAME_PALETTE = [
-    ['#FF2200','#FF4400','#FF6600'],   // base red-orange
-    ['#FF6600','#FF8800','#FFAA00'],   // mid orange-yellow
-    ['#FFAA00','#FFCC00','#FFE800'],   // top yellow
-  ];
+  // ---- Hero fire canvas ----
+  const fireCanvas = document.getElementById('hero-fire-canvas');
+  const fctx = fireCanvas.getContext('2d');
+  const CELL = 8; // pixel size
+  let fCols, fRows, fGrid, fNext;
 
-  for (let c = 0; c < FLAME_COLS; c++) {
-    const col = document.createElement('div');
-    col.className = 'flame-col';
-    const height = 2 + Math.floor(Math.random() * 4); // 2-5 pixels tall
-    for (let r = 0; r < height; r++) {
-      const px = document.createElement('div');
-      px.className = 'flame-px';
-      const tier = Math.min(r, 2);
-      const colors = FLAME_PALETTE[tier];
-      px.style.background = colors[Math.floor(Math.random() * colors.length)];
-      px.style.height = '16px';
-      px.style.animationDelay = (Math.random() * 0.3) + 's';
-      px.style.animationDuration = (0.2 + Math.random() * 0.3) + 's';
-      col.appendChild(px);
-    }
-    heroFireEl.appendChild(col);
+  function initFire() {
+    fireCanvas.width  = fireCanvas.offsetWidth;
+    fireCanvas.height = 160;
+    fCols = Math.ceil(fireCanvas.width / CELL);
+    fRows = Math.ceil(160 / CELL);
+    fGrid = new Float32Array(fCols * fRows).fill(0);
+    fNext = new Float32Array(fCols * fRows).fill(0);
+    // seed bottom row
+    for (let x = 0; x < fCols; x++) fGrid[(fRows - 1) * fCols + x] = 1;
   }
+
+  function stepFire() {
+    // seed bottom row with flicker
+    for (let x = 0; x < fCols; x++) {
+      fGrid[(fRows - 1) * fCols + x] = 0.8 + Math.random() * 0.2;
+    }
+    for (let y = 0; y < fRows - 1; y++) {
+      for (let x = 0; x < fCols; x++) {
+        const below = fGrid[(y + 1) * fCols + x];
+        const bleft = fGrid[(y + 1) * fCols + Math.max(x - 1, 0)];
+        const bright = fGrid[(y + 1) * fCols + Math.min(x + 1, fCols - 1)];
+        const avg = (below + bleft + bright) / 3;
+        fNext[y * fCols + x] = Math.max(0, avg - 0.04 - Math.random() * 0.02);
+      }
+    }
+    const tmp = fGrid; fGrid = fNext; fNext = tmp;
+  }
+
+  function drawFire() {
+    fctx.clearRect(0, 0, fireCanvas.width, 160);
+    for (let y = 0; y < fRows; y++) {
+      for (let x = 0; x < fCols; x++) {
+        const v = fGrid[y * fCols + x];
+        if (v < 0.01) continue;
+        // map value to fire color
+        let r, g, b, a;
+        if (v > 0.8) { r=255; g=255; b=Math.floor((v-0.8)/0.2*180); a=v; }
+        else if (v > 0.5) { r=255; g=Math.floor((v-0.5)/0.3*255); b=0; a=v; }
+        else if (v > 0.2) { r=255; g=0; b=0; a=v; }
+        else { r=180; g=0; b=0; a=v*2; }
+        fctx.fillStyle = `rgba(${r},${g},${b},${Math.min(a,1)})`;
+        fctx.fillRect(x * CELL, y * CELL, CELL, CELL);
+      }
+    }
+  }
+
+  initFire();
+  window.addEventListener('resize', initFire);
+
+  function fireLoop() {
+    stepFire();
+    drawFire();
+    requestAnimationFrame(fireLoop);
+  }
+  requestAnimationFrame(fireLoop);
 
   // ---- Fire particle system — emits from hero bottom ----
   const PARTICLES_PER_FIRE = 25;
