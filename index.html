@@ -27,7 +27,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: linear-gradient(180deg, #04041e 0%, #08083a 30%, #0e0828 60%, #08051a 100%);
+      background: linear-gradient(180deg, #020214 0%, #05052a 18%, #090830 40%, #0d0a28 65%, #060410 100%);
       color: var(--white);
       font-family: 'Press Start 2P', monospace;
       overflow-x: hidden;
@@ -37,97 +37,151 @@
     /* Stars layer 1 */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        radial-gradient(2px 2px at 4% 6%,   rgba(245,212,121,1),  transparent),
-        radial-gradient(1px 1px at 11% 12%,  rgba(255,255,255,0.9),transparent),
-        radial-gradient(2px 2px at 17% 4%,   rgba(255,230,150,1),  transparent),
-        radial-gradient(1px 1px at 23% 18%,  rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 29% 8%,   rgba(245,212,121,1),  transparent),
-        radial-gradient(1px 1px at 35% 3%,   rgba(255,255,255,0.9),transparent),
-        radial-gradient(2px 2px at 41% 14%,  rgba(255,230,150,1),  transparent),
-        radial-gradient(1px 1px at 48% 7%,   rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 54% 2%,   rgba(245,212,121,1),  transparent),
-        radial-gradient(1px 1px at 60% 16%,  rgba(255,255,255,0.9),transparent),
-        radial-gradient(2px 2px at 67% 9%,   rgba(255,230,150,1),  transparent),
-        radial-gradient(1px 1px at 73% 5%,   rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 79% 13%,  rgba(245,212,121,1),  transparent),
-        radial-gradient(1px 1px at 85% 3%,   rgba(255,255,255,0.9),transparent),
-        radial-gradient(2px 2px at 91% 10%,  rgba(255,230,150,1),  transparent),
-        radial-gradient(1px 1px at 97% 7%,   rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 8%  28%,  rgba(245,212,121,0.9),transparent),
-        radial-gradient(1px 1px at 19% 33%,  rgba(255,255,255,0.7),transparent),
-        radial-gradient(2px 2px at 32% 25%,  rgba(255,230,150,0.9),transparent),
-        radial-gradient(1px 1px at 44% 38%,  rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 57% 22%,  rgba(245,212,121,0.9),transparent),
-        radial-gradient(1px 1px at 70% 31%,  rgba(255,255,255,0.7),transparent),
-        radial-gradient(2px 2px at 82% 27%,  rgba(255,230,150,0.9),transparent),
-        radial-gradient(1px 1px at 93% 35%,  rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 14% 48%,  rgba(245,212,121,0.8),transparent),
-        radial-gradient(1px 1px at 38% 52%,  rgba(255,255,255,0.6),transparent),
-        radial-gradient(2px 2px at 63% 45%,  rgba(255,230,150,0.8),transparent),
-        radial-gradient(1px 1px at 87% 50%,  rgba(255,255,255,0.7),transparent);
+        radial-gradient(2px 2px at 4%  6%,  #F5D479, transparent),
+        radial-gradient(1px 1px at 11% 12%, #fff,    transparent),
+        radial-gradient(2px 2px at 17% 4%,  #FFE89A, transparent),
+        radial-gradient(1px 1px at 23% 18%, #fff,    transparent),
+        radial-gradient(2px 2px at 29% 8%,  #F5D479, transparent),
+        radial-gradient(1px 1px at 35% 3%,  #fff,    transparent),
+        radial-gradient(2px 2px at 41% 14%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 48% 7%,  #fff,    transparent),
+        radial-gradient(2px 2px at 54% 2%,  #F5D479, transparent),
+        radial-gradient(1px 1px at 60% 16%, #fff,    transparent),
+        radial-gradient(2px 2px at 67% 9%,  #FFE89A, transparent),
+        radial-gradient(1px 1px at 73% 5%,  #fff,    transparent),
+        radial-gradient(2px 2px at 79% 13%, #F5D479, transparent),
+        radial-gradient(1px 1px at 85% 3%,  #fff,    transparent),
+        radial-gradient(2px 2px at 91% 10%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 97% 7%,  #fff,    transparent),
+        radial-gradient(2px 2px at 8%  28%, #F5D479, transparent),
+        radial-gradient(1px 1px at 19% 33%, #fff,    transparent),
+        radial-gradient(2px 2px at 32% 25%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 44% 38%, #fff,    transparent),
+        radial-gradient(2px 2px at 57% 22%, #F5D479, transparent),
+        radial-gradient(1px 1px at 70% 31%, #fff,    transparent),
+        radial-gradient(2px 2px at 82% 27%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 93% 35%, #fff,    transparent),
+        radial-gradient(2px 2px at 14% 48%, #F5D479, transparent),
+        radial-gradient(1px 1px at 38% 52%, #fff,    transparent),
+        radial-gradient(2px 2px at 63% 45%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 87% 50%, #fff,    transparent);
       animation: starTwinkle1 4s ease-in-out infinite alternate;
     }
 
     /* Stars layer 2 */
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        radial-gradient(1px 1px at 7%  20%,  rgba(255,255,255,0.9),transparent),
-        radial-gradient(2px 2px at 16% 9%,   rgba(245,212,121,1),  transparent),
-        radial-gradient(1px 1px at 26% 28%,  rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 37% 11%,  rgba(255,230,150,1),  transparent),
-        radial-gradient(1px 1px at 50% 24%,  rgba(255,255,255,0.9),transparent),
-        radial-gradient(2px 2px at 62% 6%,   rgba(245,212,121,1),  transparent),
-        radial-gradient(1px 1px at 75% 19%,  rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 88% 14%,  rgba(255,230,150,1),  transparent),
-        radial-gradient(1px 1px at 3%  40%,  rgba(255,255,255,0.7),transparent),
-        radial-gradient(2px 2px at 22% 43%,  rgba(245,212,121,0.9),transparent),
-        radial-gradient(1px 1px at 46% 36%,  rgba(255,255,255,0.8),transparent),
-        radial-gradient(2px 2px at 68% 42%,  rgba(255,230,150,0.9),transparent),
-        radial-gradient(1px 1px at 90% 38%,  rgba(255,255,255,0.7),transparent);
+        radial-gradient(1px 1px at 7%  20%, #fff,    transparent),
+        radial-gradient(2px 2px at 16% 9%,  #F5D479, transparent),
+        radial-gradient(1px 1px at 26% 28%, #fff,    transparent),
+        radial-gradient(2px 2px at 37% 11%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 50% 24%, #fff,    transparent),
+        radial-gradient(2px 2px at 62% 6%,  #F5D479, transparent),
+        radial-gradient(1px 1px at 75% 19%, #fff,    transparent),
+        radial-gradient(2px 2px at 88% 14%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 3%  40%, #fff,    transparent),
+        radial-gradient(2px 2px at 22% 43%, #F5D479, transparent),
+        radial-gradient(1px 1px at 46% 36%, #fff,    transparent),
+        radial-gradient(2px 2px at 68% 42%, #FFE89A, transparent),
+        radial-gradient(1px 1px at 90% 38%, #fff,    transparent);
       animation: starTwinkle2 6s ease-in-out infinite alternate-reverse;
     }
 
-    @keyframes starTwinkle1 { 0%{opacity:0.6} 100%{opacity:1} }
-    @keyframes starTwinkle2 { 0%{opacity:0.5} 100%{opacity:0.95} }
+    @keyframes starTwinkle1 { 0%{opacity:0.55} 100%{opacity:1} }
+    @keyframes starTwinkle2 { 0%{opacity:0.4}  100%{opacity:0.95} }
 
-    /* City skyline */
-    #bg-city {
+    /* Moon */
+    #bg-moon {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 220px;
-      z-index: 1;
+      top: 8%; right: 14%;
+      width: 56px; height: 56px;
+      background: #f8e860;
+      box-shadow: 0 0 0 4px #c8a020, 0 0 35px 10px rgba(245,210,60,0.35), 0 0 70px 24px rgba(245,210,60,0.12);
+      z-index: 2;
       pointer-events: none;
     }
 
-    .bldg {
-      position: absolute;
-      bottom: 0;
-      background: #06050f;
-      border-top: 2px solid #1a1540;
+    /* Far city (depth) */
+    #bg-city-far {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 160px;
+      z-index: 2; pointer-events: none;
+    }
+    .bldg-far {
+      position: absolute; bottom: 0;
+      background: #08071c;
+      opacity: 0.6;
     }
 
-    .bldg::after {
+    /* Near city */
+    #bg-city {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 210px;
+      z-index: 3; pointer-events: none;
+    }
+
+    .bldg, .bldg-red, .bldg-gold {
+      position: absolute; bottom: 0;
+      background: #070616;
+    }
+
+    /* Window grid on all buildings */
+    .bldg::after, .bldg-red::after, .bldg-gold::after {
       content: '';
       position: absolute;
-      inset: 8px 5px;
+      inset: 10px 6px;
       background-image:
-        radial-gradient(2px 2px at 25% 20%, rgba(245,212,121,0.7), transparent),
-        radial-gradient(2px 2px at 70% 20%, rgba(245,212,121,0.5), transparent),
-        radial-gradient(2px 2px at 25% 50%, rgba(245,212,121,0.6), transparent),
-        radial-gradient(2px 2px at 70% 50%, rgba(245,212,121,0.4), transparent),
-        radial-gradient(2px 2px at 50% 78%, rgba(224,85,85,0.6),   transparent);
-      background-size: 16px 16px;
+        radial-gradient(2px 2px at 25% 20%, rgba(245,212,121,0.85), transparent),
+        radial-gradient(2px 2px at 68% 20%, rgba(245,212,121,0.65), transparent),
+        radial-gradient(2px 2px at 25% 52%, rgba(245,212,121,0.75), transparent),
+        radial-gradient(2px 2px at 68% 52%, rgba(245,212,121,0.55), transparent),
+        radial-gradient(2px 2px at 46% 80%, rgba(224,85,85,0.75),   transparent);
+      background-size: 18px 16px;
       background-repeat: repeat;
+    }
+
+    /* Red neon top */
+    .bldg-red {
+      border-top: 3px solid #E05555;
+      box-shadow: 0 -5px 18px rgba(224,85,85,0.6), 0 -2px 6px rgba(224,85,85,0.5);
+    }
+
+    /* Gold neon top */
+    .bldg-gold {
+      border-top: 3px solid #F5D479;
+      box-shadow: 0 -5px 18px rgba(245,212,121,0.6), 0 -2px 6px rgba(245,212,121,0.5);
+    }
+
+    /* Parkour runner */
+    #bg-runner {
+      position: fixed;
+      z-index: 10;
+      pointer-events: none;
+      filter: drop-shadow(0 0 6px #F5D479) drop-shadow(0 0 14px rgba(245,212,121,0.5));
+      animation: runnerMove 22s linear infinite;
+    }
+
+    @keyframes runnerMove {
+      0%   { left: -40px; bottom: 158px; }
+      14%  { left: 13%;   bottom: 158px; }
+      17%  { left: 16%;   bottom: 218px; }
+      20%  { left: 19%;   bottom: 158px; }
+      38%  { left: 36%;   bottom: 158px; }
+      42%  { left: 40%;   bottom: 255px; }
+      46%  { left: 44%;   bottom: 158px; }
+      62%  { left: 59%;   bottom: 158px; }
+      65%  { left: 62%;   bottom: 205px; }
+      68%  { left: 65%;   bottom: 158px; }
+      85%  { left: 80%;   bottom: 158px; }
+      88%  { left: 83%;   bottom: 215px; }
+      91%  { left: 86%;   bottom: 158px; }
+      100% { left: 110%;  bottom: 158px; }
     }
 
     #bg-canvas { display: none; }
@@ -1446,39 +1500,77 @@
 
 <canvas id="bg-canvas"></canvas>
 
-<!-- Pixel city skyline -->
+<!-- Moon -->
+<div id="bg-moon"></div>
+
+<!-- Far city layer (depth) -->
+<div id="bg-city-far">
+  <div class="bldg-far" style="left:2%;width:5%;height:55px;"></div>
+  <div class="bldg-far" style="left:8%;width:7%;height:80px;"></div>
+  <div class="bldg-far" style="left:16%;width:6%;height:65px;"></div>
+  <div class="bldg-far" style="left:23%;width:8%;height:95px;"></div>
+  <div class="bldg-far" style="left:32%;width:5%;height:70px;"></div>
+  <div class="bldg-far" style="left:38%;width:9%;height:110px;"></div>
+  <div class="bldg-far" style="left:48%;width:6%;height:75px;"></div>
+  <div class="bldg-far" style="left:55%;width:7%;height:90px;"></div>
+  <div class="bldg-far" style="left:63%;width:8%;height:80px;"></div>
+  <div class="bldg-far" style="left:72%;width:6%;height:100px;"></div>
+  <div class="bldg-far" style="left:79%;width:8%;height:70px;"></div>
+  <div class="bldg-far" style="left:88%;width:6%;height:85px;"></div>
+  <div class="bldg-far" style="left:95%;width:5%;height:60px;"></div>
+</div>
+
+<!-- Near city layer -->
 <div id="bg-city">
-  <div class="bldg" style="left:1%;width:3%;height:75px;"></div>
-  <div class="bldg" style="left:4%;width:2%;height:55px;"></div>
-  <div class="bldg" style="left:6%;width:4%;height:115px;"></div>
-  <div class="bldg" style="left:10%;width:2%;height:65px;"></div>
-  <div class="bldg" style="left:12%;width:5%;height:145px;"></div>
-  <div class="bldg" style="left:17%;width:3%;height:85px;"></div>
-  <div class="bldg" style="left:20%;width:2%;height:60px;"></div>
-  <div class="bldg" style="left:22%;width:4%;height:125px;"></div>
-  <div class="bldg" style="left:26%;width:2%;height:75px;"></div>
-  <div class="bldg" style="left:28%;width:6%;height:170px;"></div>
-  <div class="bldg" style="left:34%;width:3%;height:95px;"></div>
-  <div class="bldg" style="left:37%;width:2%;height:65px;"></div>
-  <div class="bldg" style="left:39%;width:4%;height:130px;"></div>
-  <div class="bldg" style="left:43%;width:3%;height:88px;"></div>
-  <div class="bldg" style="left:46%;width:2%;height:60px;"></div>
-  <div class="bldg" style="left:48%;width:5%;height:150px;"></div>
-  <div class="bldg" style="left:53%;width:2%;height:72px;"></div>
-  <div class="bldg" style="left:55%;width:4%;height:118px;"></div>
-  <div class="bldg" style="left:59%;width:3%;height:88px;"></div>
-  <div class="bldg" style="left:62%;width:2%;height:58px;"></div>
-  <div class="bldg" style="left:64%;width:5%;height:138px;"></div>
-  <div class="bldg" style="left:69%;width:3%;height:82px;"></div>
-  <div class="bldg" style="left:72%;width:2%;height:62px;"></div>
-  <div class="bldg" style="left:74%;width:4%;height:115px;"></div>
-  <div class="bldg" style="left:78%;width:2%;height:72px;"></div>
-  <div class="bldg" style="left:80%;width:5%;height:105px;"></div>
-  <div class="bldg" style="left:85%;width:3%;height:128px;"></div>
-  <div class="bldg" style="left:88%;width:2%;height:68px;"></div>
-  <div class="bldg" style="left:90%;width:4%;height:88px;"></div>
-  <div class="bldg" style="left:95%;width:3%;height:78px;"></div>
-  <div class="bldg" style="left:98%;width:2%;height:58px;"></div>
+  <div class="bldg"      style="left:0%;  width:3%; height:78px;"></div>
+  <div class="bldg"      style="left:3%;  width:2%; height:58px;"></div>
+  <div class="bldg"      style="left:5%;  width:4%; height:110px;"></div>
+  <div class="bldg"      style="left:9%;  width:2%; height:68px;"></div>
+  <div class="bldg-red"  style="left:11%; width:5%; height:185px;"></div>
+  <div class="bldg"      style="left:16%; width:3%; height:88px;"></div>
+  <div class="bldg"      style="left:19%; width:2%; height:62px;"></div>
+  <div class="bldg"      style="left:21%; width:4%; height:118px;"></div>
+  <div class="bldg"      style="left:25%; width:2%; height:78px;"></div>
+  <div class="bldg"      style="left:27%; width:3%; height:98px;"></div>
+  <div class="bldg"      style="left:30%; width:2%; height:65px;"></div>
+  <div class="bldg"      style="left:32%; width:4%; height:128px;"></div>
+  <div class="bldg"      style="left:36%; width:2%; height:82px;"></div>
+  <div class="bldg-gold" style="left:38%; width:6%; height:205px;"></div>
+  <div class="bldg"      style="left:44%; width:3%; height:95px;"></div>
+  <div class="bldg"      style="left:47%; width:2%; height:65px;"></div>
+  <div class="bldg"      style="left:49%; width:4%; height:130px;"></div>
+  <div class="bldg"      style="left:53%; width:3%; height:85px;"></div>
+  <div class="bldg"      style="left:56%; width:2%; height:62px;"></div>
+  <div class="bldg-red"  style="left:58%; width:5%; height:172px;"></div>
+  <div class="bldg"      style="left:63%; width:2%; height:75px;"></div>
+  <div class="bldg"      style="left:65%; width:4%; height:115px;"></div>
+  <div class="bldg"      style="left:69%; width:3%; height:88px;"></div>
+  <div class="bldg"      style="left:72%; width:2%; height:65px;"></div>
+  <div class="bldg"      style="left:74%; width:4%; height:118px;"></div>
+  <div class="bldg"      style="left:78%; width:2%; height:74px;"></div>
+  <div class="bldg-gold" style="left:80%; width:4%; height:180px;"></div>
+  <div class="bldg"      style="left:84%; width:2%; height:70px;"></div>
+  <div class="bldg"      style="left:86%; width:3%; height:105px;"></div>
+  <div class="bldg"      style="left:89%; width:4%; height:88px;"></div>
+  <div class="bldg"      style="left:93%; width:3%; height:75px;"></div>
+  <div class="bldg"      style="left:96%; width:2%; height:58px;"></div>
+  <div class="bldg"      style="left:98%; width:2%; height:68px;"></div>
+</div>
+
+<!-- Parkour runner -->
+<div id="bg-runner">
+  <svg width="32" height="40" viewBox="0 0 32 40" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#F5D479">
+      <rect x="10" y="0"  width="12" height="12"/>
+      <rect x="11" y="12" width="10" height="12"/>
+      <rect x="2"  y="10" width="9"  height="4"/>
+      <rect x="21" y="16" width="9"  height="4"/>
+      <rect x="9"  y="24" width="4"  height="10"/>
+      <rect x="4"  y="32" width="9"  height="4"/>
+      <rect x="19" y="24" width="4"  height="8"/>
+      <rect x="19" y="30" width="9"  height="4"/>
+    </g>
+  </svg>
 </div>
 
 <!-- NAV -->
