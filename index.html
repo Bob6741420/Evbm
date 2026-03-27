@@ -27,36 +27,110 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
+      background: linear-gradient(180deg, #04041e 0%, #08083a 30%, #0e0828 60%, #08051a 100%);
       color: var(--white);
       font-family: 'Press Start 2P', monospace;
       overflow-x: hidden;
       image-rendering: pixelated;
     }
 
-    #bg-canvas { display: none; }
-
-    .bg-block {
+    /* Stars layer 1 */
+    body::before {
+      content: '';
       position: fixed;
+      inset: 0;
+      z-index: 0;
       pointer-events: none;
-      z-index: 999;
-      image-rendering: pixelated;
+      background-image:
+        radial-gradient(2px 2px at 4% 6%,   rgba(245,212,121,1),  transparent),
+        radial-gradient(1px 1px at 11% 12%,  rgba(255,255,255,0.9),transparent),
+        radial-gradient(2px 2px at 17% 4%,   rgba(255,230,150,1),  transparent),
+        radial-gradient(1px 1px at 23% 18%,  rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 29% 8%,   rgba(245,212,121,1),  transparent),
+        radial-gradient(1px 1px at 35% 3%,   rgba(255,255,255,0.9),transparent),
+        radial-gradient(2px 2px at 41% 14%,  rgba(255,230,150,1),  transparent),
+        radial-gradient(1px 1px at 48% 7%,   rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 54% 2%,   rgba(245,212,121,1),  transparent),
+        radial-gradient(1px 1px at 60% 16%,  rgba(255,255,255,0.9),transparent),
+        radial-gradient(2px 2px at 67% 9%,   rgba(255,230,150,1),  transparent),
+        radial-gradient(1px 1px at 73% 5%,   rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 79% 13%,  rgba(245,212,121,1),  transparent),
+        radial-gradient(1px 1px at 85% 3%,   rgba(255,255,255,0.9),transparent),
+        radial-gradient(2px 2px at 91% 10%,  rgba(255,230,150,1),  transparent),
+        radial-gradient(1px 1px at 97% 7%,   rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 8%  28%,  rgba(245,212,121,0.9),transparent),
+        radial-gradient(1px 1px at 19% 33%,  rgba(255,255,255,0.7),transparent),
+        radial-gradient(2px 2px at 32% 25%,  rgba(255,230,150,0.9),transparent),
+        radial-gradient(1px 1px at 44% 38%,  rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 57% 22%,  rgba(245,212,121,0.9),transparent),
+        radial-gradient(1px 1px at 70% 31%,  rgba(255,255,255,0.7),transparent),
+        radial-gradient(2px 2px at 82% 27%,  rgba(255,230,150,0.9),transparent),
+        radial-gradient(1px 1px at 93% 35%,  rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 14% 48%,  rgba(245,212,121,0.8),transparent),
+        radial-gradient(1px 1px at 38% 52%,  rgba(255,255,255,0.6),transparent),
+        radial-gradient(2px 2px at 63% 45%,  rgba(255,230,150,0.8),transparent),
+        radial-gradient(1px 1px at 87% 50%,  rgba(255,255,255,0.7),transparent);
+      animation: starTwinkle1 4s ease-in-out infinite alternate;
     }
 
-    @keyframes floatLeft  { 0%{transform:translateX(110vw) translateY(0);} 100%{transform:translateX(-20vw) translateY(var(--bob));} }
-    @keyframes floatRight { 0%{transform:translateX(-20vw) translateY(0);} 100%{transform:translateX(110vw) translateY(var(--bob));} }
-    @keyframes bob { 0%,100%{margin-top:0;} 50%{margin-top:var(--bob);} }
-
-    .bg-block span {
-      display: inline-block;
-      width: var(--bw);
-      height: var(--bw);
-      background: var(--mc);
-      box-shadow: 0 0 12px 4px var(--mg), inset 2px 2px 0 var(--ml), inset -2px -2px 0 var(--md);
-      margin-right: 2px;
-      animation: bob 3s ease-in-out infinite;
-      animation-delay: var(--bd);
+    /* Stars layer 2 */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 7%  20%,  rgba(255,255,255,0.9),transparent),
+        radial-gradient(2px 2px at 16% 9%,   rgba(245,212,121,1),  transparent),
+        radial-gradient(1px 1px at 26% 28%,  rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 37% 11%,  rgba(255,230,150,1),  transparent),
+        radial-gradient(1px 1px at 50% 24%,  rgba(255,255,255,0.9),transparent),
+        radial-gradient(2px 2px at 62% 6%,   rgba(245,212,121,1),  transparent),
+        radial-gradient(1px 1px at 75% 19%,  rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 88% 14%,  rgba(255,230,150,1),  transparent),
+        radial-gradient(1px 1px at 3%  40%,  rgba(255,255,255,0.7),transparent),
+        radial-gradient(2px 2px at 22% 43%,  rgba(245,212,121,0.9),transparent),
+        radial-gradient(1px 1px at 46% 36%,  rgba(255,255,255,0.8),transparent),
+        radial-gradient(2px 2px at 68% 42%,  rgba(255,230,150,0.9),transparent),
+        radial-gradient(1px 1px at 90% 38%,  rgba(255,255,255,0.7),transparent);
+      animation: starTwinkle2 6s ease-in-out infinite alternate-reverse;
     }
+
+    @keyframes starTwinkle1 { 0%{opacity:0.6} 100%{opacity:1} }
+    @keyframes starTwinkle2 { 0%{opacity:0.5} 100%{opacity:0.95} }
+
+    /* City skyline */
+    #bg-city {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .bldg {
+      position: absolute;
+      bottom: 0;
+      background: #06050f;
+      border-top: 2px solid #1a1540;
+    }
+
+    .bldg::after {
+      content: '';
+      position: absolute;
+      inset: 8px 5px;
+      background-image:
+        radial-gradient(2px 2px at 25% 20%, rgba(245,212,121,0.7), transparent),
+        radial-gradient(2px 2px at 70% 20%, rgba(245,212,121,0.5), transparent),
+        radial-gradient(2px 2px at 25% 50%, rgba(245,212,121,0.6), transparent),
+        radial-gradient(2px 2px at 70% 50%, rgba(245,212,121,0.4), transparent),
+        radial-gradient(2px 2px at 50% 78%, rgba(224,85,85,0.6),   transparent);
+      background-size: 16px 16px;
+      background-repeat: repeat;
+    }
+
+    #bg-canvas { display: none; }
 
     nav, #hero, #features, #about, #ranks, .marquee-wrap, section, footer, #cta, .how-grid-wrap {
       position: relative;
@@ -1372,15 +1446,40 @@
 
 <canvas id="bg-canvas"></canvas>
 
-<!-- CSS floating platforms -->
-<div class="bg-block" style="top:12%;animation:floatLeft 28s linear infinite;--bob:-18px;--bw:22px;--mc:#F5A030;--ml:#FFD060;--md:#A06020;--mg:#F5A030;"><span style="--bd:0s"></span><span style="--bd:.2s"></span><span style="--bd:.4s"></span><span style="--bd:.6s"></span><span style="--bd:.8s"></span><span style="--bd:1s"></span></div>
-<div class="bg-block" style="top:28%;animation:floatRight 22s linear infinite;animation-delay:-8s;--bob:14px;--bw:22px;--mc:#E04040;--ml:#FF8080;--md:#802020;--mg:#FF4040;"><span style="--bd:0s"></span><span style="--bd:.3s"></span><span style="--bd:.6s"></span><span style="--bd:.9s"></span><span style="--bd:1.2s"></span></div>
-<div class="bg-block" style="top:45%;animation:floatLeft 32s linear infinite;animation-delay:-14s;--bob:-22px;--bw:22px;--mc:#4080FF;--ml:#80B0FF;--md:#2040C0;--mg:#6090FF;"><span style="--bd:0s"></span><span style="--bd:.25s"></span><span style="--bd:.5s"></span><span style="--bd:.75s"></span><span style="--bd:1s"></span><span style="--bd:1.25s"></span><span style="--bd:1.5s"></span></div>
-<div class="bg-block" style="top:62%;animation:floatRight 26s linear infinite;animation-delay:-5s;--bob:16px;--bw:22px;--mc:#40C040;--ml:#80FF80;--md:#208020;--mg:#40CC40;"><span style="--bd:0s"></span><span style="--bd:.2s"></span><span style="--bd:.4s"></span><span style="--bd:.6s"></span></div>
-<div class="bg-block" style="top:78%;animation:floatLeft 20s linear infinite;animation-delay:-10s;--bob:-12px;--bw:22px;--mc:#C0C030;--ml:#FFFF60;--md:#808020;--mg:#D0D030;"><span style="--bd:0s"></span><span style="--bd:.35s"></span><span style="--bd:.7s"></span><span style="--bd:1.05s"></span><span style="--bd:1.4s"></span></div>
-<div class="bg-block" style="top:20%;animation:floatRight 35s linear infinite;animation-delay:-20s;--bob:20px;--bw:22px;--mc:#F5A030;--ml:#FFD060;--md:#A06020;--mg:#F5A030;"><span style="--bd:0s"></span><span style="--bd:.4s"></span><span style="--bd:.8s"></span></div>
-<div class="bg-block" style="top:55%;animation:floatLeft 24s linear infinite;animation-delay:-3s;--bob:-10px;--bw:22px;--mc:#E04040;--ml:#FF8080;--md:#802020;--mg:#FF4040;"><span style="--bd:0s"></span><span style="--bd:.3s"></span><span style="--bd:.6s"></span><span style="--bd:.9s"></span><span style="--bd:1.2s"></span><span style="--bd:1.5s"></span></div>
-<div class="bg-block" style="top:88%;animation:floatRight 30s linear infinite;animation-delay:-16s;--bob:8px;--bw:22px;--mc:#4080FF;--ml:#80B0FF;--md:#2040C0;--mg:#6090FF;"><span style="--bd:0s"></span><span style="--bd:.2s"></span><span style="--bd:.4s"></span><span style="--bd:.6s"></span><span style="--bd:.8s"></span></div>
+<!-- Pixel city skyline -->
+<div id="bg-city">
+  <div class="bldg" style="left:1%;width:3%;height:75px;"></div>
+  <div class="bldg" style="left:4%;width:2%;height:55px;"></div>
+  <div class="bldg" style="left:6%;width:4%;height:115px;"></div>
+  <div class="bldg" style="left:10%;width:2%;height:65px;"></div>
+  <div class="bldg" style="left:12%;width:5%;height:145px;"></div>
+  <div class="bldg" style="left:17%;width:3%;height:85px;"></div>
+  <div class="bldg" style="left:20%;width:2%;height:60px;"></div>
+  <div class="bldg" style="left:22%;width:4%;height:125px;"></div>
+  <div class="bldg" style="left:26%;width:2%;height:75px;"></div>
+  <div class="bldg" style="left:28%;width:6%;height:170px;"></div>
+  <div class="bldg" style="left:34%;width:3%;height:95px;"></div>
+  <div class="bldg" style="left:37%;width:2%;height:65px;"></div>
+  <div class="bldg" style="left:39%;width:4%;height:130px;"></div>
+  <div class="bldg" style="left:43%;width:3%;height:88px;"></div>
+  <div class="bldg" style="left:46%;width:2%;height:60px;"></div>
+  <div class="bldg" style="left:48%;width:5%;height:150px;"></div>
+  <div class="bldg" style="left:53%;width:2%;height:72px;"></div>
+  <div class="bldg" style="left:55%;width:4%;height:118px;"></div>
+  <div class="bldg" style="left:59%;width:3%;height:88px;"></div>
+  <div class="bldg" style="left:62%;width:2%;height:58px;"></div>
+  <div class="bldg" style="left:64%;width:5%;height:138px;"></div>
+  <div class="bldg" style="left:69%;width:3%;height:82px;"></div>
+  <div class="bldg" style="left:72%;width:2%;height:62px;"></div>
+  <div class="bldg" style="left:74%;width:4%;height:115px;"></div>
+  <div class="bldg" style="left:78%;width:2%;height:72px;"></div>
+  <div class="bldg" style="left:80%;width:5%;height:105px;"></div>
+  <div class="bldg" style="left:85%;width:3%;height:128px;"></div>
+  <div class="bldg" style="left:88%;width:2%;height:68px;"></div>
+  <div class="bldg" style="left:90%;width:4%;height:88px;"></div>
+  <div class="bldg" style="left:95%;width:3%;height:78px;"></div>
+  <div class="bldg" style="left:98%;width:2%;height:58px;"></div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1899,144 +1998,6 @@
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
-
-  // ---- Background Canvas: Parkour Night Sky ----
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-
-  let W = window.innerWidth;
-  let H = window.innerHeight;
-  canvas.width = W; canvas.height = H;
-
-  // Stars
-  function makeStars(count) {
-    return Array.from({length: count}, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      size: Math.random() < 0.5 ? 2 : 3,
-      phase: Math.random() * Math.PI * 2,
-      speed: 0.015 + Math.random() * 0.025,
-      color: ['#F5D479','#FFE89A','#F0E8D8','#C4845A'][Math.floor(Math.random() * 4)],
-    }));
-  }
-  let stars = makeStars(180);
-
-  // Platform block palettes: [dark, mid, light, glow]
-  const PALETTES = [
-    ['#A06020','#F5A030','#FFD060','#FFB030'],  // bright gold
-    ['#802020','#E04040','#FF8080','#FF4040'],  // bright red
-    ['#2040C0','#4080FF','#80B0FF','#6090FF'],  // bright blue
-    ['#208020','#40C040','#80FF80','#40CC40'],  // bright green
-    ['#808020','#C0C030','#FFFF60','#D0D030'],  // bright yellow
-  ];
-
-  function makePlatform() {
-    const depth = 0.3 + Math.random() * 0.7;
-    const pal = PALETTES[Math.floor(Math.random() * PALETTES.length)];
-    const blocks = 4 + Math.floor(Math.random() * 7);
-    const vx = (0.15 + Math.random() * 0.35) * (Math.random() < 0.5 ? 1 : -1);
-    return {
-      x: Math.random() * (W + 400) - 200,
-      y: 60 + Math.random() * (H - 120),
-      blocks,
-      vx,
-      bobPhase: Math.random() * Math.PI * 2,
-      bobAmp: 8 + Math.random() * 12,
-      bobSpeed: 0.004 + Math.random() * 0.006,
-      depth,
-      pal,
-    };
-  }
-
-  let platforms = Array.from({length: 50}, makePlatform);
-
-  // Dust particles
-  function makeDust() {
-    return {
-      x: Math.random() * W,
-      y: H + 10,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: -(0.3 + Math.random() * 0.7),
-      life: 1,
-      decay: 0.003 + Math.random() * 0.004,
-      size: 2,
-      color: ['#F5D479','#C4845A','#FFE89A'][Math.floor(Math.random() * 3)],
-    };
-  }
-  let dust = Array.from({length: 60}, () => {
-    const d = makeDust();
-    d.y = Math.random() * H;
-    d.life = Math.random();
-    return d;
-  });
-
-  window.addEventListener('resize', () => {
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W; canvas.height = H;
-    stars = makeStars(180);
-  });
-
-  function drawPlatform(p) {
-    const bw = 20;
-    const [dark, mid, light, glow] = p.pal;
-    const alpha = 0.6 + p.depth * 0.35;
-    ctx.globalAlpha = alpha;
-    ctx.shadowBlur = 16 + p.depth * 16;
-    ctx.shadowColor = glow;
-    for (let b = 0; b < p.blocks; b++) {
-      const bx = Math.round((p.x + b * bw) / 2) * 2;
-      const by = Math.round(p.y / 2) * 2;
-      ctx.fillStyle = mid;
-      ctx.fillRect(bx, by, bw, bw);
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = light;
-      ctx.fillRect(bx, by, bw, 2);
-      ctx.fillRect(bx, by, 2, bw);
-      ctx.fillStyle = dark;
-      ctx.fillRect(bx, by + bw - 2, bw, 2);
-      ctx.fillRect(bx + bw - 2, by, 2, bw);
-    }
-    ctx.shadowBlur = 0;
-    ctx.globalAlpha = 1;
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Stars
-    stars.forEach(s => {
-      s.phase += s.speed;
-      ctx.globalAlpha = 0.65 + Math.sin(s.phase) * 0.3;
-      ctx.fillStyle = s.color;
-      ctx.fillRect(s.x, s.y, s.size, s.size);
-    });
-
-    // Platforms (sorted far → near)
-    platforms.sort((a, b) => a.depth - b.depth);
-    platforms.forEach((p, i) => {
-      p.bobPhase += p.bobSpeed;
-      p.x += p.vx;
-      p.y += Math.sin(p.bobPhase) * p.bobAmp * 0.01;
-      const w = p.blocks * 16;
-      if (p.vx > 0 && p.x > W + 50)  { p.x = -w - 20; p.y = 40 + Math.random() * (H - 80); }
-      if (p.vx < 0 && p.x < -w - 50) { p.x = W + 20;  p.y = 40 + Math.random() * (H - 80); }
-      drawPlatform(p);
-    });
-
-    // Dust particles rising
-    dust.forEach((d, i) => {
-      ctx.globalAlpha = d.life * 0.35;
-      ctx.fillStyle = d.color;
-      ctx.fillRect(d.x, d.y, d.size, d.size);
-      d.x += d.vx; d.y += d.vy; d.life -= d.decay;
-      if (d.life <= 0) { dust[i] = makeDust(); }
-    });
-
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  }
-
-  requestAnimationFrame(draw);
 
   // ---- Airtable config ----
   const AIRTABLE_TOKEN   = 'patpAbTIZAn653X4z.bd16c3aca7caa386b94ae94fb5f98ca8c3bb56da18b71a2783e8c99cfa933695';
