@@ -40,7 +40,6 @@
       width: 100%; height: 100%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.35;
     }
 
     nav, #hero, #features, #about, #ranks, .marquee-wrap, section, footer, #cta, .how-grid-wrap {
@@ -312,9 +311,8 @@
       background:
         radial-gradient(ellipse 35% 25% at 80% 10%, rgba(245,212,121,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 35% 25% at 15% 85%, rgba(184,50,50,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(92,58,30,0.35) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 50% 75%, rgba(92,26,26,0.25) 0%, transparent 70%),
-        var(--bg);
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(92,58,30,0.25) 0%, transparent 70%),
+        transparent;
     }
 
     /* Animated background grid */
@@ -1876,60 +1874,147 @@
     observer.observe(el);
   });
 
-  // ---- Background Canvas ----
+  // ---- Background Canvas: Parkour Night Sky ----
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
-  const PARTICLE_COLORS = ['#F5D479','#C4845A','#E05555','#FF7070','#FFE89A','#8B5E3C'];
 
   let W = window.innerWidth;
   let H = window.innerHeight;
   canvas.width = W; canvas.height = H;
 
-  function makeParticle(fireX) {
-    const life = 0.6 + Math.random() * 0.8;
+  // Stars
+  function makeStars(count) {
+    return Array.from({length: count}, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      size: Math.random() < 0.75 ? 1 : 2,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.015 + Math.random() * 0.025,
+      color: ['#F5D479','#FFE89A','#F0E8D8','#C4845A'][Math.floor(Math.random() * 4)],
+    }));
+  }
+  let stars = makeStars(180);
+
+  // Platform block palettes: [dark, mid, light]
+  const PALETTES = [
+    ['#3D2410','#6B3E1F','#A05C2A'],  // warm brown stone
+    ['#1A1230','#2E1F5E','#4A3490'],  // dark purple stone
+    ['#0A1F0A','#1A3A1A','#2D5E2D'],  // mossy green
+    ['#3D1A0A','#6B2810','#A03818'],  // red sandstone
+    ['#2A2A10','#4A4A1A','#747428'],  // yellow-grey stone
+  ];
+
+  function makePlatform() {
+    const depth = 0.15 + Math.random() * 0.85;
+    const pal = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+    const blocks = 2 + Math.floor(Math.random() * 7);
+    const vx = (0.12 + Math.random() * 0.28) * (Math.random() < 0.5 ? 1 : -1) * depth;
     return {
-      x: fireX + (Math.random() - 0.5) * 80,
-      y: H, vx: (Math.random() - 0.5) * 1.2,
-      vy: -(1.5 + Math.random() * 3.5),
-      life, maxLife: life,
-      size: 4 + Math.floor(Math.random() * 3) * 4,
-      wobble: (Math.random() - 0.5) * 0.04,
-      color: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
-      fireX,
+      x: Math.random() * (W + 400) - 200,
+      y: 40 + Math.random() * (H - 80),
+      blocks,
+      vx,
+      bobPhase: Math.random() * Math.PI * 2,
+      bobAmp: 6 + Math.random() * 10,
+      bobSpeed: 0.004 + Math.random() * 0.006,
+      depth,
+      pal,
     };
   }
 
-  function getFireXs() {
-    return Array.from({length: 8}, (_, i) => (W / 9) * (i + 1));
-  }
+  let platforms = Array.from({length: 35}, makePlatform);
 
-  let fireXs = getFireXs();
-  let particles = fireXs.flatMap(fx =>
-    Array.from({length: 25}, () => {
-      const p = makeParticle(fx);
-      p.life = Math.random() * p.maxLife;
-      p.y = H - (1 - p.life / p.maxLife) * H * 0.6;
-      return p;
-    })
-  );
+  // Dust particles
+  function makeDust() {
+    return {
+      x: Math.random() * W,
+      y: H + 10,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -(0.3 + Math.random() * 0.7),
+      life: 1,
+      decay: 0.003 + Math.random() * 0.004,
+      size: 2,
+      color: ['#F5D479','#C4845A','#FFE89A'][Math.floor(Math.random() * 3)],
+    };
+  }
+  let dust = Array.from({length: 60}, () => {
+    const d = makeDust();
+    d.y = Math.random() * H;
+    d.life = Math.random();
+    return d;
+  });
+
+  // Bg gradient (created once, recreated on resize)
+  let bgGrad = null;
+  function buildGrad() {
+    bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0,   '#050510');
+    bgGrad.addColorStop(0.5, '#0a0a18');
+    bgGrad.addColorStop(1,   '#110a14');
+  }
+  buildGrad();
 
   window.addEventListener('resize', () => {
     W = window.innerWidth; H = window.innerHeight;
     canvas.width = W; canvas.height = H;
-    fireXs = getFireXs();
+    stars = makeStars(180);
+    buildGrad();
   });
 
+  function drawPlatform(p) {
+    const bw = 16;
+    const [dark, mid, light] = p.pal;
+    const alpha = 0.12 + p.depth * 0.5;
+    ctx.globalAlpha = alpha;
+    for (let b = 0; b < p.blocks; b++) {
+      const bx = Math.round((p.x + b * bw) / 2) * 2;
+      const by = Math.round(p.y / 2) * 2;
+      ctx.fillStyle = mid;
+      ctx.fillRect(bx, by, bw, bw);
+      ctx.fillStyle = light;
+      ctx.fillRect(bx, by, bw, 2);
+      ctx.fillRect(bx, by, 2, bw);
+      ctx.fillStyle = dark;
+      ctx.fillRect(bx, by + bw - 2, bw, 2);
+      ctx.fillRect(bx + bw - 2, by, 2, bw);
+    }
+    ctx.globalAlpha = 1;
+  }
+
   function draw() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach((p, i) => {
-      const t = 1 - (p.life / p.maxLife);
-      const alpha = t < 0.08 ? t * 12.5 * 0.65 : (1 - t) * 0.65;
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = p.color;
-      ctx.fillRect(Math.round(p.x / 4) * 4 - p.size / 2, Math.round(p.y / 4) * 4 - p.size / 2, p.size, p.size);
-      p.vx += p.wobble; p.x += p.vx; p.y += p.vy; p.life -= 0.016;
-      if (p.life <= 0) particles[i] = makeParticle(p.fireX);
+    // Sky gradient
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Stars
+    stars.forEach(s => {
+      s.phase += s.speed;
+      ctx.globalAlpha = 0.35 + Math.sin(s.phase) * 0.25;
+      ctx.fillStyle = s.color;
+      ctx.fillRect(s.x, s.y, s.size, s.size);
     });
+
+    // Platforms (sorted far → near)
+    platforms.sort((a, b) => a.depth - b.depth);
+    platforms.forEach((p, i) => {
+      p.bobPhase += p.bobSpeed;
+      p.x += p.vx;
+      p.y += Math.sin(p.bobPhase) * p.bobAmp * 0.01;
+      const w = p.blocks * 16;
+      if (p.vx > 0 && p.x > W + 50)  { p.x = -w - 20; p.y = 40 + Math.random() * (H - 80); }
+      if (p.vx < 0 && p.x < -w - 50) { p.x = W + 20;  p.y = 40 + Math.random() * (H - 80); }
+      drawPlatform(p);
+    });
+
+    // Dust particles rising
+    dust.forEach((d, i) => {
+      ctx.globalAlpha = d.life * 0.18;
+      ctx.fillStyle = d.color;
+      ctx.fillRect(d.x, d.y, d.size, d.size);
+      d.x += d.vx; d.y += d.vy; d.life -= d.decay;
+      if (d.life <= 0) { dust[i] = makeDust(); }
+    });
+
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
   }
