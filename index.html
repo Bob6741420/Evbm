@@ -1887,7 +1887,7 @@
     return Array.from({length: count}, () => ({
       x: Math.random() * W,
       y: Math.random() * H,
-      size: Math.random() < 0.75 ? 1 : 2,
+      size: Math.random() < 0.5 ? 2 : 3,
       phase: Math.random() * Math.PI * 2,
       speed: 0.015 + Math.random() * 0.025,
       color: ['#F5D479','#FFE89A','#F0E8D8','#C4845A'][Math.floor(Math.random() * 4)],
@@ -1897,32 +1897,32 @@
 
   // Platform block palettes: [dark, mid, light, glow]
   const PALETTES = [
-    ['#7A4A20','#C4845A','#F5D479','#F5D479'],  // gold stone
-    ['#5C1A1A','#B83232','#FF7070','#FF5050'],  // red stone
-    ['#2A3A8A','#4A60CC','#8899FF','#6680FF'],  // blue stone
-    ['#1A5A1A','#38A038','#70E070','#50CC50'],  // green stone
-    ['#6A6A18','#A8A830','#E8E850','#D0D030'],  // yellow stone
+    ['#A06020','#F5A030','#FFD060','#FFB030'],  // bright gold
+    ['#802020','#E04040','#FF8080','#FF4040'],  // bright red
+    ['#2040C0','#4080FF','#80B0FF','#6090FF'],  // bright blue
+    ['#208020','#40C040','#80FF80','#40CC40'],  // bright green
+    ['#808020','#C0C030','#FFFF60','#D0D030'],  // bright yellow
   ];
 
   function makePlatform() {
-    const depth = 0.15 + Math.random() * 0.85;
+    const depth = 0.3 + Math.random() * 0.7;
     const pal = PALETTES[Math.floor(Math.random() * PALETTES.length)];
-    const blocks = 3 + Math.floor(Math.random() * 8);
-    const vx = (0.12 + Math.random() * 0.28) * (Math.random() < 0.5 ? 1 : -1) * depth;
+    const blocks = 4 + Math.floor(Math.random() * 7);
+    const vx = (0.15 + Math.random() * 0.35) * (Math.random() < 0.5 ? 1 : -1);
     return {
       x: Math.random() * (W + 400) - 200,
-      y: 40 + Math.random() * (H - 80),
+      y: 60 + Math.random() * (H - 120),
       blocks,
       vx,
       bobPhase: Math.random() * Math.PI * 2,
-      bobAmp: 6 + Math.random() * 10,
+      bobAmp: 8 + Math.random() * 12,
       bobSpeed: 0.004 + Math.random() * 0.006,
       depth,
       pal,
     };
   }
 
-  let platforms = Array.from({length: 35}, makePlatform);
+  let platforms = Array.from({length: 50}, makePlatform);
 
   // Dust particles
   function makeDust() {
@@ -1951,11 +1951,11 @@
   });
 
   function drawPlatform(p) {
-    const bw = 16;
+    const bw = 20;
     const [dark, mid, light, glow] = p.pal;
-    const alpha = 0.25 + p.depth * 0.3;
+    const alpha = 0.6 + p.depth * 0.35;
     ctx.globalAlpha = alpha;
-    ctx.shadowBlur = 10 + p.depth * 12;
+    ctx.shadowBlur = 16 + p.depth * 16;
     ctx.shadowColor = glow;
     for (let b = 0; b < p.blocks; b++) {
       const bx = Math.round((p.x + b * bw) / 2) * 2;
@@ -1980,7 +1980,7 @@
     // Stars
     stars.forEach(s => {
       s.phase += s.speed;
-      ctx.globalAlpha = 0.35 + Math.sin(s.phase) * 0.25;
+      ctx.globalAlpha = 0.65 + Math.sin(s.phase) * 0.3;
       ctx.fillStyle = s.color;
       ctx.fillRect(s.x, s.y, s.size, s.size);
     });
