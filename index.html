@@ -34,12 +34,28 @@
       image-rendering: pixelated;
     }
 
-    #bg-canvas {
+    #bg-canvas { display: none; }
+
+    .bg-block {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 999;
+      image-rendering: pixelated;
+    }
+
+    @keyframes floatLeft  { 0%{transform:translateX(110vw) translateY(0);} 100%{transform:translateX(-20vw) translateY(var(--bob));} }
+    @keyframes floatRight { 0%{transform:translateX(-20vw) translateY(0);} 100%{transform:translateX(110vw) translateY(var(--bob));} }
+    @keyframes bob { 0%,100%{margin-top:0;} 50%{margin-top:var(--bob);} }
+
+    .bg-block span {
+      display: inline-block;
+      width: var(--bw);
+      height: var(--bw);
+      background: var(--mc);
+      box-shadow: 0 0 12px 4px var(--mg), inset 2px 2px 0 var(--ml), inset -2px -2px 0 var(--md);
+      margin-right: 2px;
+      animation: bob 3s ease-in-out infinite;
+      animation-delay: var(--bd);
     }
 
     nav, #hero, #features, #about, #ranks, .marquee-wrap, section, footer, #cta, .how-grid-wrap {
@@ -1355,6 +1371,16 @@
 <body>
 
 <canvas id="bg-canvas"></canvas>
+
+<!-- CSS floating platforms -->
+<div class="bg-block" style="top:12%;animation:floatLeft 28s linear infinite;--bob:-18px;--bw:22px;--mc:#F5A030;--ml:#FFD060;--md:#A06020;--mg:#F5A030;"><span style="--bd:0s"></span><span style="--bd:.2s"></span><span style="--bd:.4s"></span><span style="--bd:.6s"></span><span style="--bd:.8s"></span><span style="--bd:1s"></span></div>
+<div class="bg-block" style="top:28%;animation:floatRight 22s linear infinite;animation-delay:-8s;--bob:14px;--bw:22px;--mc:#E04040;--ml:#FF8080;--md:#802020;--mg:#FF4040;"><span style="--bd:0s"></span><span style="--bd:.3s"></span><span style="--bd:.6s"></span><span style="--bd:.9s"></span><span style="--bd:1.2s"></span></div>
+<div class="bg-block" style="top:45%;animation:floatLeft 32s linear infinite;animation-delay:-14s;--bob:-22px;--bw:22px;--mc:#4080FF;--ml:#80B0FF;--md:#2040C0;--mg:#6090FF;"><span style="--bd:0s"></span><span style="--bd:.25s"></span><span style="--bd:.5s"></span><span style="--bd:.75s"></span><span style="--bd:1s"></span><span style="--bd:1.25s"></span><span style="--bd:1.5s"></span></div>
+<div class="bg-block" style="top:62%;animation:floatRight 26s linear infinite;animation-delay:-5s;--bob:16px;--bw:22px;--mc:#40C040;--ml:#80FF80;--md:#208020;--mg:#40CC40;"><span style="--bd:0s"></span><span style="--bd:.2s"></span><span style="--bd:.4s"></span><span style="--bd:.6s"></span></div>
+<div class="bg-block" style="top:78%;animation:floatLeft 20s linear infinite;animation-delay:-10s;--bob:-12px;--bw:22px;--mc:#C0C030;--ml:#FFFF60;--md:#808020;--mg:#D0D030;"><span style="--bd:0s"></span><span style="--bd:.35s"></span><span style="--bd:.7s"></span><span style="--bd:1.05s"></span><span style="--bd:1.4s"></span></div>
+<div class="bg-block" style="top:20%;animation:floatRight 35s linear infinite;animation-delay:-20s;--bob:20px;--bw:22px;--mc:#F5A030;--ml:#FFD060;--md:#A06020;--mg:#F5A030;"><span style="--bd:0s"></span><span style="--bd:.4s"></span><span style="--bd:.8s"></span></div>
+<div class="bg-block" style="top:55%;animation:floatLeft 24s linear infinite;animation-delay:-3s;--bob:-10px;--bw:22px;--mc:#E04040;--ml:#FF8080;--md:#802020;--mg:#FF4040;"><span style="--bd:0s"></span><span style="--bd:.3s"></span><span style="--bd:.6s"></span><span style="--bd:.9s"></span><span style="--bd:1.2s"></span><span style="--bd:1.5s"></span></div>
+<div class="bg-block" style="top:88%;animation:floatRight 30s linear infinite;animation-delay:-16s;--bob:8px;--bw:22px;--mc:#4080FF;--ml:#80B0FF;--md:#2040C0;--mg:#6090FF;"><span style="--bd:0s"></span><span style="--bd:.2s"></span><span style="--bd:.4s"></span><span style="--bd:.6s"></span><span style="--bd:.8s"></span></div>
 
 <!-- NAV -->
 <nav>
