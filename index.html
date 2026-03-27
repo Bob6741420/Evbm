@@ -1930,7 +1930,7 @@
   // ---- Background Canvas — Parkour Civilization ----
   const canvas = document.getElementById('bg-canvas');
   const ctx    = canvas.getContext('2d');
-  const B      = 8; // pixel block size
+  const B      = 12; // pixel block size
 
   let W = window.innerWidth;
   let H = window.innerHeight;
@@ -1946,8 +1946,8 @@
 
   // ---- Palette ----
   const PAL = {
-    grassA: '#7A6030', grassB: '#C4845A', grassGold: '#F5D479',
-    stoneA: '#8B5E3C', stoneB: '#5C3A1E',
+    grassA: '#A07840', grassB: '#C4845A', grassGold: '#F5D479',
+    stoneA: '#A07050', stoneB: '#6B4428',
     playerBody: '#C4845A', playerHead: '#F0E8D8', playerLeg: '#8B5E3C',
     dust: ['#F5D479','#C4845A','rgba(245,212,121,0.6)','rgba(196,132,90,0.5)'],
   };
@@ -1969,7 +1969,7 @@
   buildRuins();
 
   function drawRuins() {
-    ctx.fillStyle = 'rgba(92,58,30,0.13)';
+    ctx.fillStyle = 'rgba(139,94,60,0.35)';
     ruins.forEach(r => {
       const x = Math.round(r.x / B) * B;
       const y = Math.round((r.baseY - r.h) / B) * B;
@@ -2136,7 +2136,7 @@
 
   function drawDust(dt) {
     dust.forEach((p, i) => {
-      const a = Math.sin((p.life / p.maxLife) * Math.PI) * 0.35;
+      const a = Math.sin((p.life / p.maxLife) * Math.PI) * 0.6;
       ctx.globalAlpha = a;
       ctx.fillStyle   = p.color;
       ctx.fillRect(Math.round(p.x / B) * B, Math.round(p.y / B) * B, p.size, p.size);
