@@ -39,7 +39,7 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 999;
     }
 
     nav, #hero, #features, #about, #ranks, .marquee-wrap, section, footer, #cta, .how-grid-wrap {
@@ -519,7 +519,7 @@
         linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
         radial-gradient(ellipse 70% 50% at 50% 50%, rgba(92,58,30,0.12) 0%, transparent 70%),
-        rgba(13,13,20,0.60);
+        var(--bg);
       background-size: 16px 16px, 16px 16px, 100% 100%, 100% 100%;
       max-width: 100%;
       padding: 80px 40px;
@@ -664,7 +664,7 @@
         repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(139,94,60,0.05) 15px, rgba(139,94,60,0.05) 16px),
         radial-gradient(ellipse 70% 60% at 25% 50%, rgba(92,58,30,0.18) 0%, transparent 65%),
         radial-gradient(ellipse 50% 40% at 80% 60%, rgba(92,26,26,0.1) 0%, transparent 60%),
-        rgba(9,9,15,0.60);
+        var(--bg);
     }
 
     .about-grid {
@@ -718,7 +718,7 @@
         radial-gradient(ellipse 100% 80% at 50% 50%, rgba(92,26,26,0.3) 0%, transparent 70%),
         radial-gradient(ellipse 40% 30% at 10% 20%, rgba(92,26,26,0.15) 0%, transparent 50%),
         radial-gradient(ellipse 40% 30% at 90% 80%, rgba(92,26,26,0.15) 0%, transparent 50%),
-        rgba(13,13,17,0.60);
+        var(--bg);
       background-size: 16px 16px, 16px 16px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
       max-width: 100%;
       padding: 80px 40px;
@@ -841,7 +841,7 @@
         radial-gradient(ellipse 30% 25% at 15% 35%, rgba(184,80,0,0.2) 0%, transparent 55%),
         radial-gradient(ellipse 30% 25% at 85% 65%, rgba(92,26,26,0.25) 0%, transparent 55%),
         radial-gradient(ellipse 80% 40% at 50% 100%, rgba(184,50,50,0.15) 0%, transparent 60%),
-        rgba(9,9,15,0.60);
+        var(--bg);
       max-width: 100%;
       padding: 100px 40px;
       text-align: center;
@@ -921,7 +921,7 @@
       background:
         repeating-linear-gradient(0deg, transparent 0px, transparent 7px, rgba(255,255,255,0.02) 7px, rgba(255,255,255,0.02) 8px),
         repeating-linear-gradient(90deg, transparent 0px, transparent 7px, rgba(255,255,255,0.02) 7px, rgba(255,255,255,0.02) 8px),
-        rgba(10,10,14,0.60);
+        var(--bg);
       background-size: 8px 8px, 8px 8px, 100% 100%;
       border-top: 4px solid var(--brown-dark);
       padding: 40px;
@@ -1552,7 +1552,7 @@
 </div>
 
 <!-- RANK PERKS -->
-<section id="rank-perks" style="background: linear-gradient(rgba(245,212,121,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245,212,121,0.02) 1px, transparent 1px), radial-gradient(ellipse 60% 50% at 50% 50%, rgba(92,68,0,0.15) 0%, transparent 70%), rgba(13,13,10,0.60); background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%; max-width: 100%; padding: 80px 40px;"><div style="max-width:1200px; margin:0 auto;">
+<section id="rank-perks" style="background: linear-gradient(rgba(245,212,121,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245,212,121,0.02) 1px, transparent 1px), radial-gradient(ellipse 60% 50% at 50% 50%, rgba(92,68,0,0.15) 0%, transparent 70%), var(--bg); background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%; max-width: 100%; padding: 80px 40px;"><div style="max-width:1200px; margin:0 auto;">
   <div class="section-label">// PROGRESSION</div>
   <h2 class="section-title">WHAT EACH RANK UNLOCKS</h2>
   <p class="section-sub">Every rank opens new doors. Here's what's waiting for you.</p>
@@ -1613,7 +1613,7 @@
 </div></section>
 
 <!-- FAQ -->
-<div style="background: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px), rgba(13,13,17,0.60); background-size: 16px 16px, 16px 16px, 100% 100%; max-width:100%; padding: 80px 40px;">
+<div style="background: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px), var(--bg); background-size: 16px 16px, 16px 16px, 100% 100%; max-width:100%; padding: 80px 40px;">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-label">// QUESTIONS</div>
     <h2 class="section-title">COMMON QUESTIONS</h2>
@@ -1639,7 +1639,7 @@
 </div>
 
 <!-- HOW TO JOIN -->
-<div style="background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(92,58,30,0.06) 15px, rgba(92,58,30,0.06) 16px), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(92,58,30,0.15) 0%, transparent 70%), rgba(15,14,11,0.60); max-width:100%; padding: 80px 40px;">
+<div style="background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(92,58,30,0.06) 15px, rgba(92,58,30,0.06) 16px), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(92,58,30,0.15) 0%, transparent 70%), var(--bg); max-width:100%; padding: 80px 40px;">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-label">// GET STARTED</div>
     <h2 class="section-title">HOW TO JOIN</h2>
@@ -1944,27 +1944,16 @@
     return d;
   });
 
-  // Bg gradient (created once, recreated on resize)
-  let bgGrad = null;
-  function buildGrad() {
-    bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-    bgGrad.addColorStop(0,   '#050510');
-    bgGrad.addColorStop(0.5, '#0a0a18');
-    bgGrad.addColorStop(1,   '#110a14');
-  }
-  buildGrad();
-
   window.addEventListener('resize', () => {
     W = window.innerWidth; H = window.innerHeight;
     canvas.width = W; canvas.height = H;
     stars = makeStars(180);
-    buildGrad();
   });
 
   function drawPlatform(p) {
     const bw = 16;
     const [dark, mid, light, glow] = p.pal;
-    const alpha = 0.55 + p.depth * 0.4;
+    const alpha = 0.25 + p.depth * 0.3;
     ctx.globalAlpha = alpha;
     ctx.shadowBlur = 10 + p.depth * 12;
     ctx.shadowColor = glow;
@@ -1986,14 +1975,12 @@
   }
 
   function draw() {
-    // Sky gradient
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);
 
     // Stars
     stars.forEach(s => {
       s.phase += s.speed;
-      ctx.globalAlpha = 0.5 + Math.sin(s.phase) * 0.35;
+      ctx.globalAlpha = 0.35 + Math.sin(s.phase) * 0.25;
       ctx.fillStyle = s.color;
       ctx.fillRect(s.x, s.y, s.size, s.size);
     });
