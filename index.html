@@ -1741,12 +1741,14 @@
   }
   setTimeout(cycleTip, 1000);
 
-  // ---- Achievement toast on load ----
-  setTimeout(() => {
-    const ach = document.getElementById('achievement');
-    ach.classList.add('show');
-    setTimeout(() => ach.classList.remove('show'), 4000);
-  }, 1200);
+  const achEl = document.getElementById('achievement');
+  function showAch(icon, text, duration) {
+    if (icon) { achEl.querySelector('.ach-icon').textContent = icon; achEl.querySelector('.ach-sub').textContent = text; }
+    achEl.classList.add('show');
+    setTimeout(() => achEl.classList.remove('show'), duration);
+  }
+
+  setTimeout(() => showAch(null, null, 4000), 1200);
 
   // ---- Konami code easter egg ----
   let kSeq = [];
@@ -1755,11 +1757,7 @@
     kSeq.push(e.keyCode);
     kSeq = kSeq.slice(-10);
     if (kSeq.join() === kCode.join()) {
-      const ach = document.getElementById('achievement');
-      ach.querySelector('.ach-icon').textContent = '🎮';
-      ach.querySelector('.ach-sub').textContent = 'Cheat Code Activated';
-      ach.classList.add('show');
-      setTimeout(() => ach.classList.remove('show'), 3000);
+      showAch('🎮', 'Cheat Code Activated', 3000);
       for (let i = 0; i < 40; i++) {
         setTimeout(() => {
           const px = document.createElement('div');
@@ -1968,97 +1966,106 @@
 
     ctx.globalAlpha = 1;
 
-    // Vignette — darkens edges, draws eye to centre
-    const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.25, W / 2, H / 2, W * 0.82);
-    vig.addColorStop(0, 'rgba(0,0,0,0)');
-    vig.addColorStop(1, 'rgba(0,0,0,0.62)');
-    ctx.fillStyle = vig;
+    // Vignette — created once, re-applied each frame
+    ctx.fillStyle = vigGrad;
     ctx.fillRect(0, 0, W, H);
 
     requestAnimationFrame(draw);
   }
 
+  // Vignette gradient — built once, rebuilt only on resize
+  let vigGrad = buildVigGrad();
+  function buildVigGrad() {
+    const v = ctx.createRadialGradient(W / 2, H / 2, H * 0.25, W / 2, H / 2, W * 0.82);
+    v.addColorStop(0, 'rgba(0,0,0,0)');
+    v.addColorStop(1, 'rgba(0,0,0,0.62)');
+    return v;
+  }
+  window.addEventListener('resize', () => { vigGrad = buildVigGrad(); });
+
   requestAnimationFrame(draw);
 
   // ---- Live server status ----
+  const statEl = document.querySelector('.stat-num[data-target]');
+  let lastCount = -1;
+  let statusFetching = false;
+
   async function fetchServerStatus() {
-    const statEl = document.querySelector('.stat-num[data-target]');
+    if (statusFetching) return;
+    statusFetching = true;
     try {
       const res  = await fetch('https://api.mcsrvstat.us/3/evbm.minehut.gg');
       const data = await res.json();
       const count = (data.online && data.players && data.players.online) ? data.players.online : 0;
-      if (statEl) {
+      if (count !== lastCount && statEl) {
+        lastCount = count;
         statEl.dataset.target = count;
         statEl.textContent = count.toLocaleString();
       }
     } catch (err) {
       console.warn('Server status fetch failed:', err);
+    } finally {
+      statusFetching = false;
     }
   }
 
   fetchServerStatus();
-  setInterval(fetchServerStatus, 3000); // refresh every 3 s
+  setInterval(fetchServerStatus, 3000);
 
   // ---- Player stats modal ----
-  const RANK_ORDER  = ['noob','pro','master','legend','captain','champion'];
   const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION' };
 
+  // Cached modal elements
+  const statsOverlay   = document.getElementById('stats-overlay');
+  const loginView      = document.getElementById('stats-login-view');
+  const profileView    = document.getElementById('stats-profile-view');
+  const usernameInput  = document.getElementById('mc-username-input');
+  const lookupBtn      = document.getElementById('lookup-btn');
+  const loginError     = document.getElementById('login-error');
+  const playerAvatar   = document.getElementById('player-avatar');
+  const playerNameEl   = document.getElementById('player-name');
+  const playerRankEl   = document.getElementById('player-rank-badge');
+  const navStatsBtn    = document.getElementById('nav-stats-btn');
+
+  function showLoginView()   { loginView.style.display = ''; profileView.style.display = 'none'; setTimeout(() => usernameInput.focus(), 50); }
+  function showProfileView() { loginView.style.display = 'none'; profileView.style.display = ''; }
+
   function openStatsModal() {
-    const overlay = document.getElementById('stats-overlay');
-    overlay.classList.add('open');
-    const saved = localStorage.getItem('mc_username');
-    if (saved) {
-      showProfile(saved, true);
-    } else {
-      document.getElementById('stats-login-view').style.display = '';
-      document.getElementById('stats-profile-view').style.display = 'none';
-      setTimeout(() => document.getElementById('mc-username-input').focus(), 50);
-    }
+    statsOverlay.classList.add('open');
+    if (localStorage.getItem('mc_username')) showProfile(localStorage.getItem('mc_username'), true);
+    else showLoginView();
   }
 
-  function closeStatsModal() {
-    document.getElementById('stats-overlay').classList.remove('open');
-  }
+  function closeStatsModal() { statsOverlay.classList.remove('open'); }
 
-  function overlayClick(e) {
-    if (e.target === document.getElementById('stats-overlay')) closeStatsModal();
-  }
+  function overlayClick(e) { if (e.target === statsOverlay) closeStatsModal(); }
 
   async function lookupPlayer() {
-    const input = document.getElementById('mc-username-input');
-    const btn   = document.getElementById('lookup-btn');
-    const errEl = document.getElementById('login-error');
-    const name  = input.value.trim();
+    const name = usernameInput.value.trim();
     if (!name) return;
-
-    btn.disabled = true;
-    btn.textContent = 'LOOKING UP...';
-    errEl.textContent = '';
-
+    lookupBtn.disabled = true;
+    lookupBtn.textContent = 'LOOKING UP...';
+    loginError.textContent = '';
     try {
       const res  = await fetch(`https://playerdb.co/api/player/minecraft/${encodeURIComponent(name)}`);
       const data = await res.json();
-      if (!data.success) throw new Error('player not found');
-      const player = data.data.player;
-      localStorage.setItem('mc_username', player.username);
-      localStorage.setItem('mc_uuid', player.id);
-      showProfile(player.username, false);
-    } catch (err) {
-      errEl.textContent = 'Player not found. Check the username and try again.';
+      if (!data.success) throw new Error();
+      const { username, id } = data.data.player;
+      localStorage.setItem('mc_username', username);
+      localStorage.setItem('mc_uuid', id);
+      showProfile(username, false, id);
+    } catch {
+      loginError.textContent = 'Player not found. Check the username and try again.';
     } finally {
-      btn.disabled = false;
-      btn.textContent = 'LOOK UP STATS';
+      lookupBtn.disabled = false;
+      lookupBtn.textContent = 'LOOK UP STATS';
     }
   }
 
-  async function showProfile(username, fromCache) {
-    document.getElementById('stats-login-view').style.display = 'none';
-    const profileView = document.getElementById('stats-profile-view');
-    profileView.style.display = '';
-
-    // If coming from cache we already have the UUID, otherwise fetch it
-    let uuid = localStorage.getItem('mc_uuid');
-    if (!uuid || !fromCache) {
+  async function showProfile(username, fromCache, knownUuid) {
+    showProfileView();
+    let uuid = knownUuid || localStorage.getItem('mc_uuid');
+    if (!uuid) {
       try {
         const res  = await fetch(`https://playerdb.co/api/player/minecraft/${encodeURIComponent(username)}`);
         const data = await res.json();
@@ -2068,48 +2075,19 @@
           localStorage.setItem('mc_uuid', uuid);
           localStorage.setItem('mc_username', username);
         }
-      } catch (e) { /* use whatever we have */ }
+      } catch { /* use whatever we have */ }
     }
-
-    // Avatar
-    const avatarEl = document.getElementById('player-avatar');
-    avatarEl.src = uuid
-      ? `https://crafatar.com/avatars/${uuid}?size=64&overlay=true`
-      : '';
-
-    // Name
-    document.getElementById('player-name').textContent = username;
-
-    // Nav button
-    const navBtn = document.getElementById('nav-stats-btn');
-    navBtn.textContent = username.toUpperCase();
-    navBtn.classList.add('logged-in');
-
-    // Rank — fetch from server stats if available
-    await loadPlayerStats(username, uuid);
+    playerAvatar.src = uuid ? `https://crafatar.com/avatars/${uuid}?size=64&overlay=true` : '';
+    playerNameEl.textContent = username;
+    navStatsBtn.textContent  = username.toUpperCase();
+    navStatsBtn.classList.add('logged-in');
+    loadPlayerStats(uuid);
   }
 
-  async function loadPlayerStats(username, uuid) {
-    // Determine if player is currently online from server data
-    let onlineRank = null;
-    try {
-      const res  = await fetch('https://api.mcsrvstat.us/3/evbm.minehut.gg');
-      const data = await res.json();
-      if (data.online && data.players && data.players.list) {
-        const match = data.players.list.find(p =>
-          (typeof p === 'string' ? p : p.name).toLowerCase() === username.toLowerCase()
-        );
-        if (match) onlineRank = 'online';
-      }
-    } catch (e) { /* ignore */ }
-
-    // Rank badge — default to noob until a backend provides real rank
+  function loadPlayerStats(uuid) {
     const storedRank = localStorage.getItem(`rank_${uuid}`) || 'noob';
-    const rankEl = document.getElementById('player-rank-badge');
-    rankEl.textContent  = RANK_LABELS[storedRank];
-    rankEl.className    = `rank-badge rank-${storedRank}`;
-
-    // Stats — fill in from Airtable once connected
+    playerRankEl.textContent = RANK_LABELS[storedRank];
+    playerRankEl.className   = `rank-badge rank-${storedRank}`;
     document.getElementById('stat-playtime').textContent = '--';
     document.getElementById('stat-jumps').textContent    = '--';
     document.getElementById('stat-coins').textContent    = '--';
@@ -2119,24 +2097,16 @@
   function switchPlayer() {
     localStorage.removeItem('mc_username');
     localStorage.removeItem('mc_uuid');
-    document.getElementById('nav-stats-btn').textContent = 'MY STATS';
-    document.getElementById('nav-stats-btn').classList.remove('logged-in');
-    document.getElementById('mc-username-input').value = '';
-    document.getElementById('login-error').textContent = '';
-    document.getElementById('stats-profile-view').style.display = 'none';
-    document.getElementById('stats-login-view').style.display = '';
-    setTimeout(() => document.getElementById('mc-username-input').focus(), 50);
+    navStatsBtn.textContent = 'MY STATS';
+    navStatsBtn.classList.remove('logged-in');
+    usernameInput.value    = '';
+    loginError.textContent = '';
+    showLoginView();
   }
 
   // Restore nav label if already logged in
-  (function restoreSession() {
-    const saved = localStorage.getItem('mc_username');
-    if (saved) {
-      const btn = document.getElementById('nav-stats-btn');
-      btn.textContent = saved.toUpperCase();
-      btn.classList.add('logged-in');
-    }
-  })();
+  const _saved = localStorage.getItem('mc_username');
+  if (_saved) { navStatsBtn.textContent = _saved.toUpperCase(); navStatsBtn.classList.add('logged-in'); }
 </script>
 </body>
 </html>
