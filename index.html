@@ -129,6 +129,176 @@
 
     .nav-ip:hover { background: var(--brown-mid); }
 
+    .nav-stats-btn {
+      font-size: 0.45rem;
+      color: var(--gold);
+      background: rgba(92,58,30,0.5);
+      border: 2px solid var(--gold);
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 1px;
+    }
+    .nav-stats-btn:hover { background: rgba(245,212,121,0.15); }
+    .nav-stats-btn.logged-in { color: #6FF0FF; border-color: #6FF0FF; }
+
+    /* ---- STATS MODAL ---- */
+    .stats-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .stats-overlay.open { display: flex; }
+
+    .stats-modal {
+      background: #120f0a;
+      border: 4px solid var(--brown-mid);
+      padding: 36px 32px;
+      max-width: 480px;
+      width: 90%;
+      position: relative;
+      image-rendering: pixelated;
+      box-shadow: 0 0 0 2px var(--brown-dark), 8px 8px 0 rgba(0,0,0,0.6);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px; right: 14px;
+      background: none;
+      border: none;
+      color: var(--brown-light);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: var(--gold); }
+
+    .modal-title {
+      font-size: 0.6rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .modal-subtitle {
+      font-size: 0.35rem;
+      color: var(--brown-light);
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .mc-input {
+      width: 100%;
+      background: #0d0d16;
+      border: 3px solid var(--brown-mid);
+      color: var(--white);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      padding: 12px 14px;
+      box-sizing: border-box;
+      outline: none;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .mc-input:focus { border-color: var(--gold); }
+    .mc-input::placeholder { color: var(--brown-mid); }
+
+    .modal-btn {
+      width: 100%;
+      background: var(--brown-dark);
+      border: 3px solid var(--brown-mid);
+      color: var(--gold);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      padding: 12px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: background 0.15s;
+    }
+    .modal-btn:hover { background: var(--brown-mid); }
+    .modal-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .modal-error {
+      font-size: 0.35rem;
+      color: var(--red-light);
+      text-align: center;
+      margin-top: 14px;
+      min-height: 1.2em;
+    }
+
+    /* ---- PROFILE VIEW ---- */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .player-avatar {
+      width: 64px;
+      height: 64px;
+      image-rendering: pixelated;
+      border: 3px solid var(--brown-mid);
+      flex-shrink: 0;
+    }
+
+    .player-info { flex: 1; }
+
+    .player-name {
+      font-size: 0.65rem;
+      color: var(--white);
+      margin-bottom: 10px;
+      word-break: break-all;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: rgba(92,58,30,0.25);
+      border: 2px solid var(--brown-mid);
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .stat-box-num {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .stat-box-label {
+      display: block;
+      font-size: 0.3rem;
+      color: var(--brown-light);
+      letter-spacing: 1px;
+    }
+
+    .modal-switch {
+      background: none;
+      border: 2px solid var(--brown-mid);
+      color: var(--brown-light);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.3rem;
+      padding: 8px 14px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      width: 100%;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .modal-switch:hover { color: var(--white); border-color: var(--white); }
+
     /* ---- HERO ---- */
     #hero {
       min-height: 100vh;
@@ -873,27 +1043,6 @@
       display: block;
     }
 
-    /* ---- SERVER STATUS ---- */
-    .server-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.38rem;
-      color: #60ff90;
-      letter-spacing: 1px;
-    }
-
-    .status-dot {
-      width: 8px; height: 8px;
-      background: #60ff90;
-      display: inline-block;
-      animation: statusPulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes statusPulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 6px #60ff90; }
-      50%       { opacity: 0.3; box-shadow: none; }
-    }
 
     /* ---- ACHIEVEMENT TOAST ---- */
     .achievement {
@@ -1221,9 +1370,56 @@
 
     <li><a href="#cta">Join</a></li>
   </ul>
-  <div class="server-status"><span class="status-dot"></span>ONLINE</div>
+  <div class="nav-stats-btn" id="nav-stats-btn" onclick="openStatsModal()">MY STATS</div>
   <div class="nav-ip" onclick="copyIP()">COPY IP</div>
 </nav>
+
+<!-- STATS MODAL -->
+<div class="stats-overlay" id="stats-overlay" onclick="overlayClick(event)">
+  <div class="stats-modal">
+    <button class="modal-close" onclick="closeStatsModal()">✕</button>
+
+    <!-- Login view -->
+    <div id="stats-login-view">
+      <div class="modal-title">PLAYER LOOKUP</div>
+      <p class="modal-subtitle">Enter your Minecraft username<br>to view your stats.</p>
+      <input class="mc-input" id="mc-username-input" type="text" placeholder="YourUsername" maxlength="16"
+             onkeydown="if(event.key==='Enter')lookupPlayer()">
+      <button class="modal-btn" id="lookup-btn" onclick="lookupPlayer()">LOOK UP STATS</button>
+      <div class="modal-error" id="login-error"></div>
+    </div>
+
+    <!-- Profile view -->
+    <div id="stats-profile-view" style="display:none">
+      <div class="profile-header">
+        <img class="player-avatar" id="player-avatar" src="" alt="avatar">
+        <div class="player-info">
+          <div class="player-name" id="player-name"></div>
+          <div class="rank-badge" id="player-rank-badge"></div>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-tickets">--</span>
+          <span class="stat-box-label">TICKETS</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-keys">--</span>
+          <span class="stat-box-label">KEYS</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-courses">--</span>
+          <span class="stat-box-label">COURSES DONE</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-battles">--</span>
+          <span class="stat-box-label">BATTLES WON</span>
+        </div>
+      </div>
+      <button class="modal-switch" onclick="switchPlayer()">SWITCH PLAYER</button>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <div id="hero">
@@ -1767,6 +1963,165 @@
   }
 
   requestAnimationFrame(draw);
+
+  // ---- Live server status ----
+  async function fetchServerStatus() {
+    const statEl = document.querySelector('.stat-num[data-target]');
+    try {
+      const res  = await fetch('https://api.mcsrvstat.us/3/evbm.minehut.gg');
+      const data = await res.json();
+      const count = (data.online && data.players && data.players.online) ? data.players.online : 0;
+      if (statEl) {
+        statEl.dataset.target = count;
+        statEl.textContent = count.toLocaleString();
+      }
+    } catch (err) {
+      console.warn('Server status fetch failed:', err);
+    }
+  }
+
+  fetchServerStatus();
+  setInterval(fetchServerStatus, 3000); // refresh every 3 s
+
+  // ---- Player stats modal ----
+  const RANK_ORDER  = ['noob','pro','master','legend','captain','champion'];
+  const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION' };
+
+  function openStatsModal() {
+    const overlay = document.getElementById('stats-overlay');
+    overlay.classList.add('open');
+    const saved = localStorage.getItem('mc_username');
+    if (saved) {
+      showProfile(saved, true);
+    } else {
+      document.getElementById('stats-login-view').style.display = '';
+      document.getElementById('stats-profile-view').style.display = 'none';
+      setTimeout(() => document.getElementById('mc-username-input').focus(), 50);
+    }
+  }
+
+  function closeStatsModal() {
+    document.getElementById('stats-overlay').classList.remove('open');
+  }
+
+  function overlayClick(e) {
+    if (e.target === document.getElementById('stats-overlay')) closeStatsModal();
+  }
+
+  async function lookupPlayer() {
+    const input = document.getElementById('mc-username-input');
+    const btn   = document.getElementById('lookup-btn');
+    const errEl = document.getElementById('login-error');
+    const name  = input.value.trim();
+    if (!name) return;
+
+    btn.disabled = true;
+    btn.textContent = 'LOOKING UP...';
+    errEl.textContent = '';
+
+    try {
+      const res  = await fetch(`https://playerdb.co/api/player/minecraft/${encodeURIComponent(name)}`);
+      const data = await res.json();
+      if (!data.success) throw new Error('player not found');
+      const player = data.data.player;
+      localStorage.setItem('mc_username', player.username);
+      localStorage.setItem('mc_uuid', player.id);
+      showProfile(player.username, false);
+    } catch (err) {
+      errEl.textContent = 'Player not found. Check the username and try again.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'LOOK UP STATS';
+    }
+  }
+
+  async function showProfile(username, fromCache) {
+    document.getElementById('stats-login-view').style.display = 'none';
+    const profileView = document.getElementById('stats-profile-view');
+    profileView.style.display = '';
+
+    // If coming from cache we already have the UUID, otherwise fetch it
+    let uuid = localStorage.getItem('mc_uuid');
+    if (!uuid || !fromCache) {
+      try {
+        const res  = await fetch(`https://playerdb.co/api/player/minecraft/${encodeURIComponent(username)}`);
+        const data = await res.json();
+        if (data.success) {
+          uuid = data.data.player.id;
+          username = data.data.player.username;
+          localStorage.setItem('mc_uuid', uuid);
+          localStorage.setItem('mc_username', username);
+        }
+      } catch (e) { /* use whatever we have */ }
+    }
+
+    // Avatar
+    const avatarEl = document.getElementById('player-avatar');
+    avatarEl.src = uuid
+      ? `https://crafatar.com/avatars/${uuid}?size=64&overlay=true`
+      : '';
+
+    // Name
+    document.getElementById('player-name').textContent = username;
+
+    // Nav button
+    const navBtn = document.getElementById('nav-stats-btn');
+    navBtn.textContent = username.toUpperCase();
+    navBtn.classList.add('logged-in');
+
+    // Rank — fetch from server stats if available
+    await loadPlayerStats(username, uuid);
+  }
+
+  async function loadPlayerStats(username, uuid) {
+    // Determine if player is currently online from server data
+    let onlineRank = null;
+    try {
+      const res  = await fetch('https://api.mcsrvstat.us/3/evbm.minehut.gg');
+      const data = await res.json();
+      if (data.online && data.players && data.players.list) {
+        const match = data.players.list.find(p =>
+          (typeof p === 'string' ? p : p.name).toLowerCase() === username.toLowerCase()
+        );
+        if (match) onlineRank = 'online';
+      }
+    } catch (e) { /* ignore */ }
+
+    // Rank badge — default to noob until a backend provides real rank
+    const storedRank = localStorage.getItem(`rank_${uuid}`) || 'noob';
+    const rankEl = document.getElementById('player-rank-badge');
+    rankEl.textContent  = RANK_LABELS[storedRank];
+    rankEl.className    = `rank-badge rank-${storedRank}`;
+
+    // Stats — placeholder until a backend is connected
+    // To connect: replace the '--' below with data fetched from your server API
+    document.getElementById('stat-tickets').textContent = '--';
+    document.getElementById('stat-keys').textContent    = '--';
+    document.getElementById('stat-courses').textContent = '--';
+    document.getElementById('stat-battles').textContent = '--';
+  }
+
+  function switchPlayer() {
+    localStorage.removeItem('mc_username');
+    localStorage.removeItem('mc_uuid');
+    document.getElementById('nav-stats-btn').textContent = 'MY STATS';
+    document.getElementById('nav-stats-btn').classList.remove('logged-in');
+    document.getElementById('mc-username-input').value = '';
+    document.getElementById('login-error').textContent = '';
+    document.getElementById('stats-profile-view').style.display = 'none';
+    document.getElementById('stats-login-view').style.display = '';
+    setTimeout(() => document.getElementById('mc-username-input').focus(), 50);
+  }
+
+  // Restore nav label if already logged in
+  (function restoreSession() {
+    const saved = localStorage.getItem('mc_username');
+    if (saved) {
+      const btn = document.getElementById('nav-stats-btn');
+      btn.textContent = saved.toUpperCase();
+      btn.classList.add('logged-in');
+    }
+  })();
 </script>
 </body>
 </html>
