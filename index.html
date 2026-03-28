@@ -355,15 +355,41 @@
       100% { transform: translateY(-95vh) translateX(var(--dx2)) scale(0.3); opacity: 0; }
     }
 
+    /* Flame shapes */
+    .flame-row {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      pointer-events: none;
+      z-index: 2;
+      padding: 0 10px;
+    }
+
+    .flame {
+      position: relative;
+      border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+      transform-origin: bottom center;
+      animation: flicker ease-in-out infinite alternate;
+      flex-shrink: 0;
+    }
+
+    @keyframes flicker {
+      0%   { transform: scaleX(0.85) scaleY(1.05) rotate(-4deg) skewX(-3deg); filter: brightness(0.9); }
+      100% { transform: scaleX(1.1)  scaleY(0.92) rotate(4deg)  skewX(3deg);  filter: brightness(1.2); }
+    }
+
     /* Fire glow at bottom of hero */
     #hero::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 220px;
-      background: linear-gradient(to top, rgba(255,80,0,0.5) 0%, rgba(255,40,0,0.2) 40%, transparent 100%);
+      height: 260px;
+      background: linear-gradient(to top, rgba(255,100,0,0.7) 0%, rgba(255,50,0,0.35) 40%, transparent 100%);
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
     /* Logo block */
@@ -1482,6 +1508,25 @@
   <p class="mc-tip" id="mc-tip"></p>
 
   <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
+
+  <!-- Flames at bottom -->
+  <div class="flame-row">
+    <div class="flame" style="width:28px;height:90px; background:linear-gradient(to top,#fff5aa,#ff8800,#ff2200,transparent); animation-duration:0.4s; animation-delay:0s;"></div>
+    <div class="flame" style="width:20px;height:60px; background:linear-gradient(to top,#ffffff,#ffcc00,#ff5500,transparent); animation-duration:0.5s; animation-delay:0.1s;"></div>
+    <div class="flame" style="width:36px;height:130px;background:linear-gradient(to top,#fff5aa,#ff9900,#cc2200,transparent); animation-duration:0.35s;animation-delay:0.2s;"></div>
+    <div class="flame" style="width:22px;height:70px; background:linear-gradient(to top,#ffffff,#ffaa00,#ff3300,transparent); animation-duration:0.45s;animation-delay:0.05s;"></div>
+    <div class="flame" style="width:40px;height:150px;background:linear-gradient(to top,#ffffff,#ffe060,#ff6600,#cc1100,transparent); animation-duration:0.3s; animation-delay:0.15s;"></div>
+    <div class="flame" style="width:18px;height:55px; background:linear-gradient(to top,#ffee88,#ff8800,#ff2200,transparent); animation-duration:0.55s;animation-delay:0.25s;"></div>
+    <div class="flame" style="width:32px;height:110px;background:linear-gradient(to top,#fff5aa,#ff9900,#dd2200,transparent); animation-duration:0.38s;animation-delay:0.08s;"></div>
+    <div class="flame" style="width:24px;height:80px; background:linear-gradient(to top,#ffffff,#ffcc00,#ff4400,transparent); animation-duration:0.48s;animation-delay:0.18s;"></div>
+    <div class="flame" style="width:38px;height:140px;background:linear-gradient(to top,#fff5aa,#ffaa00,#ff3300,#aa1100,transparent); animation-duration:0.32s;animation-delay:0.12s;"></div>
+    <div class="flame" style="width:20px;height:65px; background:linear-gradient(to top,#ffffff,#ffbb00,#ff5500,transparent); animation-duration:0.52s;animation-delay:0.22s;"></div>
+    <div class="flame" style="width:34px;height:120px;background:linear-gradient(to top,#fff5aa,#ff9900,#cc2200,transparent); animation-duration:0.36s;animation-delay:0.06s;"></div>
+    <div class="flame" style="width:22px;height:75px; background:linear-gradient(to top,#ffffff,#ffdd00,#ff4400,transparent); animation-duration:0.46s;animation-delay:0.16s;"></div>
+    <div class="flame" style="width:42px;height:160px;background:linear-gradient(to top,#ffffff,#ffe060,#ff7700,#bb1100,transparent); animation-duration:0.28s;animation-delay:0.04s;"></div>
+    <div class="flame" style="width:18px;height:50px; background:linear-gradient(to top,#ffee88,#ff9900,#ff3300,transparent); animation-duration:0.58s;animation-delay:0.28s;"></div>
+    <div class="flame" style="width:30px;height:100px;background:linear-gradient(to top,#fff5aa,#ffaa00,#dd3300,transparent); animation-duration:0.42s;animation-delay:0.14s;"></div>
+  </div>
 
 </div>
 
