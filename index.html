@@ -1901,49 +1901,31 @@
   // ---- Hero Fire Canvas (DOOM algorithm) ----
   const fireEl  = document.getElementById('fire-canvas');
   const fireCtx = fireEl.getContext('2d');
+  const BS = 6;
 
-  const offscreen    = document.createElement('canvas');
-  const offCtx       = offscreen.getContext('2d');
-  const FIRE_BS      = 6; // px per fire "pixel"
-  const FIRE_H_PX    = 320;
+  let FW, FH, fbuf;
 
-  // Palette: black → red → orange → yellow → white
-  const PAL = new Uint32Array(256);
-  for (let i = 0; i < 256; i++) {
-    let r=0,g=0,b=0,a=0;
-    if (i>0) {
-      if      (i<60)  { const t=i/60;        r=Math.round(t*210);                    a=Math.round(t*255); }
-      else if (i<120) { const t=(i-60)/60;   r=210+Math.round(t*45); g=Math.round(t*100); a=255; }
-      else if (i<190) { const t=(i-120)/70;  r=255; g=100+Math.round(t*130);         a=255; }
-      else            { const t=(i-190)/65;  r=255; g=230+Math.round(t*25); b=Math.round(t*255); a=255; }
-    }
-    PAL[i] = (a<<24)|(b<<16)|(g<<8)|r;
+  function fireColor(h) {
+    if (h < 20)  return null;
+    if (h < 80)  { const t=(h-20)/60;  return `rgb(${Math.round(t*220)},0,0)`; }
+    if (h < 140) { const t=(h-80)/60;  return `rgb(${220+Math.round(t*35)},${Math.round(t*110)},0)`; }
+    if (h < 200) { const t=(h-140)/60; return `rgb(255,${110+Math.round(t*130)},0)`; }
+                   const t=(h-200)/55; return `rgb(255,${240+Math.round(t*15)},${Math.round(t*220)})`;
   }
 
-  let FW, FH, fbuf, fimg, fpix;
-
-  function initHeroFire() {
-    const W = fireEl.offsetWidth || window.innerWidth;
-    FW = Math.ceil(W / FIRE_BS);
-    FH = Math.ceil(FIRE_H_PX / FIRE_BS);
-    fireEl.width  = FW * FIRE_BS;
-    fireEl.height = FH * FIRE_BS;
-    offscreen.width  = FW;
-    offscreen.height = FH;
+  function initFire() {
+    FW   = Math.max(10, Math.round((fireEl.parentElement.offsetWidth || window.innerWidth) / BS));
+    FH   = Math.round(320 / BS);
+    fireEl.width  = FW * BS;
+    fireEl.height = FH * BS;
     fbuf = new Uint8Array(FW * FH);
-    fimg = offCtx.createImageData(FW, FH);
-    fpix = new Uint32Array(fimg.data.buffer);
     for (let x = 0; x < FW; x++) {
       fbuf[x + (FH-1)*FW] = 255;
       fbuf[x + (FH-2)*FW] = 245;
-      fbuf[x + (FH-3)*FW] = 225;
     }
   }
 
-  window.addEventListener('resize', initHeroFire);
-  initHeroFire();
-
-  function spreadHeroFire() {
+  function spreadFire() {
     for (let y = 0; y < FH-1; y++) {
       for (let x = 0; x < FW; x++) {
         const src  = fbuf[x + (y+1)*FW];
@@ -1955,24 +1937,25 @@
     for (let x = 0; x < FW; x++) {
       fbuf[x + (FH-1)*FW] = 255;
       fbuf[x + (FH-2)*FW] = 240 + ((Math.random()*15)|0);
-      fbuf[x + (FH-3)*FW] = 215 + ((Math.random()*25)|0);
     }
   }
 
-  function renderHeroFire() {
-    for (let i = 0; i < FW*FH; i++) fpix[i] = PAL[fbuf[i]];
-    offCtx.putImageData(fimg, 0, 0);
+  function renderFire() {
     fireCtx.clearRect(0, 0, fireEl.width, fireEl.height);
-    fireCtx.imageSmoothingEnabled = false;
-    fireCtx.drawImage(offscreen, 0, 0, FW, FH, 0, 0, fireEl.width, fireEl.height);
+    for (let y = 0; y < FH; y++) {
+      for (let x = 0; x < FW; x++) {
+        const col = fireColor(fbuf[x + y*FW]);
+        if (!col) continue;
+        fireCtx.fillStyle = col;
+        fireCtx.fillRect(x*BS, y*BS, BS, BS);
+      }
+    }
   }
 
-  function fireTick() {
-    spreadHeroFire();
-    renderHeroFire();
-    requestAnimationFrame(fireTick);
-  }
-  requestAnimationFrame(fireTick);
+  initFire();
+  window.addEventListener('resize', initFire);
+
+  (function tick() { spreadFire(); renderFire(); requestAnimationFrame(tick); })();
 
   // ---- Airtable config ----
   const AIRTABLE_TOKEN   = 'patpAbTIZAn653X4z.bd16c3aca7caa386b94ae94fb5f98ca8c3bb56da18b71a2783e8c99cfa933695';
