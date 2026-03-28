@@ -364,6 +364,61 @@
       z-index: 0;
     }
 
+    /* ---- Small fires ---- */
+    .fire-pit {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding: 0 4%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .small-fire {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      filter: drop-shadow(0 0 12px #FF6600) drop-shadow(0 0 24px #FF3300);
+    }
+
+    .small-fire span {
+      display: block;
+      border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+      transform-origin: bottom center;
+    }
+
+    .small-fire span:nth-child(1) {
+      width: 14px; height: 34px;
+      background: linear-gradient(to top, #CC2200, #FF5500, #FF9900);
+      animation: flk1 0.38s ease-in-out infinite alternate;
+    }
+    .small-fire span:nth-child(2) {
+      width: 20px; height: 52px;
+      background: linear-gradient(to top, #FF2200, #FF7700, #FFD000);
+      animation: flk2 0.27s ease-in-out infinite alternate;
+    }
+    .small-fire span:nth-child(3) {
+      width: 13px; height: 30px;
+      background: linear-gradient(to top, #BB2000, #FF4400, #FF9900);
+      animation: flk3 0.44s ease-in-out infinite alternate;
+    }
+
+    @keyframes flk1 {
+      0%   { transform: scaleX(1.0) scaleY(1.0) rotate(-4deg); }
+      100% { transform: scaleX(0.82) scaleY(1.18) rotate(3deg); }
+    }
+    @keyframes flk2 {
+      0%   { transform: scaleX(1.0) scaleY(1.0) rotate(2deg);  opacity: 1; }
+      100% { transform: scaleX(0.88) scaleY(1.12) rotate(-3deg); opacity: 0.85; }
+    }
+    @keyframes flk3 {
+      0%   { transform: scaleX(0.9) scaleY(0.92) rotate(5deg);  opacity: 0.8; }
+      100% { transform: scaleX(1.1) scaleY(1.08) rotate(-2deg); opacity: 1; }
+    }
+
     /* Logo block */
     .hero-logo {
       position: relative;
@@ -1480,6 +1535,18 @@
   <p class="mc-tip" id="mc-tip"></p>
 
   <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
+
+  <!-- Small fires along the bottom -->
+  <div class="fire-pit">
+    <div class="small-fire"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.1s"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.2s"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.05s"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.15s"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.3s"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.08s"><span></span><span></span><span></span></div>
+    <div class="small-fire" style="animation-delay:0.25s"><span></span><span></span><span></span></div>
+  </div>
 
 </div>
 
