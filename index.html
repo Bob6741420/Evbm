@@ -40,7 +40,8 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 10;
+      mix-blend-mode: screen;
     }
 
     nav, #hero, #features, #about, #ranks, .marquee-wrap, section, footer, #cta, .how-grid-wrap {
@@ -1954,15 +1955,16 @@
     for (let y = 0; y < FH - 1; y++) {
       for (let x = 0; x < FW; x++) {
         const src  = fire[x + (y+1)*FW];
-        const rand = (Math.random()*4)|0;
-        const nx   = Math.max(0, Math.min(FW-1, x - (rand&1)));
+        const rand = (Math.random()*3)|0; // 0-2: slow cooling = tall flames
+        const nx   = Math.max(0, Math.min(FW-1, x + rand - 1));
         fire[nx + y*FW] = src < rand ? 0 : src - rand;
       }
     }
-    // Keep bottom rows hot
+    // Keep bottom rows blazing
     for (let x = 0; x < FW; x++) {
       fire[x + (FH-1)*FW] = 255;
-      fire[x + (FH-2)*FW] = 240 + ((Math.random()*16)|0);
+      fire[x + (FH-2)*FW] = 245 + ((Math.random()*10)|0);
+      fire[x + (FH-3)*FW] = 220 + ((Math.random()*20)|0);
     }
   }
 
