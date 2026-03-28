@@ -182,12 +182,50 @@
       box-shadow: 0 -4px 18px rgba(245,212,80,0.5), inset 2px 0 0 rgba(255,255,255,0.12), inset -2px 0 0 rgba(0,0,0,0.2);
     }
 
-    /* Parkour runner - position controlled by JS */
+    /* Parkour runner */
     #bg-runner {
       position: fixed;
       z-index: 10;
       pointer-events: none;
       filter: drop-shadow(0 0 5px #F5D479) drop-shadow(0 0 12px rgba(245,212,121,0.45));
+      animation: runnerMove 30s linear infinite;
+    }
+
+    @keyframes runnerMove {
+      0%   { left:-40px;  bottom:80px;  }
+      7%   { left:7%;     bottom:80px;  }
+      8%   { left:8%;     bottom:64px;  }
+      13%  { left:13%;    bottom:64px;  }
+      14%  { left:14%;    bottom:108px; }
+      16%  { left:16%;    bottom:128px; }
+      21%  { left:21%;    bottom:128px; }
+      22%  { left:22%;    bottom:80px;  }
+      26%  { left:26%;    bottom:80px;  }
+      27%  { left:27%;    bottom:96px;  }
+      32%  { left:32%;    bottom:96px;  }
+      33%  { left:33%;    bottom:64px;  }
+      37%  { left:37%;    bottom:64px;  }
+      39%  { left:39%;    bottom:128px; }
+      41%  { left:41%;    bottom:160px; }
+      46%  { left:46%;    bottom:160px; }
+      47%  { left:47%;    bottom:96px;  }
+      52%  { left:52%;    bottom:96px;  }
+      53%  { left:53%;    bottom:80px;  }
+      59%  { left:59%;    bottom:80px;  }
+      60%  { left:60%;    bottom:112px; }
+      62%  { left:62%;    bottom:128px; }
+      66%  { left:66%;    bottom:128px; }
+      67%  { left:67%;    bottom:80px;  }
+      71%  { left:71%;    bottom:80px;  }
+      72%  { left:72%;    bottom:96px;  }
+      78%  { left:78%;    bottom:96px;  }
+      80%  { left:80%;    bottom:136px; }
+      82%  { left:82%;    bottom:160px; }
+      86%  { left:86%;    bottom:160px; }
+      87%  { left:87%;    bottom:80px;  }
+      92%  { left:92%;    bottom:80px;  }
+      93%  { left:93%;    bottom:64px;  }
+      100% { left:110%;   bottom:64px;  }
     }
 
     #bg-canvas { display: none; }
@@ -1510,10 +1548,39 @@
 <div id="bg-moon"></div>
 
 <!-- Far city (depth silhouette) -->
-<div id="bg-city-far"></div>
+<div id="bg-city-far">
+  <div class="bldg-far" style="left:1%;width:6%;height:55px;"></div>
+  <div class="bldg-far" style="left:8%;width:8%;height:80px;"></div>
+  <div class="bldg-far" style="left:17%;width:7%;height:65px;"></div>
+  <div class="bldg-far" style="left:25%;width:9%;height:95px;"></div>
+  <div class="bldg-far" style="left:35%;width:6%;height:70px;"></div>
+  <div class="bldg-far" style="left:42%;width:9%;height:105px;"></div>
+  <div class="bldg-far" style="left:52%;width:7%;height:75px;"></div>
+  <div class="bldg-far" style="left:60%;width:8%;height:88px;"></div>
+  <div class="bldg-far" style="left:69%;width:7%;height:78px;"></div>
+  <div class="bldg-far" style="left:77%;width:7%;height:100px;"></div>
+  <div class="bldg-far" style="left:85%;width:7%;height:68px;"></div>
+  <div class="bldg-far" style="left:93%;width:7%;height:82px;"></div>
+</div>
 
-<!-- Near city - Minecraft blocks, filled by JS -->
-<div id="bg-city"></div>
+<!-- Near city - Minecraft blocks -->
+<div id="bg-city">
+  <div class="mc-stone"  style="left:0%;  width:7%;  height:80px;"></div>
+  <div class="mc-wood"   style="left:7%;  width:6%;  height:64px;"></div>
+  <div class="mc-brick"  style="left:13%; width:8%;  height:128px;"></div>
+  <div class="mc-stone"  style="left:21%; width:5%;  height:80px;"></div>
+  <div class="mc-cobble" style="left:26%; width:6%;  height:96px;"></div>
+  <div class="mc-wood"   style="left:32%; width:5%;  height:64px;"></div>
+  <div class="mc-brick"  style="left:37%; width:9%;  height:160px;"></div>
+  <div class="mc-stone"  style="left:46%; width:6%;  height:96px;"></div>
+  <div class="mc-cobble" style="left:52%; width:7%;  height:80px;"></div>
+  <div class="mc-brick"  style="left:59%; width:7%;  height:128px;"></div>
+  <div class="mc-wood"   style="left:66%; width:5%;  height:80px;"></div>
+  <div class="mc-stone"  style="left:71%; width:7%;  height:96px;"></div>
+  <div class="mc-gold"   style="left:78%; width:8%;  height:160px;"></div>
+  <div class="mc-wood"   style="left:86%; width:6%;  height:80px;"></div>
+  <div class="mc-stone"  style="left:92%; width:8%;  height:64px;"></div>
+</div>
 
 <!-- Parkour runner -->
 <div id="bg-runner">
@@ -2048,103 +2115,6 @@
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
-
-  // ---- Minecraft City + Parkour Runner ----
-  const BUILDINGS = [
-    { l:  0, w: 7,  h: 80,  t: 'stone'  },
-    { l:  7, w: 6,  h: 64,  t: 'wood'   },
-    { l: 13, w: 8,  h: 128, t: 'brick'  },
-    { l: 21, w: 5,  h: 80,  t: 'stone'  },
-    { l: 26, w: 6,  h: 96,  t: 'cobble' },
-    { l: 32, w: 5,  h: 64,  t: 'wood'   },
-    { l: 37, w: 9,  h: 160, t: 'brick'  },
-    { l: 46, w: 6,  h: 96,  t: 'stone'  },
-    { l: 52, w: 7,  h: 80,  t: 'cobble' },
-    { l: 59, w: 7,  h: 128, t: 'brick'  },
-    { l: 66, w: 5,  h: 80,  t: 'wood'   },
-    { l: 71, w: 7,  h: 96,  t: 'stone'  },
-    { l: 78, w: 8,  h: 160, t: 'gold'   },
-    { l: 86, w: 6,  h: 80,  t: 'wood'   },
-    { l: 92, w: 8,  h: 64,  t: 'stone'  },
-  ];
-
-  // Far city silhouette
-  const FAR = [
-    { l:1, w:6, h:55 }, { l:8, w:8, h:80 }, { l:17, w:7, h:65 },
-    { l:25, w:9, h:95 }, { l:35, w:6, h:70 }, { l:42, w:9, h:105 },
-    { l:52, w:7, h:75 }, { l:60, w:8, h:88 }, { l:69, w:7, h:78 },
-    { l:77, w:7, h:100}, { l:85, w:7, h:68 }, { l:93, w:7, h:82 },
-  ];
-
-  const cityFar  = document.getElementById('bg-city-far');
-  const cityNear = document.getElementById('bg-city');
-
-  FAR.forEach(b => {
-    const d = document.createElement('div');
-    d.className = 'bldg-far';
-    d.style.cssText = `left:${b.l}%;width:${b.w}%;height:${b.h}px;`;
-    cityFar.appendChild(d);
-  });
-
-  BUILDINGS.forEach(b => {
-    const d = document.createElement('div');
-    d.className = `mc-${b.t}`;
-    d.style.cssText = `left:${b.l}%;width:${b.w}%;height:${b.h}px;`;
-    cityNear.appendChild(d);
-  });
-
-  // Runner physics
-  const runnerEl = document.getElementById('bg-runner');
-  const GRAVITY  = 0.55;
-  const SPEED    = 2.2;
-  const RW       = 28;
-
-  let rx = -RW, ry = 80, rvy = 0;
-
-  function bLeft(b)  { return b.l * window.innerWidth / 100; }
-  function bRight(b) { return (b.l + b.w) * window.innerWidth / 100; }
-
-  function groundAt(x) {
-    const cx = x + RW / 2;
-    for (const b of BUILDINGS) {
-      if (cx >= bLeft(b) && cx <= bRight(b)) return b.h;
-    }
-    return -200;
-  }
-
-  function runnerTick() {
-    rx += SPEED;
-    rvy -= GRAVITY;
-    ry  += rvy;
-
-    const g = groundAt(rx);
-    if (ry <= g && rvy <= 0) {
-      ry  = g;
-      rvy = 0;
-
-      // Look 50px ahead — jump if ground rises or drops sharply
-      const ahead = groundAt(rx + 50);
-      if (ahead > g + 10) {
-        // Higher platform ahead — jump high enough to clear it
-        rvy = Math.sqrt(2 * GRAVITY * (ahead - g + 36)) + 1;
-      } else if (ahead < g - 10 || ahead < -100) {
-        // Lower platform or gap — small hop for style
-        rvy = 7;
-      }
-    }
-
-    if (rx > window.innerWidth + 40) {
-      rx  = -RW;
-      ry  = groundAt(0);
-      rvy = 0;
-    }
-
-    runnerEl.style.left   = Math.round(rx) + 'px';
-    runnerEl.style.bottom = Math.round(ry) + 'px';
-    requestAnimationFrame(runnerTick);
-  }
-
-  requestAnimationFrame(runnerTick);
 
   // ---- Airtable config ----
   const AIRTABLE_TOKEN   = 'patpAbTIZAn653X4z.bd16c3aca7caa386b94ae94fb5f98ca8c3bb56da18b71a2783e8c99cfa933695';
