@@ -1356,16 +1356,38 @@
       50%       { box-shadow: 0 0 20px rgba(111,240,255,0.8), 0 0 40px rgba(111,240,255,0.3); }
     }
 
-    /* ---- DOOM FIRE CANVAS ---- */
-    #fire-canvas {
+    /* ---- CSS PIXEL FIRES ---- */
+    .fire-row {
       position: fixed;
-      bottom: 0; left: 0;
-      width: 100%;
-      height: 240px;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      padding: 0 3%;
+      z-index: 9999;
       pointer-events: none;
-      z-index: 50;
       image-rendering: pixelated;
     }
+    .px-fire {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: bottom center;
+      animation: pfk 0.35s ease-in-out infinite alternate;
+    }
+    .px-fire:nth-child(2n)   { animation-duration: 0.28s; animation-delay: 0.05s; }
+    .px-fire:nth-child(3n)   { animation-duration: 0.42s; animation-delay: 0.12s; }
+    .px-fire:nth-child(4n)   { animation-duration: 0.31s; animation-delay: 0.08s; }
+    @keyframes pfk {
+      0%   { transform: scaleX(1.0) scaleY(1.0); }
+      100% { transform: scaleX(0.85) scaleY(1.15); }
+    }
+    .fr { display: flex; }
+    .fr i { display: block; width: 10px; height: 10px; flex-shrink: 0; }
+    .fr i.y { background: #F5D479; }
+    .fr i.o { background: #FF9900; }
+    .fr i.r { background: #CC3300; }
+    .fr i.d { background: #881100; }
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 600px) {
@@ -1381,7 +1403,16 @@
 <body>
 
 <canvas id="bg-canvas"></canvas>
-<canvas id="fire-canvas"></canvas>
+<div class="fire-row">
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+  <div class="px-fire"><div class="fr"><i></i><i></i><i class="y"></i><i></i><i></i></div><div class="fr"><i></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i></div><div class="fr"><i></i><i class="o"></i><i class="y"></i><i class="o"></i><i></i></div><div class="fr"><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i></div><div class="fr"><i class="o"></i><i class="r"></i><i class="o"></i><i class="r"></i><i class="o"></i></div><div class="fr"><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i></div><div class="fr"><i class="d"></i><i class="r"></i><i class="d"></i><i class="r"></i><i class="d"></i></div><div class="fr"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div></div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -2173,83 +2204,6 @@
   const _saved = localStorage.getItem('mc_username');
   if (_saved) { navStatsBtn.textContent = _saved.toUpperCase(); navStatsBtn.classList.add('logged-in'); }
 
-  // ---- Pixel fire — individual small fires along hero bottom ----
-  const FC  = document.getElementById('fire-canvas');
-  const FX  = FC.getContext('2d');
-  const FPX = 8; // big pixels so it looks like pixel art
-  let FCOLS, FROWS, heatBuf;
-
-  // Site-coloured palette: null=transparent, dark red → red → orange → site gold
-  const FIRE_PAL = [
-    null,
-    '#3a0800','#520c00','#6b1000','#881500','#a01a00',
-    '#b82000','#cc2800','#dd3000','#ee3800','#ff4000',
-    '#ff5000','#ff6200','#ff7400','#ff8800','#ff9900',
-    '#ffaa00','#ffbb00','#ffcc00','#ffd800','#ffe200',
-    '#F5D479','#f8df80','#fbe890','#fdeea8','#fff2c0',
-  ];
-  const MAX_H = FIRE_PAL.length - 1;
-  const GAP   = 180; // px between fires
-  const BASE  = 48;  // px wide each fire base
-
-  function seedFires() {
-    const gap  = Math.round(GAP  / FPX);
-    const half = Math.round(BASE / FPX / 2);
-    const off  = Math.round(gap  / 2);
-    for (let c = 0; c < FCOLS; c++) {
-      heatBuf[(FROWS - 1) * FCOLS + c] = 0;
-      heatBuf[(FROWS - 2) * FCOLS + c] = 0;
-    }
-    for (let fx = off; fx < FCOLS; fx += gap) {
-      for (let dc = -half; dc <= half; dc++) {
-        const c = fx + dc;
-        if (c < 0 || c >= FCOLS) continue;
-        const fade = 1 - Math.abs(dc) / (half + 1);
-        heatBuf[(FROWS - 1) * FCOLS + c] = Math.round(MAX_H * fade);
-        heatBuf[(FROWS - 2) * FCOLS + c] = Math.round(MAX_H * fade * 0.88);
-      }
-    }
-  }
-
-  function initFire() {
-    FC.width  = window.innerWidth;
-    FC.height = 160;
-    FCOLS  = Math.ceil(window.innerWidth / FPX);
-    FROWS  = Math.ceil(160 / FPX);
-    heatBuf = new Uint8Array(FCOLS * FROWS);
-    seedFires();
-  }
-
-  function tickFire() {
-    for (let r = FROWS - 1; r >= 1; r--) {
-      for (let c = 0; c < FCOLS; c++) {
-        const src = heatBuf[r * FCOLS + c];
-        if (src === 0) { heatBuf[(r-1)*FCOLS+c] = 0; continue; }
-        const rnd = (Math.random() * 3) | 0;
-        const nc  = Math.max(0, Math.min(FCOLS - 1, c - rnd + 1));
-        heatBuf[(r-1)*FCOLS+nc] = Math.max(0, src - (rnd & 1));
-      }
-    }
-    seedFires();
-  }
-
-  function renderFire() {
-    tickFire();
-    FX.clearRect(0, 0, FC.width, FC.height);
-    for (let r = 0; r < FROWS; r++) {
-      for (let c = 0; c < FCOLS; c++) {
-        const h = heatBuf[r * FCOLS + c];
-        if (!h) continue;
-        FX.fillStyle = FIRE_PAL[h];
-        FX.fillRect(c * FPX, r * FPX, FPX, FPX);
-      }
-    }
-    requestAnimationFrame(renderFire);
-  }
-
-  initFire();
-  window.addEventListener('resize', initFire);
-  renderFire();
 </script>
 </body>
 </html>
