@@ -1526,6 +1526,13 @@
     <a href="#features" class="btn-secondary">LEARN MORE</a>
   </div>
 
+  <div class="hero-stats">
+    <div class="stat-block">
+      <span class="stat-num" id="live-player-count">0</span>
+      <span class="stat-label">PLAYERS ONLINE</span>
+    </div>
+  </div>
+
   <p class="mc-tip" id="mc-tip"></p>
 
   <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
@@ -1995,7 +2002,7 @@
   const AIRTABLE_TABLE   = 'Players';
 
   // ---- Live server status ----
-  const statEl = document.querySelector('.stat-num[data-target]');
+  const statEl = document.getElementById('live-player-count');
   let lastCount = -1;
   let statusFetching = false;
 
@@ -2146,13 +2153,16 @@
   const _saved = localStorage.getItem('mc_username');
   if (_saved) { navStatsBtn.textContent = _saved.toUpperCase(); navStatsBtn.classList.add('logged-in'); }
 
-  // ---- Canvas Glow ----
+  // ---- Full-screen Canvas Fire ----
   (function initFire() {
     const fc=document.getElementById('fire-canvas'), fctx=fc.getContext('2d');
     let FW=window.innerWidth, FH=window.innerHeight;
     fc.width=FW; fc.height=FH;
+    const FIRE_COLORS=['#FFE060','#FFB700','#FF9900','#FF5500','#CC2200','#881100','#550800'];
     function getSources() { const n=Math.max(5,Math.floor(FW/160)); return Array.from({length:n},(_,i)=>({x:(FW/(n+1))*(i+1),flicker:Math.random()*Math.PI*2})); }
     let sources=getSources();
+    function makeParticle(src) { const life=0.8+Math.random()*1.5; return {x:src.x+(Math.random()-0.5)*60,y:FH,vx:(Math.random()-0.5)*2,vy:-(1.8+Math.random()*4.5),life,maxLife:life,size:8+Math.floor(Math.random()*4)*8,wobble:(Math.random()-0.5)*0.08,srcIdx:sources.indexOf(src)}; }
+    let particles=sources.flatMap(src=>Array.from({length:50},()=>{const p=makeParticle(src),frac=Math.random();p.life=p.maxLife*(1-frac);p.y=FH-frac*FH*0.85;return p;}));
     window.addEventListener('resize',()=>{FW=window.innerWidth;FH=window.innerHeight;fc.width=FW;fc.height=FH;sources=getSources();});
     function draw() {
       fctx.clearRect(0,0,FW,FH);
@@ -2166,6 +2176,14 @@
         const core=fctx.createRadialGradient(src.x,FH,0,src.x,FH-40,55*f);
         core.addColorStop(0,'rgba(255,255,200,1.0)'); core.addColorStop(0.4,'rgba(255,200,0,0.85)'); core.addColorStop(1,'rgba(255,60,0,0)');
         fctx.fillStyle=core; fctx.fillRect(src.x-65,FH-80,130,80);
+      });
+      particles.forEach((p,i)=>{
+        const t=1-p.life/p.maxLife,ci=Math.min(Math.floor(t*FIRE_COLORS.length),FIRE_COLORS.length-1);
+        const alpha=t<0.08?t*12.5:(1-t),size=Math.max(4,p.size*(1-t*0.6));
+        fctx.globalAlpha=alpha; fctx.fillStyle=FIRE_COLORS[ci];
+        fctx.fillRect(Math.round(p.x/4)*4-size/2,Math.round(p.y/4)*4-size/2,size,size);
+        p.vx+=p.wobble; p.x+=p.vx; p.y+=p.vy; p.life-=0.013;
+        if(p.life<=0){const src=sources[p.srcIdx%sources.length]||sources[0];particles[i]=makeParticle(src);}
       });
       fctx.globalAlpha=1; requestAnimationFrame(draw);
     }
