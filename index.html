@@ -305,30 +305,7 @@
     }
 
     #hero::before { display: none; }
-    #hero::after  { display: none; }
 
-    /* ---- MINECRAFT TERRAIN SVG ---- */
-    #mc-terrain-svg {
-      position: fixed;
-      bottom: 0; left: 0;
-      width: 100%; height: 48vh;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Clouds */
-    .mc-cloud {
-      position: fixed;
-      z-index: 0;
-      pointer-events: none;
-      background: #fff;
-      image-rendering: pixelated;
-    }
-    @keyframes cloudDrift { from { transform: translateX(0); } to { transform: translateX(-100vw); } }
-    .mc-cloud-a { top: 8vh;  left: 5%;   width: 160px; height: 32px; animation: cloudDrift 60s linear infinite; }
-    .mc-cloud-b { top: 15vh; left: 35%;  width: 128px; height: 32px; animation: cloudDrift 80s linear infinite; }
-    .mc-cloud-c { top: 6vh;  left: 65%;  width: 192px; height: 32px; animation: cloudDrift 50s linear infinite; }
-    .mc-cloud-d { top: 20vh; left: 80%;  width: 160px; height: 32px; animation: cloudDrift 70s linear infinite; }
 
     /* Logo block */
     .hero-logo {
@@ -1360,18 +1337,6 @@
       z-index: 0;
     }
 
-    /* ---- CLOUD PARALLAX WRAPPERS ---- */
-    .cloud-wrap {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      will-change: transform;
-    }
-    .cloud-wrap .mc-cloud {
-      position: absolute;
-    }
 
     /* ---- RANK EXPLORER MODAL ---- */
     .rank-overlay {
@@ -1487,86 +1452,7 @@
 </head>
 <body>
 
-<!-- Minecraft terrain + trees — single inline SVG, trees anchored to terrain peaks -->
-<svg id="mc-terrain-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" preserveAspectRatio="none">
-  <defs>
-    <!-- Block grid overlay clipped to terrain -->
-    <clipPath id="tc">
-      <polygon points="0,260 60,260 60,228 90,228 90,196 150,196 150,228 200,228 200,260 260,260 260,228 310,228 310,196 360,196 360,164 420,164 420,196 470,196 470,228 530,228 530,260 590,260 590,228 640,228 640,196 690,196 690,164 750,164 750,196 800,196 800,228 840,228 840,196 880,196 880,164 940,164 940,196 970,196 970,228 1000,228 1000,380 0,380"/>
-    </clipPath>
-    <pattern id="bg" width="32" height="32" patternUnits="userSpaceOnUse">
-      <rect width="32" height="32" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1.5"/>
-    </pattern>
-  </defs>
-
-  <!-- Stone base (fills full terrain polygon to bottom) -->
-  <polygon fill="#717171" points="0,260 60,260 60,228 90,228 90,196 150,196 150,228 200,228 200,260 260,260 260,228 310,228 310,196 360,196 360,164 420,164 420,196 470,196 470,228 530,228 530,260 590,260 590,228 640,228 640,196 690,196 690,164 750,164 750,196 800,196 800,228 840,228 840,196 880,196 880,164 940,164 940,196 970,196 970,228 1000,228 1000,380 0,380"/>
-
-  <!-- Dirt layer (surface down 96 units) -->
-  <polygon fill="#8B5E3C" points="0,260 60,260 60,228 90,228 90,196 150,196 150,228 200,228 200,260 260,260 260,228 310,228 310,196 360,196 360,164 420,164 420,196 470,196 470,228 530,228 530,260 590,260 590,228 640,228 640,196 690,196 690,164 750,164 750,196 800,196 800,228 840,228 840,196 880,196 880,164 940,164 940,196 970,196 970,228 1000,228 1000,324 970,324 970,292 940,292 940,260 880,260 880,292 840,292 840,324 800,324 800,292 750,292 750,260 690,260 690,292 640,292 640,324 590,324 590,356 530,356 530,324 470,324 470,292 420,292 420,260 360,260 360,292 310,292 310,324 260,324 260,356 200,356 200,324 150,324 150,292 90,292 90,324 60,324 60,356 0,356"/>
-
-  <!-- Grass layer (surface down 28 units) -->
-  <polygon fill="#5D9A2A" points="0,260 60,260 60,228 90,228 90,196 150,196 150,228 200,228 200,260 260,260 260,228 310,228 310,196 360,196 360,164 420,164 420,196 470,196 470,228 530,228 530,260 590,260 590,228 640,228 640,196 690,196 690,164 750,164 750,196 800,196 800,228 840,228 840,196 880,196 880,164 940,164 940,196 970,196 970,228 1000,228 1000,256 970,256 970,224 940,224 940,192 880,192 880,224 840,224 840,256 800,256 800,224 750,224 750,192 690,192 690,224 640,224 640,256 590,256 590,288 530,288 530,256 470,256 470,224 420,224 420,192 360,192 360,224 310,224 310,256 260,256 260,288 200,288 200,256 150,256 150,224 90,224 90,256 60,256 60,288 0,288"/>
-
-  <!-- Grass top highlight -->
-  <polygon fill="rgba(120,200,70,0.25)" points="0,260 60,260 60,228 90,228 90,196 150,196 150,228 200,228 200,260 260,260 260,228 310,228 310,196 360,196 360,164 420,164 420,196 470,196 470,228 530,228 530,260 590,260 590,228 640,228 640,196 690,196 690,164 750,164 750,196 800,196 800,228 840,228 840,196 880,196 880,164 940,164 940,196 970,196 970,228 1000,228 1000,242 970,242 970,210 940,210 940,178 880,178 880,210 840,210 840,242 800,242 800,210 750,210 750,178 690,178 690,210 640,210 640,242 590,242 590,274 530,274 530,242 470,242 470,210 420,210 420,178 360,178 360,210 310,210 310,242 260,242 260,274 200,274 200,242 150,242 150,210 90,210 90,242 60,242 60,274 0,274"/>
-
-  <!-- Block grid overlay -->
-  <rect x="0" y="0" width="1000" height="380" fill="url(#bg)" clip-path="url(#tc)"/>
-
-  <!-- Step shadows on cliff right-faces (ascending steps going left→right) -->
-  <g fill="rgba(0,0,0,0.18)">
-    <rect x="52" y="228" width="8" height="32"/>
-    <rect x="82" y="196" width="8" height="32"/>
-    <rect x="302" y="196" width="8" height="32"/>
-    <rect x="352" y="164" width="8" height="32"/>
-    <rect x="632" y="196" width="8" height="32"/>
-    <rect x="682" y="164" width="8" height="32"/>
-    <rect x="832" y="196" width="8" height="32"/>
-    <rect x="872" y="164" width="8" height="32"/>
-  </g>
-
-  <!-- Tree at x=390, surface y=164 (peak 1: x=360–420) -->
-  <rect x="374" y="164" width="32" height="64" fill="#6B4423"/>
-  <rect x="398" y="164" width="8"  height="64" fill="#3D2610"/>
-  <rect x="374" y="164" width="6"  height="64" fill="rgba(255,255,255,0.1)"/>
-  <rect x="342" y="68"  width="96" height="96" fill="#3A7D1E"/>
-  <rect x="422" y="68"  width="16" height="96" fill="#1E4D0A"/>
-  <rect x="342" y="148" width="96" height="16" fill="#2A6010"/>
-  <rect x="342" y="68"  width="96" height="12" fill="rgba(255,255,255,0.18)"/>
-
-  <!-- Tree at x=120, surface y=196 (local peak: x=90–150) -->
-  <rect x="104" y="196" width="32" height="64" fill="#6B4423"/>
-  <rect x="128" y="196" width="8"  height="64" fill="#3D2610"/>
-  <rect x="104" y="196" width="6"  height="64" fill="rgba(255,255,255,0.1)"/>
-  <rect x="72"  y="100" width="96" height="96" fill="#3A7D1E"/>
-  <rect x="152" y="100" width="16" height="96" fill="#1E4D0A"/>
-  <rect x="72"  y="180" width="96" height="16" fill="#2A6010"/>
-  <rect x="72"  y="100" width="96" height="12" fill="rgba(255,255,255,0.18)"/>
-
-  <!-- Tree at x=720, surface y=164 (peak 2: x=690–750) -->
-  <rect x="704" y="164" width="32" height="64" fill="#6B4423"/>
-  <rect x="728" y="164" width="8"  height="64" fill="#3D2610"/>
-  <rect x="704" y="164" width="6"  height="64" fill="rgba(255,255,255,0.1)"/>
-  <rect x="672" y="68"  width="96" height="96" fill="#3A7D1E"/>
-  <rect x="752" y="68"  width="16" height="96" fill="#1E4D0A"/>
-  <rect x="672" y="148" width="96" height="16" fill="#2A6010"/>
-  <rect x="672" y="68"  width="96" height="12" fill="rgba(255,255,255,0.18)"/>
-
-  <!-- Tree at x=910, surface y=164 (peak 3: x=880–940) -->
-  <rect x="894" y="164" width="32" height="64" fill="#6B4423"/>
-  <rect x="918" y="164" width="8"  height="64" fill="#3D2610"/>
-  <rect x="894" y="164" width="6"  height="64" fill="rgba(255,255,255,0.1)"/>
-  <rect x="862" y="68"  width="96" height="96" fill="#3A7D1E"/>
-  <rect x="942" y="68"  width="16" height="96" fill="#1E4D0A"/>
-  <rect x="862" y="148" width="96" height="16" fill="#2A6010"/>
-  <rect x="862" y="68"  width="96" height="12" fill="rgba(255,255,255,0.18)"/>
-</svg>
-<canvas id="fire-canvas"></canvas>
-<div class="cloud-wrap" id="cw-a"><div class="mc-cloud mc-cloud-a"></div></div>
-<div class="cloud-wrap" id="cw-b"><div class="mc-cloud mc-cloud-b"></div></div>
-<div class="cloud-wrap" id="cw-c"><div class="mc-cloud mc-cloud-c"></div></div>
-<div class="cloud-wrap" id="cw-d"><div class="mc-cloud mc-cloud-d"></div></div>
+<canvas id="fire-canvas"></canvas></div></div></div></div>
 
 <!-- NAV -->
 <nav>
@@ -2447,27 +2333,6 @@
     showAch(icon, text, 3500);
   }
 
-  // ---- Parallax clouds ----
-  (function initParallax() {
-    const wraps = [
-      document.getElementById('cw-a'),
-      document.getElementById('cw-b'),
-      document.getElementById('cw-c'),
-      document.getElementById('cw-d'),
-    ];
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const sy = window.scrollY;
-        wraps.forEach((w, i) => {
-          if (w) w.style.transform = `translateY(${-sy * (0.06 + i * 0.015)}px)`;
-        });
-        ticking = false;
-      });
-    }, { passive: true });
-  })();
 
   // ---- Stagger perk cards in scroll observer ----
   document.querySelectorAll('.perk-card').forEach((el, i) => {
