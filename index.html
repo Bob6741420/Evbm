@@ -36,7 +36,7 @@
     }
 
     #fire-canvas {
-      position: fixed;
+      position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
       pointer-events: none;
@@ -306,6 +306,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       text-align: center;
       position: relative;
       padding: 100px 20px 60px;
@@ -1330,7 +1331,6 @@
   </style>
 </head>
 <body>
-<canvas id="fire-canvas"></canvas>
 
 
 <!-- NAV -->
@@ -1398,6 +1398,7 @@
 
 <!-- HERO -->
 <div id="hero">
+<canvas id="fire-canvas"></canvas>
 
   <div class="hero-logo">
     <img src="logo_transparent.png" alt="EVBM PK CIV" style="max-width: min(520px, 85vw); width: 100%; image-rendering: pixelated; animation: logoFloat 3s ease-in-out infinite;" />
@@ -1850,7 +1851,7 @@
     const fx = fc.getContext('2d');
     const COLORS = ['#FF5500','#FF7700','#FF9900','#FFB700','#CC2200'];
     let W, H, parts = [];
-    function resize() { W = fc.width = window.innerWidth; H = fc.height = window.innerHeight; }
+    function resize() { const r = fc.parentElement.getBoundingClientRect(); W = fc.width = r.width; H = fc.height = r.height; }
     resize();
     window.addEventListener('resize', resize);
     function spawn() {
