@@ -589,7 +589,7 @@
     .feature-card p {
       font-family: 'VT323', monospace;
       font-size: 1.2rem;
-      color: #aaa;
+      color: #ccc;
       line-height: 1.7;
     }
 
@@ -624,7 +624,7 @@
     .about-text p {
       font-family: 'VT323', monospace;
       font-size: 1.3rem;
-      color: #aaa;
+      color: #ccc;
       line-height: 1.8;
       margin-bottom: 16px;
     }
@@ -1301,15 +1301,6 @@
     .slide-anim { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; transition-delay:var(--anim-delay,0ms); }
     .slide-anim.visible { opacity:1; transform:translateY(0); }
     /* ---- SCROLL DOT NAV ---- */
-    #scroll-dots { position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:200; transition:opacity 0.3s; }
-    #scroll-dots ul { list-style:none; display:flex; flex-direction:column; gap:16px; padding:0; margin:0; }
-    #scroll-dots li { position:relative; }
-    #scroll-dots .dot { display:block; width:10px; height:10px; background:rgba(139,94,60,0.4); border:2px solid var(--brown-mid); cursor:pointer; transition:background 0.2s,transform 0.2s,border-color 0.2s; padding:0; }
-    #scroll-dots .dot:hover { background:var(--brown-light); transform:scale(1.4); }
-    #scroll-dots .dot.active { background:var(--gold); border-color:var(--gold); transform:scale(1.3); box-shadow:0 0 8px rgba(245,212,121,0.6); }
-    #scroll-dots li::before { content:attr(data-label); position:absolute; right:24px; top:50%; transform:translateY(-50%); background:rgba(20,20,24,0.9); color:var(--gold); font-family:'Press Start 2P',monospace; font-size:0.3rem; padding:6px 10px; border:2px solid var(--brown-mid); white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.2s; letter-spacing:1px; }
-    #scroll-dots li:hover::before { opacity:1; }
-    @media (max-width:768px) { #scroll-dots { display:none; } }
     /* ---- FIXED IP STRIP ---- */
     #ip-strip { position:fixed; bottom:0; left:0; right:0; z-index:150; height:36px; background:rgba(9,9,15,0.95); border-top:3px solid var(--brown-dark); display:flex; align-items:center; justify-content:center; gap:16px; padding:0 20px; }
     .ip-strip-label { font-family:'Press Start 2P',monospace; font-size:0.3rem; color:var(--brown-light); letter-spacing:2px; white-space:nowrap; }
@@ -1437,7 +1428,8 @@
     </div>
     <p class="hero-subtitle slide-anim">The Minecraft Parkour Civilization</p>
     <p class="hero-tagline slide-anim">
-      &ldquo;Run. Earn. <span>Battle.</span> Conquer.&rdquo;
+      &ldquo;Run. Earn. <span>Battle.</span> Conquer.&rdquo;<br />
+      Evbo's Parkour Civilization &mdash; reborn.
     </p>
     <div class="hero-ip slide-anim">
       <span class="hero-ip-value" onclick="copyIP()">evbm.minehut.gg</span>
@@ -1668,17 +1660,6 @@
   <button class="ip-strip-copy" onclick="copyIP()">COPY IP</button>
 </div>
 
-<!-- SCROLL DOT NAV -->
-<nav id="scroll-dots">
-  <ul>
-    <li data-label="HOME"><button class="dot active" data-target="slide-hero"></button></li>
-    <li data-label="FEATURES"><button class="dot" data-target="slide-features"></button></li>
-    <li data-label="ABOUT"><button class="dot" data-target="slide-about"></button></li>
-    <li data-label="RANKS"><button class="dot" data-target="slide-ranks"></button></li>
-    <li data-label="FAQ"><button class="dot" data-target="slide-faq"></button></li>
-    <li data-label="JOIN"><button class="dot" data-target="slide-join"></button></li>
-  </ul>
-</nav>
 
 <!-- TOAST -->
 <div class="toast" id="toast">IP COPIED TO CLIPBOARD!</div>
@@ -2025,22 +2006,6 @@
 
 
 
-  // ---- Scroll dot nav ----
-  (function() {
-    var dots = document.querySelectorAll('#scroll-dots .dot');
-    dots.forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        var t = document.getElementById(dot.dataset.target);
-        if (t) t.scrollIntoView({behavior:'smooth',block:'start'});
-      });
-    });
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) dots.forEach(function(d) { d.classList.toggle('active', d.dataset.target === e.target.id); });
-      });
-    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-    document.querySelectorAll('.page-slide[id]').forEach(function(el) { io.observe(el); });
-  })();
 
   // ---- Parallax scroll handler ----
   (function() {
@@ -2051,9 +2016,6 @@
         var rect = bg.closest('.page-slide').getBoundingClientRect();
         bg.style.transform = 'translateY(' + (rect.top / vh * 40) + 'px)';
       });
-      var footer = document.getElementById('slide-footer');
-      var dots = document.getElementById('scroll-dots');
-      if (footer && dots) dots.style.opacity = footer.getBoundingClientRect().top < vh * 0.5 ? '0' : '1';
       ticking = false;
     }
     window.addEventListener('scroll', function() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, {passive:true});
