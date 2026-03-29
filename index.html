@@ -1858,28 +1858,6 @@
     }));
   }
   let sources = getFireSources();
-  function makeParticle(src) {
-    const life = 0.8 + Math.random() * 1.5;
-    return {
-      x: src.x + (Math.random() - 0.5) * 60,
-      y: H,
-      vx: (Math.random() - 0.5) * 2.0,
-      vy: -(1.8 + Math.random() * 4.5),
-      life, maxLife: life,
-      size: 8 + Math.floor(Math.random() * 4) * 8,
-      wobble: (Math.random() - 0.5) * 0.08,
-      srcIdx: sources.indexOf(src),
-    };
-  }
-  let particles = sources.flatMap(src =>
-    Array.from({length: 50}, () => {
-      const p = makeParticle(src);
-      const frac = Math.random();
-      p.life = p.maxLife * (1 - frac);
-      p.y = H - frac * H * 0.85;
-      return p;
-    })
-  );
   window.addEventListener('resize', () => {
     W = window.innerWidth; H = window.innerHeight;
     canvas.width = W; canvas.height = H;
@@ -1911,25 +1889,6 @@
     ctx.fillStyle = glow;
     ctx.fillRect(0, H - 200, W, 200);
     sources.forEach(src => drawFireBase(src));
-    particles.forEach((p, i) => {
-      const t = 1 - (p.life / p.maxLife);
-      const colorIdx = Math.min(Math.floor(t * FIRE_COLORS.length), FIRE_COLORS.length - 1);
-      const alpha = t < 0.08 ? t * 12.5 : (1 - t);
-      const size = Math.max(4, p.size * (1 - t * 0.6));
-      const px = Math.round(p.x / 4) * 4;
-      const py = Math.round(p.y / 4) * 4;
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = FIRE_COLORS[colorIdx];
-      ctx.fillRect(px - size / 2, py - size / 2, size, size);
-      p.vx += p.wobble;
-      p.x  += p.vx;
-      p.y  += p.vy;
-      p.life -= 0.013;
-      if (p.life <= 0) {
-        const src = sources[p.srcIdx % sources.length] || sources[0];
-        particles[i] = makeParticle(src);
-      }
-    });
     ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
   }
