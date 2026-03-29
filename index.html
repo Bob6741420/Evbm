@@ -1854,15 +1854,15 @@
     resize();
     window.addEventListener('resize', resize);
     function spawn() {
-      return { x: Math.random() * W, y: H + 4, size: 3 + Math.random() * 5,
-        vx: (Math.random() - 0.5) * 0.6, vy: -(0.6 + Math.random() * 1.4),
-        life: 1, decay: 0.008 + Math.random() * 0.006,
+      return { x: Math.random() * W, y: H + 4, size: 8 + Math.random() * 12,
+        vx: (Math.random() - 0.5) * 0.6, vy: -(1.4 + Math.random() * 2.5),
+        life: 1, decay: 0.003 + Math.random() * 0.003,
         color: COLORS[Math.floor(Math.random() * COLORS.length)] };
     }
-    for (let i = 0; i < 120; i++) { const p = spawn(); p.y = H - Math.random() * H * 0.5; p.life = Math.random(); parts.push(p); }
+    for (let i = 0; i < 40; i++) { const p = spawn(); p.y = H - Math.random() * H * 0.7; p.life = Math.random(); parts.push(p); }
     function draw() {
       fx.clearRect(0, 0, W, H);
-      if (parts.length < 120) parts.push(spawn());
+      if (parts.length < 40) parts.push(spawn());
       parts.forEach((p, i) => {
         fx.globalAlpha = p.life * 0.85;
         fx.fillStyle = p.color;
