@@ -199,6 +199,23 @@
     }
     .btn-secondary:hover { transform: translate(-2px,-2px); box-shadow: inset -2px -2px 0 var(--brown-dark), inset 2px 2px 0 var(--brown-light), 5px 5px 0 rgba(0,0,0,0.5); }
 
+    .hero-ip {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 28px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      border: 3px solid var(--brown-mid);
+      transition: border-color 0.2s;
+    }
+    .hero-ip:hover { border-color: var(--gold); }
+    .hero-ip:hover .hero-ip-value { color: var(--gold-glow); }
+    .hero-ip-label { font-size: 0.4rem; background: var(--brown-dark); color: var(--brown-light); padding: 12px 16px; letter-spacing: 3px; border-right: 3px solid var(--brown-mid); }
+    .hero-ip-value { font-size: 0.65rem; color: var(--gold); padding: 12px 20px; letter-spacing: 3px; transition: color 0.2s; }
+    .hero-ip-copy { font-size: 0.35rem; background: var(--brown-mid); color: var(--white); padding: 12px 14px; letter-spacing: 1px; border-left: 3px solid var(--brown-mid); transition: background 0.2s; }
+    .hero-ip:hover .hero-ip-copy { background: var(--brown-light); }
+
     .mc-tip {
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
@@ -541,6 +558,12 @@
     <div class="hero-buttons">
       <a href="#" class="btn-primary" onclick="showPage('stats'); return false;">LOOK UP STATS</a>
       <a href="#" class="btn-secondary" onclick="showPage('features'); return false;">LEARN MORE</a>
+    </div>
+
+    <div class="hero-ip" onclick="copyIP()" title="Click to copy">
+      <span class="hero-ip-label">JOIN</span>
+      <span class="hero-ip-value">evbm.minehut.gg</span>
+      <span class="hero-ip-copy">COPY</span>
     </div>
 
     <p class="mc-tip" id="mc-tip"></p>
