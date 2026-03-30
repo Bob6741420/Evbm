@@ -43,27 +43,18 @@
       z-index: 0;
     }
 
-    nav, #hero, #features, #about, #ranks, .marquee-wrap, section, footer, #cta, .how-grid-wrap {
+    nav, #home, #features, #about, #ranks, #stats, .marquee-wrap, section, footer {
       position: relative;
       z-index: 1;
     }
 
     /* ---- PIXEL HELPERS ---- */
     .pixel-border-brown {
-      box-shadow:
-        0 -4px 0 0 var(--brown-dark),
-        0  4px 0 0 var(--brown-dark),
-        -4px 0 0 0 var(--brown-dark),
-         4px 0 0 0 var(--brown-dark);
+      box-shadow: 0 -4px 0 0 var(--brown-dark), 0 4px 0 0 var(--brown-dark), -4px 0 0 0 var(--brown-dark), 4px 0 0 0 var(--brown-dark);
       border: 4px solid var(--brown-mid);
     }
-
     .pixel-border-red {
-      box-shadow:
-        0 -4px 0 0 var(--red-dark),
-        0  4px 0 0 var(--red-dark),
-        -4px 0 0 0 var(--red-dark),
-         4px 0 0 0 var(--red-dark);
+      box-shadow: 0 -4px 0 0 var(--red-dark), 0 4px 0 0 var(--red-dark), -4px 0 0 0 var(--red-dark), 4px 0 0 0 var(--red-dark);
       border: 4px solid var(--red-mid);
     }
 
@@ -72,7 +63,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(20,20,24,0.95);
+      background: rgba(20,20,24,0.97);
       border-bottom: 4px solid var(--brown-mid);
       padding: 14px 40px;
       display: flex;
@@ -84,37 +75,23 @@
       display: flex;
       flex-direction: column;
       line-height: 1;
+      text-decoration: none;
     }
+    .nav-logo .top { font-size: 0.8rem; color: var(--gold); text-shadow: 2px 2px 0 var(--brown-dark); letter-spacing: 3px; }
+    .nav-logo .bot { font-size: 0.55rem; color: var(--red-light); text-shadow: 1px 1px 0 var(--red-dark); letter-spacing: 2px; }
 
-    .nav-logo .top {
-      font-size: 0.8rem;
-      color: var(--gold);
-      text-shadow: 2px 2px 0 var(--brown-dark);
-      letter-spacing: 3px;
-    }
-
-    .nav-logo .bot {
-      font-size: 0.55rem;
-      color: var(--red-light);
-      text-shadow: 1px 1px 0 var(--red-dark);
-      letter-spacing: 2px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 28px;
-    }
-
+    nav ul { list-style: none; display: flex; gap: 28px; }
     nav ul a {
       color: var(--white);
       text-decoration: none;
       font-size: 0.45rem;
       letter-spacing: 1px;
       transition: color 0.2s;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
     }
-
     nav ul a:hover { color: var(--gold); }
+    nav ul a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
     .nav-ip {
       font-size: 0.45rem;
@@ -126,197 +103,27 @@
       transition: background 0.2s;
       letter-spacing: 1px;
     }
-
     .nav-ip:hover { background: var(--brown-mid); }
 
-    .nav-stats-btn {
-      font-size: 0.45rem;
-      color: var(--gold);
-      background: rgba(92,58,30,0.5);
-      border: 2px solid var(--gold);
-      padding: 8px 14px;
-      cursor: pointer;
-      transition: background 0.2s;
-      letter-spacing: 1px;
-    }
-    .nav-stats-btn:hover { background: rgba(245,212,121,0.15); }
-    .nav-stats-btn.logged-in { color: #6FF0FF; border-color: #6FF0FF; }
-
-    /* ---- STATS MODAL ---- */
-    .stats-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-    }
-    .stats-overlay.open { display: flex; }
-
-    .stats-modal {
-      background: #120f0a;
-      border: 4px solid var(--brown-mid);
-      padding: 36px 32px;
-      max-width: 480px;
-      width: 90%;
-      position: relative;
-      image-rendering: pixelated;
-      box-shadow: 0 0 0 2px var(--brown-dark), 8px 8px 0 rgba(0,0,0,0.6);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px; right: 14px;
-      background: none;
-      border: none;
-      color: var(--brown-light);
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.6rem;
-      cursor: pointer;
-    }
-    .modal-close:hover { color: var(--gold); }
-
-    .modal-title {
-      font-size: 0.6rem;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    .modal-subtitle {
-      font-size: 0.35rem;
-      color: var(--brown-light);
-      text-align: center;
-      margin-bottom: 20px;
-      line-height: 1.8;
-    }
-
-    .mc-input {
-      width: 100%;
-      background: #0d0d16;
-      border: 3px solid var(--brown-mid);
-      color: var(--white);
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.55rem;
-      padding: 12px 14px;
-      box-sizing: border-box;
-      outline: none;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-    .mc-input:focus { border-color: var(--gold); }
-    .mc-input::placeholder { color: var(--brown-mid); }
-
-    .modal-btn {
-      width: 100%;
-      background: var(--brown-dark);
-      border: 3px solid var(--brown-mid);
-      color: var(--gold);
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.5rem;
-      padding: 12px;
-      cursor: pointer;
-      letter-spacing: 2px;
-      transition: background 0.15s;
-    }
-    .modal-btn:hover { background: var(--brown-mid); }
-    .modal-btn:disabled { opacity: 0.4; cursor: default; }
-
-    .modal-error {
-      font-size: 0.35rem;
-      color: var(--red-light);
-      text-align: center;
-      margin-top: 14px;
-      min-height: 1.2em;
-    }
-
-    /* ---- PROFILE VIEW ---- */
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    .player-avatar {
-      width: 64px;
-      height: 64px;
-      image-rendering: pixelated;
-      border: 3px solid var(--brown-mid);
-      flex-shrink: 0;
-    }
-
-    .player-info { flex: 1; }
-
-    .player-name {
-      font-size: 0.65rem;
-      color: var(--white);
-      margin-bottom: 10px;
-      word-break: break-all;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .stat-box {
-      background: rgba(92,58,30,0.25);
-      border: 2px solid var(--brown-mid);
-      padding: 14px 10px;
-      text-align: center;
-    }
-
-    .stat-box-num {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .stat-box-label {
-      display: block;
-      font-size: 0.3rem;
-      color: var(--brown-light);
-      letter-spacing: 1px;
-    }
-
-    .modal-switch {
-      background: none;
-      border: 2px solid var(--brown-mid);
-      color: var(--brown-light);
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.3rem;
-      padding: 8px 14px;
-      cursor: pointer;
-      letter-spacing: 1px;
-      width: 100%;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .modal-switch:hover { color: var(--white); border-color: var(--white); }
-
     /* ---- HERO ---- */
-    #hero {
+    #home {
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-inner {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       text-align: center;
-      position: relative;
       padding: 100px 20px 60px;
-      background: transparent;
+      position: relative;
     }
 
-    #hero::before { display: none; }
-
-    /* Fire glow at bottom of hero */
-    #hero::after {
+    #home::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -326,36 +133,7 @@
       z-index: 0;
     }
 
-    /* Logo block */
-    .hero-logo {
-      position: relative;
-      z-index: 1;
-      margin-bottom: 20px;
-    }
-
-    .logo-evbm {
-      font-size: clamp(2.5rem, 8vw, 5.5rem);
-      color: var(--brown-light);
-      text-shadow:
-        4px 4px 0 var(--brown-dark),
-        8px 8px 0 rgba(0,0,0,0.5),
-        0 0 40px rgba(245,212,121,0.3);
-      letter-spacing: 6px;
-      display: block;
-      animation: logoFloat 3s ease-in-out infinite;
-    }
-
-    .logo-pkciv {
-      font-size: clamp(1.8rem, 6vw, 4rem);
-      color: var(--red-light);
-      text-shadow:
-        3px 3px 0 var(--red-dark),
-        6px 6px 0 rgba(0,0,0,0.5),
-        0 0 30px rgba(224,85,85,0.3);
-      letter-spacing: 4px;
-      display: block;
-      margin-top: -10px;
-    }
+    .hero-logo { position: relative; z-index: 1; margin-bottom: 20px; }
 
     @keyframes logoFloat {
       0%, 100% { transform: translateY(0); }
@@ -371,10 +149,7 @@
       z-index: 1;
       position: relative;
     }
-
-    .hero-tagline span {
-      color: var(--red-bright);
-    }
+    .hero-tagline span { color: var(--red-bright); }
 
     .hero-buttons {
       display: flex;
@@ -395,24 +170,13 @@
       cursor: pointer;
       position: relative;
       transition: transform 0.1s;
-      box-shadow:
-        inset -4px -4px 0 var(--red-dark),
-        inset 4px 4px 0 var(--red-bright),
-        4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: inset -4px -4px 0 var(--red-dark), inset 4px 4px 0 var(--red-bright), 4px 4px 0 rgba(0,0,0,0.5);
       text-decoration: none;
       display: inline-block;
       letter-spacing: 1px;
     }
-
-    .btn-primary:hover {
-      transform: translate(-2px, -2px);
-      box-shadow:
-        inset -4px -4px 0 var(--red-dark),
-        inset 4px 4px 0 var(--red-bright),
-        6px 6px 0 rgba(0,0,0,0.5);
-    }
-
-    .btn-primary:active { transform: translate(2px, 2px); box-shadow: none; }
+    .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: inset -4px -4px 0 var(--red-dark), inset 4px 4px 0 var(--red-bright), 6px 6px 0 rgba(0,0,0,0.5); }
+    .btn-primary:active { transform: translate(2px,2px); box-shadow: none; }
 
     .btn-secondary {
       font-family: 'Press Start 2P', monospace;
@@ -424,22 +188,12 @@
       cursor: pointer;
       position: relative;
       transition: transform 0.1s;
-      box-shadow:
-        inset -4px -4px 0 var(--brown-dark),
-        inset 4px 4px 0 var(--brown-light),
-        4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: inset -4px -4px 0 var(--brown-dark), inset 4px 4px 0 var(--brown-light), 4px 4px 0 rgba(0,0,0,0.5);
       text-decoration: none;
       display: inline-block;
       letter-spacing: 1px;
     }
-
-    .btn-secondary:hover {
-      transform: translate(-2px, -2px);
-      box-shadow:
-        inset -4px -4px 0 var(--brown-dark),
-        inset 4px 4px 0 var(--brown-light),
-        6px 6px 0 rgba(0,0,0,0.5);
-    }
+    .btn-secondary:hover { transform: translate(-2px,-2px); box-shadow: inset -4px -4px 0 var(--brown-dark), inset 4px 4px 0 var(--brown-light), 6px 6px 0 rgba(0,0,0,0.5); }
 
     .scroll-hint {
       position: absolute;
@@ -452,266 +206,165 @@
       animation: bounce 2s ease-in-out infinite;
       z-index: 1;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(8px); }
     }
 
-    /* ---- SECTION SHARED ---- */
-    section {
-      padding: 80px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.45rem;
-      color: var(--red-light);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(1rem, 3vw, 1.8rem);
-      color: var(--gold);
-      text-shadow: 3px 3px 0 var(--brown-dark);
-      margin-bottom: 16px;
-      line-height: 1.4;
-    }
-
-    .section-sub {
+    /* ---- MC TIP ---- */
+    .mc-tip {
       font-family: 'VT323', monospace;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: var(--gray);
-      max-width: 600px;
-      line-height: 1.6;
-      margin-bottom: 60px;
+      margin-top: 14px;
+      letter-spacing: 1px;
+      min-height: 1.4rem;
+      transition: opacity 0.4s;
+      z-index: 1;
+      position: relative;
     }
+    .mc-tip .tip-key { color: var(--gold); }
+
+    /* ---- MARQUEE ---- */
+    .marquee-wrap {
+      background: var(--brown-dark);
+      border-top: 3px solid var(--brown-mid);
+      border-bottom: 3px solid var(--brown-mid);
+      overflow: hidden;
+      padding: 12px 0;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: marqueeScroll 30s linear infinite;
+    }
+    .marquee-track span { font-size: 0.45rem; color: var(--gold); letter-spacing: 2px; margin: 0 40px; }
+    .marquee-track span.red { color: var(--red-bright); }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ---- HOW TO JOIN (in home) ---- */
+    .how-wrap {
+      background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(92,58,30,0.06) 15px, rgba(92,58,30,0.06) 16px), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(92,58,30,0.15) 0%, transparent 70%), rgba(15,14,11,0.35);
+      padding: 80px 40px;
+    }
+    .how-wrap .inner { max-width: 1200px; margin: 0 auto; }
+
+    /* ---- SECTION SHARED ---- */
+    .section-label { font-size: 0.45rem; color: var(--red-light); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(1rem, 3vw, 1.8rem); color: var(--gold); text-shadow: 3px 3px 0 var(--brown-dark); margin-bottom: 16px; line-height: 1.4; }
+    .section-sub { font-family: 'VT323', monospace; font-size: 1.3rem; color: var(--gray); max-width: 600px; line-height: 1.6; margin-bottom: 60px; }
 
     /* ---- FEATURES ---- */
     #features {
-      background:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
-        radial-gradient(ellipse 70% 50% at 50% 50%, rgba(92,58,30,0.12) 0%, transparent 70%),
-        rgba(13,13,20,0.35);
+      background: linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px), radial-gradient(ellipse 70% 50% at 50% 50%, rgba(92,58,30,0.12) 0%, transparent 70%), rgba(13,13,20,0.35);
       background-size: 16px 16px, 16px 16px, 100% 100%, 100% 100%;
       max-width: 100%;
       padding: 80px 40px;
     }
+    #features .inner { max-width: 1200px; margin: 0 auto; }
 
-    #features .inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .features-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 20px; }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
 
     .feature-card {
       background: var(--bg);
       border: 4px solid var(--brown-dark);
       padding: 32px 24px;
       position: relative;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, border-color 0.2s;
       cursor: default;
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.07),
-        inset -3px -3px 0 rgba(0,0,0,0.45),
-        0 0 0 1px rgba(0,0,0,0.7),
-        6px 6px 0 rgba(0,0,0,0.5);
+      box-shadow: inset 3px 3px 0 rgba(255,255,255,0.07), inset -3px -3px 0 rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.7), 6px 6px 0 rgba(0,0,0,0.5);
     }
-
-    .feature-card::after {
-      content: '';
-      position: absolute;
-      bottom: 5px; right: 5px;
-      width: 10px; height: 10px;
-      border-bottom: 2px solid rgba(0,0,0,0.5);
-      border-right: 2px solid rgba(0,0,0,0.5);
-      pointer-events: none;
-    }
-
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 4px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--brown-mid);
-    }
-
+    .feature-card::after { content: ''; position: absolute; bottom: 5px; right: 5px; width: 10px; height: 10px; border-bottom: 2px solid rgba(0,0,0,0.5); border-right: 2px solid rgba(0,0,0,0.5); pointer-events: none; }
+    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+    .feature-card:hover { transform: translateY(-6px); border-color: var(--brown-mid); }
     .feature-card:hover::before { opacity: 1; }
-
-    .feature-icon {
-      width: 56px; height: 56px;
-      margin-bottom: 20px;
-      image-rendering: pixelated;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Pixel art icons using CSS */
-    .icon-ticket {
-      background: var(--gold);
-      width: 48px; height: 48px;
-      clip-path: polygon(0 20%, 20% 20%, 20% 0, 80% 0, 80% 20%, 100% 20%, 100% 80%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0 80%);
-      box-shadow: 0 0 12px rgba(245,212,121,0.5);
-    }
-
-    .icon-rank {
-      width: 48px; height: 48px;
-      background: var(--red-light);
-      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-      box-shadow: 0 0 12px rgba(224,85,85,0.5);
-    }
-
-    .icon-course {
-      width: 48px; height: 12px;
-      background: var(--brown-light);
-      position: relative;
-      box-shadow: 0 0 12px rgba(196,132,90,0.5);
-      margin-top: 18px;
-    }
-
-    .icon-course::before, .icon-course::after {
-      content: '';
-      position: absolute;
-      width: 12px; height: 24px;
-      background: var(--brown-light);
-      bottom: 0;
-    }
-
+    .feature-icon { width: 56px; height: 56px; margin-bottom: 20px; image-rendering: pixelated; display: flex; align-items: center; justify-content: center; }
+    .icon-ticket { background: var(--gold); width: 48px; height: 48px; clip-path: polygon(0 20%, 20% 20%, 20% 0, 80% 0, 80% 20%, 100% 20%, 100% 80%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0 80%); box-shadow: 0 0 12px rgba(245,212,121,0.5); }
+    .icon-rank { width: 48px; height: 48px; background: var(--red-light); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); box-shadow: 0 0 12px rgba(224,85,85,0.5); }
+    .icon-course { width: 48px; height: 12px; background: var(--brown-light); position: relative; box-shadow: 0 0 12px rgba(196,132,90,0.5); margin-top: 18px; }
+    .icon-course::before, .icon-course::after { content: ''; position: absolute; width: 12px; height: 24px; background: var(--brown-light); bottom: 0; }
     .icon-course::before { left: 0; }
     .icon-course::after  { right: 0; }
+    .icon-battle { width: 44px; height: 44px; background: var(--red-bright); clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); box-shadow: 0 0 12px rgba(255,112,112,0.5); }
+    .feature-card h3 { font-size: 0.65rem; color: var(--gold); margin-bottom: 14px; letter-spacing: 1px; }
+    .feature-card p { font-family: 'VT323', monospace; font-size: 1.2rem; color: #aaa; line-height: 1.7; }
+    .feature-tag { display: inline-block; margin-top: 16px; font-size: 0.35rem; background: var(--red-dark); color: var(--red-bright); padding: 6px 10px; border: 2px solid var(--red-mid); letter-spacing: 1px; }
 
-    .icon-battle {
-      width: 44px; height: 44px;
-      background: var(--red-bright);
-      clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-      box-shadow: 0 0 12px rgba(255,112,112,0.5);
-    }
-
-    .feature-card h3 {
-      font-size: 0.65rem;
-      color: var(--gold);
-      margin-bottom: 14px;
-      letter-spacing: 1px;
-    }
-
-    .feature-card p {
-      font-family: 'VT323', monospace;
-      font-size: 1.2rem;
-      color: #aaa;
-      line-height: 1.7;
-    }
-
-    .feature-tag {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 0.35rem;
-      background: var(--red-dark);
-      color: var(--red-bright);
-      padding: 6px 10px;
-      border: 2px solid var(--red-mid);
-      letter-spacing: 1px;
-    }
-
-    /* ---- ABOUT / HOW IT WORKS ---- */
+    /* ---- ABOUT ---- */
     #about {
       padding: 80px 40px;
-      background:
-        repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(139,94,60,0.05) 15px, rgba(139,94,60,0.05) 16px),
-        radial-gradient(ellipse 70% 60% at 25% 50%, rgba(92,58,30,0.18) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 80% 60%, rgba(92,26,26,0.1) 0%, transparent 60%),
-        rgba(9,9,15,0.35);
+      background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(139,94,60,0.05) 15px, rgba(139,94,60,0.05) 16px), radial-gradient(ellipse 70% 60% at 25% 50%, rgba(92,58,30,0.18) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 80% 60%, rgba(92,26,26,0.1) 0%, transparent 60%), rgba(9,9,15,0.35);
+      max-width: 100%;
     }
+    #about .inner { max-width: 1200px; margin: 0 auto; }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-text p { font-family: 'VT323', monospace; font-size: 1.3rem; color: #aaa; line-height: 1.8; margin-bottom: 16px; }
+    .about-text p strong { color: var(--gold); }
+
+    /* ---- DEVELOPERS subsection ---- */
+    .dev-section {
+      margin-top: 80px;
+      padding-top: 60px;
+      border-top: 3px solid var(--brown-dark);
+    }
+    .dev-grid {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .dev-card {
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      gap: 14px;
     }
-
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; }
+    .dev-card img {
+      image-rendering: pixelated;
+      transition: transform 0.2s;
     }
-
-    .about-text p {
-      font-family: 'VT323', monospace;
-      font-size: 1.3rem;
-      color: #aaa;
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-
-    .about-text p strong {
+    .dev-card img:hover { transform: translateY(-4px); }
+    .dev-name {
+      font-size: 0.5rem;
       color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .dev-role {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      color: var(--gray);
+      letter-spacing: 1px;
     }
 
-    /* Pixel art server visual */
-    .server-visual {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 4px;
-      padding: 24px;
-      background: var(--bg2);
-      border: 4px solid var(--brown-dark);
-    }
-
-    .pixel-block {
-      aspect-ratio: 1;
-      animation: blockPulse 4s ease-in-out infinite;
-    }
-
-    @keyframes blockPulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.7; }
-    }
+    /* ---- FAQ (in about) ---- */
+    .faq-section { margin-top: 80px; padding-top: 60px; border-top: 3px solid var(--brown-dark); }
+    .faq-list { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; max-width: 800px; }
+    .faq-item { border: 4px solid var(--brown-dark); background: var(--bg2); overflow: hidden; cursor: pointer; transition: border-color 0.2s; box-shadow: inset 3px 3px 0 rgba(255,255,255,0.06), inset -3px -3px 0 rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.7), 5px 5px 0 rgba(0,0,0,0.4); }
+    .faq-item:hover { border-color: var(--brown-mid); }
+    .faq-q { font-size: 0.5rem; color: var(--gold); padding: 16px 20px; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .faq-q::after { content: '▼'; font-size: 0.4rem; color: var(--brown-light); transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+    .faq-item.open .faq-q::after { transform: rotate(180deg); }
+    .faq-a { font-family: 'VT323', monospace; font-size: 1.15rem; color: var(--gray); padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; line-height: 1.6; }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
 
     /* ---- RANKS ---- */
     #ranks {
-      background:
-        linear-gradient(rgba(184,50,50,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184,50,50,0.03) 1px, transparent 1px),
-        radial-gradient(ellipse 100% 80% at 50% 50%, rgba(92,26,26,0.3) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 10% 20%, rgba(92,26,26,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 40% 30% at 90% 80%, rgba(92,26,26,0.15) 0%, transparent 50%),
-        rgba(13,13,17,0.35);
-      background-size: 16px 16px, 16px 16px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+      background: linear-gradient(rgba(184,50,50,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184,50,50,0.03) 1px, transparent 1px), radial-gradient(ellipse 100% 80% at 50% 50%, rgba(92,26,26,0.3) 0%, transparent 70%), rgba(13,13,17,0.35);
+      background-size: 16px 16px, 16px 16px, 100% 100%, 100% 100%;
       max-width: 100%;
       padding: 80px 40px;
     }
+    #ranks .inner { max-width: 1200px; margin: 0 auto; }
 
-    #ranks .inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .ranks-row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
+    .ranks-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
 
     .rank-badge {
       font-family: 'Press Start 2P', monospace;
@@ -722,212 +375,169 @@
       position: relative;
       overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.15),
-        inset -3px -3px 0 rgba(0,0,0,0.5),
-        0 0 0 1px rgba(0,0,0,0.7),
-        4px 4px 0 rgba(0,0,0,0.5);
+      box-shadow: inset 3px 3px 0 rgba(255,255,255,0.15), inset -3px -3px 0 rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.7), 4px 4px 0 rgba(0,0,0,0.5);
     }
-
-    .rank-badge:hover {
-      transform: scale(1.05);
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.2),
-        inset -3px -3px 0 rgba(0,0,0,0.5),
-        0 0 0 1px rgba(0,0,0,0.7),
-        6px 6px 0 rgba(0,0,0,0.5);
-    }
-
-    .rank-badge::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-    }
-
+    .rank-badge:hover { transform: scale(1.05); }
+    .rank-badge::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%); }
     .rank-noob     { color: #C4845A; border-color: #8B5E3C; background: rgba(92,58,30,0.3); }
     .rank-pro      { color: #D8D8D8; border-color: #A0A0A0; background: rgba(80,80,80,0.3); }
     .rank-master   { color: #F5D479; border-color: #C8A030; background: rgba(92,68,0,0.3); text-shadow: 0 0 6px rgba(245,212,121,0.5); }
     .rank-legend   { color: #FF6030; border-color: #C03010; background: rgba(80,20,0,0.3); }
     .rank-captain  { color: #FF6868; border-color: #C03030; background: rgba(80,10,10,0.35); }
-    .rank-champion { color: #6FF0FF; border-color: #00B8D4; background: rgba(0,80,100,0.3); text-shadow: 0 0 8px rgba(111,240,255,0.6); }
+    .rank-champion { color: #6FF0FF; border-color: #00B8D4; background: rgba(0,80,100,0.3); text-shadow: 0 0 8px rgba(111,240,255,0.6); animation: championPulse 2s ease-in-out infinite; }
 
-    .ranks-desc {
-      font-family: 'VT323', monospace;
-      font-size: 1.2rem;
-      color: var(--gray);
-      margin-top: 24px;
-      line-height: 1.7;
+    @keyframes championPulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(111,240,255,0.3); }
+      50%       { box-shadow: 0 0 20px rgba(111,240,255,0.8), 0 0 40px rgba(111,240,255,0.3); }
     }
 
-    /* ---- LEADERBOARD TEASER ---- */
-    #leaderboard {
+    .ranks-desc { font-family: 'VT323', monospace; font-size: 1.2rem; color: var(--gray); margin-top: 24px; line-height: 1.7; }
+
+    /* ---- RANK PERKS ---- */
+    .perks-section {
+      background: linear-gradient(rgba(245,212,121,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245,212,121,0.02) 1px, transparent 1px), radial-gradient(ellipse 60% 50% at 50% 50%, rgba(92,68,0,0.15) 0%, transparent 70%), rgba(13,13,10,0.35);
+      background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
       padding: 80px 40px;
     }
+    .perks-section .inner { max-width: 1200px; margin: 0 auto; }
+    .perks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 24px; }
+    .perk-card {
+      background: var(--bg);
+      border: 4px solid var(--brown-dark);
+      padding: 20px 16px;
+      position: relative;
+      transition: transform 0.2s;
+      box-shadow: inset 3px 3px 0 rgba(255,255,255,0.07), inset -3px -3px 0 rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.7), 6px 6px 0 rgba(0,0,0,0.5);
+    }
+    .perk-card::before { content: ''; position: absolute; top: 5px; left: 5px; width: 10px; height: 10px; border-top: 2px solid rgba(255,255,255,0.2); border-left: 2px solid rgba(255,255,255,0.2); pointer-events: none; }
+    .perk-card::after  { content: ''; position: absolute; bottom: 5px; right: 5px; width: 10px; height: 10px; border-bottom: 2px solid rgba(0,0,0,0.6); border-right: 2px solid rgba(0,0,0,0.6); pointer-events: none; }
+    .perk-card:hover { transform: translateY(-4px); }
+    .perk-rank-label { font-size: 0.45rem; letter-spacing: 2px; margin-bottom: 14px; display: block; }
+    .perk-list { list-style: none; padding: 0; }
+    .perk-list li { font-family: 'VT323', monospace; font-size: 1.05rem; color: var(--gray); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.4; }
+    .perk-list li::before { content: '▶ '; font-size: 0.6rem; color: var(--brown-light); }
+    .perk-noob   .perk-rank-label { color: #C4845A; }
+    .perk-pro    .perk-rank-label { color: #D8D8D8; }
+    .perk-master .perk-rank-label { color: var(--gold); text-shadow: 0 0 6px rgba(245,212,121,0.5); }
+    .perk-legend .perk-rank-label { color: #FF6030; }
+    .perk-captain .perk-rank-label { color: #FF6868; }
+    .perk-champion .perk-rank-label { color: #6FF0FF; text-shadow: 0 0 8px rgba(111,240,255,0.6); }
+    .perk-noob   { border-color: #8B5E3C; }
+    .perk-pro    { border-color: #A0A0A0; }
+    .perk-master { border-color: #C8A030; }
+    .perk-legend { border-color: #C03010; }
+    .perk-captain { border-color: #C03030; }
+    .perk-champion { border-color: #00B8D4; }
 
-    .leaderboard-table {
-      width: 100%;
-      max-width: 700px;
-      border-collapse: collapse;
-      margin-top: 30px;
+    /* ---- STATS SECTION ---- */
+    #stats {
+      background: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px), radial-gradient(ellipse 60% 50% at 50% 30%, rgba(92,58,30,0.15) 0%, transparent 70%), rgba(9,9,15,0.35);
+      background-size: 16px 16px, 16px 16px, 100% 100%, 100% 100%;
+      max-width: 100%;
+      padding: 80px 40px;
+    }
+    #stats .inner { max-width: 600px; margin: 0 auto; }
+
+    .stats-search-wrap {
+      display: flex;
+      gap: 12px;
+      margin: 32px 0 16px;
     }
 
-    .leaderboard-table thead tr {
-      background: var(--brown-dark);
-    }
-
-    .leaderboard-table th {
-      font-size: 0.4rem;
-      color: var(--gold);
-      padding: 14px 20px;
-      text-align: left;
+    .mc-input {
+      flex: 1;
+      background: #0d0d16;
+      border: 3px solid var(--brown-mid);
+      color: var(--white);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      padding: 12px 14px;
+      box-sizing: border-box;
+      outline: none;
       letter-spacing: 1px;
-      border-bottom: 3px solid var(--brown-mid);
     }
+    .mc-input:focus { border-color: var(--gold); }
+    .mc-input::placeholder { color: var(--brown-mid); }
 
-    .leaderboard-table td {
-      font-family: 'VT323', monospace;
-      font-size: 1.2rem;
-      padding: 12px 20px;
-      border-bottom: 2px solid var(--brown-dark);
-      color: #ccc;
-    }
-
-    .leaderboard-table tr:nth-child(1) td { color: var(--gold); }
-    .leaderboard-table tr:nth-child(2) td { color: #C8C8C8; }
-    .leaderboard-table tr:nth-child(3) td { color: #C4845A; }
-
-    .rank-num {
-      display: inline-block;
-      width: 24px; height: 24px;
-      text-align: center;
-      line-height: 24px;
+    .stats-btn {
       background: var(--brown-dark);
+      border: 3px solid var(--brown-mid);
+      color: var(--gold);
       font-family: 'Press Start 2P', monospace;
       font-size: 0.45rem;
-    }
-
-    .trophy { color: var(--gold); }
-    .trophy2 { color: #C8C8C8; }
-    .trophy3 { color: #C4845A; }
-
-    /* ---- CTA ---- */
-    #cta {
-      background:
-        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(184,50,50,0.45) 0%, transparent 55%),
-        radial-gradient(ellipse 30% 25% at 15% 35%, rgba(184,80,0,0.2) 0%, transparent 55%),
-        radial-gradient(ellipse 30% 25% at 85% 65%, rgba(92,26,26,0.25) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(184,50,50,0.15) 0%, transparent 60%),
-        rgba(9,9,15,0.35);
-      max-width: 100%;
-      padding: 100px 40px;
-      text-align: center;
-    }
-
-    #cta .inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cta-title {
-      font-size: clamp(1.2rem, 4vw, 2.2rem);
-      color: var(--gold);
-      text-shadow: 4px 4px 0 var(--brown-dark), 0 0 40px rgba(245,212,121,0.3);
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-
-    .cta-sub {
-      font-family: 'VT323', monospace;
-      font-size: 1.4rem;
-      color: var(--gray);
-      margin-bottom: 40px;
-      line-height: 1.7;
-    }
-
-    .ip-box {
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .ip-label {
-      font-size: 0.4rem;
-      background: var(--brown-dark);
-      color: var(--brown-light);
-      padding: 14px 18px;
-      border: 3px solid var(--brown-mid);
-      border-right: none;
-      letter-spacing: 2px;
-    }
-
-    .ip-value {
-      font-size: 0.7rem;
-      background: var(--bg);
-      color: var(--gold);
-      padding: 14px 24px;
-      border: 3px solid var(--brown-mid);
-      letter-spacing: 3px;
+      padding: 12px 18px;
       cursor: pointer;
-      transition: background 0.2s;
-      user-select: all;
-    }
-
-    .ip-value:hover { background: var(--brown-dark); }
-
-    .ip-copy {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.4rem;
-      background: var(--brown-mid);
-      color: var(--white);
-      padding: 14px 16px;
-      border: 3px solid var(--brown-mid);
-      border-left: none;
-      cursor: pointer;
-      transition: background 0.2s;
       letter-spacing: 1px;
+      transition: background 0.15s;
+      white-space: nowrap;
     }
+    .stats-btn:hover { background: var(--brown-mid); }
+    .stats-btn:disabled { opacity: 0.4; cursor: default; }
 
-    .ip-copy:hover { background: var(--brown-light); }
+    .stats-error { font-size: 0.35rem; color: var(--red-light); margin-top: 10px; min-height: 1.2em; }
+
+    .stats-profile { display: none; margin-top: 32px; }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--brown-dark);
+    }
+    .player-avatar { width: 80px; height: 80px; image-rendering: pixelated; border: 3px solid var(--brown-mid); flex-shrink: 0; }
+    .player-info { flex: 1; }
+    .player-name { font-size: 0.75rem; color: var(--white); margin-bottom: 12px; word-break: break-all; }
+
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .stat-box { background: rgba(92,58,30,0.25); border: 2px solid var(--brown-mid); padding: 18px 12px; text-align: center; }
+    .stat-box-num { display: block; font-size: 0.8rem; color: var(--gold); margin-bottom: 8px; }
+    .stat-box-label { display: block; font-size: 0.3rem; color: var(--brown-light); letter-spacing: 1px; }
+
+    .switch-btn {
+      background: none;
+      border: 2px solid var(--brown-mid);
+      color: var(--brown-light);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.3rem;
+      padding: 10px 16px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .switch-btn:hover { color: var(--white); border-color: var(--white); }
+
+    /* ---- HOW TO JOIN ---- */
+    .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 20px; }
+    .how-step {
+      background: var(--bg2);
+      border: 4px solid var(--brown-dark);
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+      box-shadow: inset 3px 3px 0 rgba(255,255,255,0.07), inset -3px -3px 0 rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.7), 6px 6px 0 rgba(0,0,0,0.5);
+    }
+    .how-step::before { content: ''; position: absolute; top: 5px; left: 5px; width: 10px; height: 10px; border-top: 2px solid rgba(255,255,255,0.15); border-left: 2px solid rgba(255,255,255,0.15); pointer-events: none; }
+    .how-step::after  { content: ''; position: absolute; bottom: 5px; right: 5px; width: 10px; height: 10px; border-bottom: 2px solid rgba(0,0,0,0.5); border-right: 2px solid rgba(0,0,0,0.5); pointer-events: none; }
+    .how-step:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .step-num { font-size: 2rem; color: var(--gold); text-shadow: 3px 3px 0 var(--brown-dark); display: block; margin-bottom: 14px; }
+    .how-step h3 { font-size: 0.55rem; color: var(--white); margin-bottom: 12px; letter-spacing: 1px; }
+    .how-step p { font-family: 'VT323', monospace; font-size: 1.1rem; color: var(--gray); line-height: 1.6; }
 
     /* ---- FOOTER ---- */
     footer {
-      background:
-        repeating-linear-gradient(0deg, transparent 0px, transparent 7px, rgba(255,255,255,0.02) 7px, rgba(255,255,255,0.02) 8px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 7px, rgba(255,255,255,0.02) 7px, rgba(255,255,255,0.02) 8px),
-        rgba(10,10,14,0.35);
+      background: repeating-linear-gradient(0deg, transparent 0px, transparent 7px, rgba(255,255,255,0.02) 7px, rgba(255,255,255,0.02) 8px), repeating-linear-gradient(90deg, transparent 0px, transparent 7px, rgba(255,255,255,0.02) 7px, rgba(255,255,255,0.02) 8px), rgba(10,10,14,0.35);
       background-size: 8px 8px, 8px 8px, 100% 100%;
       border-top: 4px solid var(--brown-dark);
       padding: 40px;
       text-align: center;
     }
-
-    footer .footer-logo {
-      margin-bottom: 16px;
-    }
-
-    footer .footer-logo .top {
-      font-size: 0.7rem;
-      color: var(--gold);
-      text-shadow: 2px 2px 0 var(--brown-dark);
-    }
-
-    footer .footer-logo .bot {
-      font-size: 0.5rem;
-      color: var(--red-light);
-      text-shadow: 1px 1px 0 var(--red-dark);
-      margin-top: 4px;
-    }
-
-    footer p {
-      font-family: 'VT323', monospace;
-      font-size: 1rem;
-      color: var(--gray);
-      margin-top: 12px;
-    }
+    footer .footer-logo { margin-bottom: 16px; }
+    footer .footer-logo .top { font-size: 0.7rem; color: var(--gold); text-shadow: 2px 2px 0 var(--brown-dark); }
+    footer .footer-logo .bot { font-size: 0.5rem; color: var(--red-light); text-shadow: 1px 1px 0 var(--red-dark); margin-top: 4px; }
+    footer p { font-family: 'VT323', monospace; font-size: 1rem; color: var(--gray); margin-top: 12px; }
 
     /* ---- TOAST ---- */
     .toast {
@@ -944,80 +554,7 @@
       z-index: 999;
       letter-spacing: 1px;
     }
-
     .toast.show { transform: translateX(-50%) translateY(0); }
-
-    /* ---- MARQUEE ---- */
-    .marquee-wrap {
-      background: var(--brown-dark);
-      border-top: 3px solid var(--brown-mid);
-      border-bottom: 3px solid var(--brown-mid);
-      overflow: hidden;
-      padding: 12px 0;
-      white-space: nowrap;
-    }
-
-    .marquee-track {
-      display: inline-block;
-      animation: marqueeScroll 30s linear infinite;
-    }
-
-    .marquee-track span {
-      font-size: 0.45rem;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin: 0 40px;
-    }
-
-    .marquee-track span.red { color: var(--red-bright); }
-
-    @keyframes marqueeScroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* ---- STATS ---- */
-    .hero-stats {
-      display: flex;
-      gap: 0;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 40px;
-      z-index: 1;
-      position: relative;
-      border: 3px solid var(--brown-mid);
-      background: rgba(20,20,24,0.7);
-    }
-
-    .stat-block {
-      text-align: center;
-      padding: 18px 32px;
-      position: relative;
-    }
-
-    .stat-block + .stat-block::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 12px; bottom: 12px;
-      width: 2px;
-      background: var(--brown-mid);
-    }
-
-    .stat-num {
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      color: var(--gold);
-      text-shadow: 2px 2px 0 var(--brown-dark);
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.35rem;
-      color: var(--gray);
-      letter-spacing: 2px;
-      margin-top: 6px;
-      display: block;
-    }
-
 
     /* ---- ACHIEVEMENT TOAST ---- */
     .achievement {
@@ -1036,246 +573,10 @@
       gap: 14px;
       pointer-events: none;
     }
-
     .achievement.show { right: 20px; }
-
-    .ach-icon {
-      font-size: 2rem;
-      image-rendering: pixelated;
-      flex-shrink: 0;
-    }
-
-    .ach-title {
-      font-size: 0.35rem;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 4px;
-    }
-
-    .ach-sub {
-      font-family: 'VT323', monospace;
-      font-size: 1.1rem;
-      color: var(--white);
-    }
-
-    /* ---- RANK PERKS ---- */
-    .perks-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .perk-card {
-      background: var(--bg);
-      border: 4px solid var(--brown-dark);
-      padding: 20px 16px;
-      position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.07),
-        inset -3px -3px 0 rgba(0,0,0,0.45),
-        0 0 0 1px rgba(0,0,0,0.7),
-        6px 6px 0 rgba(0,0,0,0.5);
-    }
-
-    .perk-card::before, .perk-card::after {
-      content: '';
-      position: absolute;
-      width: 10px; height: 10px;
-      pointer-events: none;
-    }
-    .perk-card::before {
-      top: 5px; left: 5px;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      border-left: 2px solid rgba(255,255,255,0.2);
-    }
-    .perk-card::after {
-      bottom: 5px; right: 5px;
-      border-bottom: 2px solid rgba(0,0,0,0.6);
-      border-right: 2px solid rgba(0,0,0,0.6);
-    }
-
-    .perk-card:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.1),
-        inset -3px -3px 0 rgba(0,0,0,0.45),
-        0 0 0 1px rgba(0,0,0,0.7),
-        8px 8px 0 rgba(0,0,0,0.5);
-    }
-
-    .perk-rank-label {
-      font-size: 0.45rem;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .perk-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .perk-list li {
-      font-family: 'VT323', monospace;
-      font-size: 1.05rem;
-      color: var(--gray);
-      padding: 4px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      line-height: 1.4;
-    }
-
-    .perk-list li::before {
-      content: '▶ ';
-      font-size: 0.6rem;
-      color: var(--brown-light);
-    }
-
-    .perk-noob   .perk-rank-label { color: #C4845A; }
-    .perk-pro    .perk-rank-label { color: #D8D8D8; }
-    .perk-master .perk-rank-label { color: var(--gold); text-shadow: 0 0 6px rgba(245,212,121,0.5); }
-    .perk-legend .perk-rank-label { color: #FF6030; }
-    .perk-captain .perk-rank-label { color: #FF6868; }
-    .perk-champion .perk-rank-label { color: #6FF0FF; text-shadow: 0 0 8px rgba(111,240,255,0.6); }
-    .perk-noob   { border-color: #8B5E3C; }
-    .perk-pro    { border-color: #A0A0A0; }
-    .perk-master { border-color: #C8A030; }
-    .perk-legend { border-color: #C03010; }
-    .perk-captain { border-color: #C03030; }
-    .perk-champion { border-color: #00B8D4; animation: championPulse 2s ease-in-out infinite; }
-
-    /* ---- FAQ ---- */
-    .faq-list {
-      margin-top: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 800px;
-    }
-
-    .faq-item {
-      border: 4px solid var(--brown-dark);
-      background: var(--bg2);
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.06),
-        inset -3px -3px 0 rgba(0,0,0,0.4),
-        0 0 0 1px rgba(0,0,0,0.7),
-        5px 5px 0 rgba(0,0,0,0.4);
-    }
-
-    .faq-item:hover {
-      border-color: var(--brown-mid);
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.08),
-        inset -3px -3px 0 rgba(0,0,0,0.4),
-        0 0 0 1px rgba(0,0,0,0.7),
-        6px 6px 0 rgba(0,0,0,0.5);
-    }
-
-    .faq-q {
-      font-size: 0.5rem;
-      color: var(--gold);
-      padding: 16px 20px;
-      letter-spacing: 1px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    .faq-q::after {
-      content: '▼';
-      font-size: 0.4rem;
-      color: var(--brown-light);
-      transition: transform 0.3s;
-      flex-shrink: 0;
-      margin-left: 12px;
-    }
-
-    .faq-item.open .faq-q::after { transform: rotate(180deg); }
-
-    .faq-a {
-      font-family: 'VT323', monospace;
-      font-size: 1.15rem;
-      color: var(--gray);
-      padding: 0 20px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s;
-      line-height: 1.6;
-    }
-
-    .faq-item.open .faq-a {
-      max-height: 200px;
-      padding: 0 20px 16px;
-    }
-
-    /* ---- HOW TO JOIN ---- */
-    .how-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
-    }
-
-    .how-step {
-      background: var(--bg2);
-      border: 4px solid var(--brown-dark);
-      padding: 28px 20px;
-      text-align: center;
-      position: relative;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.07),
-        inset -3px -3px 0 rgba(0,0,0,0.45),
-        0 0 0 1px rgba(0,0,0,0.7),
-        6px 6px 0 rgba(0,0,0,0.5);
-    }
-
-    .how-step::before, .how-step::after {
-      content: '';
-      position: absolute;
-      width: 10px; height: 10px;
-      pointer-events: none;
-    }
-    .how-step::before { top: 5px; left: 5px; border-top: 2px solid rgba(255,255,255,0.15); border-left: 2px solid rgba(255,255,255,0.15); }
-    .how-step::after  { bottom: 5px; right: 5px; border-bottom: 2px solid rgba(0,0,0,0.5); border-right: 2px solid rgba(0,0,0,0.5); }
-
-    .how-step:hover {
-      border-color: var(--gold);
-      transform: translateY(-4px);
-      box-shadow:
-        inset 3px 3px 0 rgba(255,255,255,0.1),
-        inset -3px -3px 0 rgba(0,0,0,0.45),
-        0 0 0 1px rgba(0,0,0,0.7),
-        8px 8px 0 rgba(0,0,0,0.5);
-    }
-
-    .step-num {
-      font-size: 2rem;
-      color: var(--gold);
-      text-shadow: 3px 3px 0 var(--brown-dark);
-      display: block;
-      margin-bottom: 14px;
-    }
-
-    .how-step h3 {
-      font-size: 0.55rem;
-      color: var(--white);
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-    }
-
-    .how-step p {
-      font-family: 'VT323', monospace;
-      font-size: 1.1rem;
-      color: var(--gray);
-      line-height: 1.6;
-    }
+    .ach-icon { font-size: 2rem; image-rendering: pixelated; flex-shrink: 0; }
+    .ach-title { font-size: 0.35rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
+    .ach-sub { font-family: 'VT323', monospace; font-size: 1.1rem; color: var(--white); }
 
     /* ---- CLICK BURST ---- */
     .burst-pixel {
@@ -1285,145 +586,99 @@
       z-index: 9999;
       animation: burstFly 0.6s ease-out forwards;
     }
-
     @keyframes burstFly {
       0%   { opacity: 1; transform: translate(0,0) scale(1); }
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
     }
 
-
-
-    /* ---- MC TIP ---- */
-    .mc-tip {
-      font-family: 'VT323', monospace;
-      font-size: 1.1rem;
-      color: var(--gray);
-      margin-top: 14px;
-      letter-spacing: 1px;
-      min-height: 1.4rem;
-      transition: opacity 0.4s;
-      z-index: 1;
-      position: relative;
-    }
-
-    .mc-tip .tip-key { color: var(--gold); }
-
-    /* ---- CHAMPION PULSE ---- */
-    .rank-champion {
-      animation: championPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes championPulse {
-      0%, 100% { box-shadow: 0 0 8px rgba(111,240,255,0.3); }
-      50%       { box-shadow: 0 0 20px rgba(111,240,255,0.8), 0 0 40px rgba(111,240,255,0.3); }
-    }
-
+    /* ---- IP BOX (in stats) ---- */
+    .ip-box { display: inline-flex; align-items: center; gap: 0; margin-top: 24px; flex-wrap: wrap; }
+    .ip-label { font-size: 0.4rem; background: var(--brown-dark); color: var(--brown-light); padding: 14px 18px; border: 3px solid var(--brown-mid); border-right: none; letter-spacing: 2px; }
+    .ip-value { font-size: 0.7rem; background: var(--bg); color: var(--gold); padding: 14px 24px; border: 3px solid var(--brown-mid); letter-spacing: 3px; cursor: pointer; transition: background 0.2s; user-select: all; }
+    .ip-value:hover { background: var(--brown-dark); }
+    .ip-copy { font-family: 'Press Start 2P', monospace; font-size: 0.4rem; background: var(--brown-mid); color: var(--white); padding: 14px 16px; border: 3px solid var(--brown-mid); border-left: none; cursor: pointer; transition: background 0.2s; letter-spacing: 1px; }
+    .ip-copy:hover { background: var(--brown-light); }
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 600px) {
       nav ul { display: none; }
-      .logo-evbm  { font-size: 2.5rem; }
-      .logo-pkciv { font-size: 1.8rem; }
-      section, #features, #ranks, #cta, #leaderboard, #about {
-        padding: 60px 20px;
-      }
+      #stats .inner { max-width: 100%; }
+      .stats-search-wrap { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
+  <a href="#home" class="nav-logo">
     <span class="top">EVBM</span>
     <span class="bot">PK CIV</span>
-  </div>
+  </a>
   <ul>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#ranks">Ranks</a></li>
-
-    <li><a href="#cta">Join</a></li>
+    <li><a href="#home" data-section="home">Home</a></li>
+    <li><a href="#about" data-section="about">About</a></li>
+    <li><a href="#features" data-section="features">Features</a></li>
+    <li><a href="#ranks" data-section="ranks">Ranks</a></li>
+    <li><a href="#stats" data-section="stats">Stats</a></li>
   </ul>
-  <div class="nav-stats-btn" id="nav-stats-btn" onclick="openStatsModal()">MY STATS</div>
   <div class="nav-ip" onclick="copyIP()">COPY IP</div>
 </nav>
 
-<!-- STATS MODAL -->
-<div class="stats-overlay" id="stats-overlay" onclick="overlayClick(event)">
-  <div class="stats-modal">
-    <button class="modal-close" onclick="closeStatsModal()">✕</button>
+<!-- HOME: HERO -->
+<div id="home">
+  <canvas id="fire-canvas"></canvas>
 
-    <!-- Login view -->
-    <div id="stats-login-view">
-      <div class="modal-title">PLAYER LOOKUP</div>
-      <p class="modal-subtitle">Enter your Minecraft username<br>to view your stats.</p>
-      <input class="mc-input" id="mc-username-input" type="text" placeholder="YourUsername" maxlength="16"
-             onkeydown="if(event.key==='Enter')lookupPlayer()">
-      <button class="modal-btn" id="lookup-btn" onclick="lookupPlayer()">LOOK UP STATS</button>
-      <div class="modal-error" id="login-error"></div>
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <img src="logo_transparent.png" alt="EVBM PK CIV" style="max-width: min(520px, 85vw); width: 100%; image-rendering: pixelated; animation: logoFloat 3s ease-in-out infinite;" />
     </div>
 
-    <!-- Profile view -->
-    <div id="stats-profile-view" style="display:none">
-      <div class="profile-header">
-        <img class="player-avatar" id="player-avatar" src="" alt="avatar">
-        <div class="player-info">
-          <div class="player-name" id="player-name"></div>
-          <div class="rank-badge" id="player-rank-badge"></div>
-        </div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-box">
-          <span class="stat-box-num" id="stat-playtime">--</span>
-          <span class="stat-box-label">PLAYTIME</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-box-num" id="stat-jumps">--</span>
-          <span class="stat-box-label">JUMPS</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-box-num" id="stat-coins">--</span>
-          <span class="stat-box-label">COINS</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-box-num" id="stat-rank">--</span>
-          <span class="stat-box-label">RANK</span>
-        </div>
-      </div>
-      <button class="modal-switch" onclick="switchPlayer()">SWITCH PLAYER</button>
+    <p class="hero-tagline">
+      Run. Earn. <span>Battle.</span> Conquer.<br />
+      Evbo's Parkour Civilization — reborn.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#stats" class="btn-primary">LOOK UP STATS</a>
+      <a href="#features" class="btn-secondary">LEARN MORE</a>
+    </div>
+
+    <p class="mc-tip" id="mc-tip"></p>
+    <div class="scroll-hint">&#9660; SCROLL DOWN &#9660;</div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>TICKETS + KEYS</span><span class="red">&#9670; PARKOUR BATTLE &#9670;</span><span>RANK UP</span><span class="red">&#9670; JOIN NOW &#9670;</span><span>EXPLORE COURSES</span><span class="red">&#9670; EVBM PK CIV &#9670;</span><span>BECOME CHAMPION</span><span class="red">&#9670; evbm.minehut.gg &#9670;</span><span>EARN TICKETS</span><span class="red">&#9670; PARKOUR BATTLE &#9670;</span><span>RANK UP</span><span class="red">&#9670; JOIN NOW &#9670;</span><span>EXPLORE COURSES</span><span class="red">&#9670; EVBM PK CIV &#9670;</span><span>BECOME CHAMPION</span><span class="red">&#9670; evbm.minehut.gg &#9670;</span>
     </div>
   </div>
-</div>
 
-<!-- HERO -->
-<div id="hero">
-<canvas id="fire-canvas"></canvas>
-
-  <div class="hero-logo">
-    <img src="logo_transparent.png" alt="EVBM PK CIV" style="max-width: min(520px, 85vw); width: 100%; image-rendering: pixelated; animation: logoFloat 3s ease-in-out infinite;" />
-  </div>
-
-  <p class="hero-tagline">
-    Run. Earn. <span>Battle.</span> Conquer.<br />
-    Evbo's Parkour Civilization — reborn.
-  </p>
-
-  <div class="hero-buttons">
-    <a href="#cta" class="btn-primary">JOIN NOW</a>
-    <a href="#features" class="btn-secondary">LEARN MORE</a>
-  </div>
-
-  <p class="mc-tip" id="mc-tip"></p>
-
-  <div class="scroll-hint">▼ SCROLL DOWN ▼</div>
-
-</div>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span>TICKETS + KEYS</span><span class="red">&#9670; PARKOUR BATTLE &#9670;</span><span>RANK UP</span><span class="red">&#9670; JOIN NOW &#9670;</span><span>EXPLORE COURSES</span><span class="red">&#9670; EVBM PK CIV &#9670;</span><span>BECOME CHAMPION</span><span class="red">&#9670; evbm.minehut.gg &#9670;</span><span>EARN TICKETS</span><span class="red">&#9670; PARKOUR BATTLE &#9670;</span><span>RANK UP</span><span class="red">&#9670; JOIN NOW &#9670;</span><span>EXPLORE COURSES</span><span class="red">&#9670; EVBM PK CIV &#9670;</span><span>BECOME CHAMPION</span><span class="red">&#9670; evbm.minehut.gg &#9670;</span>
+  <!-- HOW TO JOIN -->
+  <div class="how-wrap">
+    <div class="inner">
+      <div class="section-label">// GET STARTED</div>
+      <h2 class="section-title">HOW TO JOIN</h2>
+      <p class="section-sub">Three steps. That's all it takes.</p>
+      <div class="how-grid">
+        <div class="how-step">
+          <span class="step-num">1</span>
+          <h3>OPEN MINECRAFT</h3>
+          <p>Launch Minecraft and head to Multiplayer.</p>
+        </div>
+        <div class="how-step">
+          <span class="step-num">2</span>
+          <h3>ADD THE SERVER</h3>
+          <p>Click "Add Server" and enter <strong style="color:var(--gold);">evbm.minehut.gg</strong> as the address.</p>
+        </div>
+        <div class="how-step">
+          <span class="step-num">3</span>
+          <h3>START RUNNING</h3>
+          <p>Jump in, hit the courses, earn achievements, and start climbing the ranks.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1441,32 +696,28 @@
         <p>Complete parkour courses to collect tickets and keys. Use a ticket to rank up to Pro, or a key to rank up to Master.</p>
         <span class="feature-tag">TICKETS + KEYS</span>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon"><div class="icon-rank"></div></div>
         <h3>RANK UP</h3>
         <p>Start as a newcomer and grind your way to legend. Each rank unlocks new areas and exclusive perks. The climb is the game.</p>
         <span class="feature-tag">PRESTIGE SYSTEM</span>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon"><div class="icon-course"></div></div>
         <h3>PARKOUR COURSES</h3>
         <p>Dozens of hand-crafted courses from beginner to expert. Complete them to earn ranks and achievements. Every jump matters.</p>
         <span class="feature-tag">60+ COURSES</span>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon" style="font-size:2rem; line-height:1;">&#128218;</div>
         <h3>THE LORE</h3>
         <p>Every civilization has an origin. Discover the legend behind EVBM PK CIV — who built it, why it exists, and what you're really running for.</p>
         <span class="feature-tag">READ THE STORY</span>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon"><div class="icon-battle"></div></div>
         <h3>BATTLE OTHERS</h3>
-        <p>Go head-to-head in parkour battles against other players. Take turns attempting jumps — if your opponent lands it, you have to match it. Miss and you lose a life. Last one standing wins.</p>
+        <p>Go head-to-head in parkour battles against other players. Take turns attempting jumps — miss and you lose a life. Last one standing wins.</p>
         <span class="feature-tag">PARKOUR BATTLE</span>
       </div>
     </div>
@@ -1474,31 +725,71 @@
 </div>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-text">
-      <div class="section-label">// ABOUT</div>
-      <h2 class="section-title">BUILT ON<br />EVBO'S VISION</h2>
-      <p>EVBM PK CIV is inspired by <strong>Evbo's legendary Parkour Civilization</strong> series. We took everything that made it great and built a full multiplayer experience around it.</p>
-      <p>Every system — tickets, ranks, courses, battles — is designed to keep you engaged and coming back. <strong>Progress never resets.</strong> Your grind is permanent.</p>
-      <p>Whether you're here to speed-run courses or dominate in parkour battles, there's a path for you. <strong>The civilization grows with every player.</strong></p>
-    </div>
-    <div style="display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; justify-content:center; gap:28px;">
-      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+<div id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">// ABOUT</div>
+        <h2 class="section-title">BUILT ON<br />EVBO'S VISION</h2>
+        <p>EVBM PK CIV is inspired by <strong>Evbo's legendary Parkour Civilization</strong> series. We took everything that made it great and built a full multiplayer experience around it.</p>
+        <p>Every system — tickets, ranks, courses, battles — is designed to keep you engaged and coming back. <strong>Progress never resets.</strong> Your grind is permanent.</p>
+        <p>Whether you're here to speed-run courses or dominate in parkour battles, there's a path for you. <strong>The civilization grows with every player.</strong></p>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center;">
         <img src="https://minotar.net/helm/evbo_/160" alt="evbo_" style="width:160px; height:160px; image-rendering: pixelated; border: 4px solid var(--brown-mid); box-shadow: 0 0 20px rgba(245,212,121,0.2);" />
+      </div>
+    </div>
+
+    <!-- DEVELOPERS -->
+    <div class="dev-section" id="developers">
+      <div class="section-label">// TEAM</div>
+      <h2 class="section-title">DEVELOPERS</h2>
+      <div class="dev-grid">
+        <div class="dev-card">
+          <img src="https://minotar.net/helm/em24431/120" alt="em24431" style="width:120px; height:120px; border: 4px solid var(--brown-mid); box-shadow: 0 0 20px rgba(245,212,121,0.2);" />
+          <span class="dev-name">em24431</span>
+          <span class="dev-role">Developer</span>
         </div>
+        <div class="dev-card">
+          <img src="https://minotar.net/helm/wafflesMC_/120" alt="wafflesMC_" style="width:120px; height:120px; border: 4px solid var(--red-mid); box-shadow: 0 0 20px rgba(224,85,85,0.2);" />
+          <span class="dev-name">wafflesMC_</span>
+          <span class="dev-role">Developer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <div class="section-label">// QUESTIONS</div>
+      <h2 class="section-title">COMMON QUESTIONS</h2>
+      <div class="faq-list">
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">What version of Minecraft do I need?</div>
+          <div class="faq-a">EVBM PK CIV runs on Minehut and supports Minecraft Java Edition. Most recent versions work — just add evbm.minehut.gg and connect.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Is it free to play?</div>
+          <div class="faq-a">Yes — 100% free. Every rank, every course, every battle is earned through gameplay. No pay-to-win. The grind is the reward.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">What is a parkour battle?</div>
+          <div class="faq-a">Two players face off. Player 1 attempts a jump. If they land it, Player 2 must match it. Miss and you lose a life. Three lives each — last one standing wins.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Is progress saved when I log off?</div>
+          <div class="faq-a">Absolutely. Your rank, achievements, and progress are permanently saved. Log off and come back whenever — your civilization waits.</div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
-
+</div>
 
 <!-- RANKS -->
 <div id="ranks">
   <div class="inner">
     <div class="section-label">// PROGRESSION</div>
     <h2 class="section-title">RANK UP THE LADDER</h2>
-    <p class="section-sub">Use a ticket to reach Pro, a key to reach Master. Keep climbing. Where do you stand?</p>
-
+    <p class="section-sub">Use a ticket to reach Pro, a key to reach Master. Keep climbing.</p>
     <div class="ranks-row">
       <div class="rank-badge rank-noob">NOOB</div>
       <div class="rank-badge rank-pro">PRO</div>
@@ -1507,149 +798,120 @@
       <div class="rank-badge rank-captain">CAPTAIN</div>
       <div class="rank-badge rank-champion">CHAMPION</div>
     </div>
-    <p class="ranks-desc">
-      Every rank you earn unlocks new areas to explore and fresh perks to enjoy. The higher you climb, the more the civilization opens up. The grind is real — and so are the rewards.
-    </p>
+    <p class="ranks-desc">Every rank you earn unlocks new areas to explore and fresh perks to enjoy. The higher you climb, the more the civilization opens up.</p>
   </div>
 </div>
 
 <!-- RANK PERKS -->
-<section id="rank-perks" style="background: linear-gradient(rgba(245,212,121,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(245,212,121,0.02) 1px, transparent 1px), radial-gradient(ellipse 60% 50% at 50% 50%, rgba(92,68,0,0.15) 0%, transparent 70%), rgba(13,13,10,0.35); background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%; max-width: 100%; padding: 80px 40px;"><div style="max-width:1200px; margin:0 auto;">
-  <div class="section-label">// PROGRESSION</div>
-  <h2 class="section-title">WHAT EACH RANK UNLOCKS</h2>
-  <p class="section-sub">Every rank opens new doors. Here's what's waiting for you.</p>
-  <div class="perks-grid">
-    <div class="perk-card perk-noob">
-      <span class="perk-rank-label">NOOB</span>
-      <ul class="perk-list">
-        <li>When you die, you go to prison</li>
-        <li>Collect tickets from the Ticket Temple</li>
-        <li>Use tickets to rank up to Pro</li>
-      </ul>
-    </div>
-    <div class="perk-card perk-pro">
-      <span class="perk-rank-label">PRO</span>
-      <ul class="perk-list">
-        <li>When you die, you rank down</li>
-        <li>Collect keys from the Key Temple</li>
-        <li>Use keys to rank up to Master</li>
-        <li>Access to the Build Area</li>
-        <li>Access to the Pro area</li>
-        <li>Unlocks commands: /steak &amp; /ticket</li>
-      </ul>
-    </div>
-    <div class="perk-card perk-master">
-      <span class="perk-rank-label">MASTER</span>
-      <ul class="perk-list">
-        <li>When you die, you become Pro</li>
-        <li>Access to the Legend Temples</li>
-        <li>No items needed to enter Legend Temples</li>
-        <li>Access to the Master area and arena</li>
-        <li>Unlocks commands: /goldencarrot &amp; /key</li>
-      </ul>
-    </div>
-    <div class="perk-card perk-legend">
-      <span class="perk-rank-label">LEGEND</span>
-      <ul class="perk-list">
-        <li>Death no longer ranks you down</li>
-        <li>Access to the Lore</li>
-      </ul>
-    </div>
-    <div class="perk-card perk-captain">
-      <span class="perk-rank-label">CAPTAIN</span>
-      <ul class="perk-list">
-        <li>Earned by defeating a Captain in a Captain parkour battle</li>
-        <li>Access to the Palace — build incredible creations</li>
-        <li>Weekly quota: battle 3 Masters or 1 Legend</li>
-      </ul>
-    </div>
-    <div class="perk-card perk-champion">
-      <span class="perk-rank-label">CHAMPION</span>
-      <ul class="perk-list">
-        <li>No weekly battle quota</li>
-        <li>Can promote and demote players</li>
-        <li>Become staff</li>
-      </ul>
-    </div>
-  </div>
-</div></section>
-
-<!-- FAQ -->
-<div style="background: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px), rgba(13,13,17,0.35); background-size: 16px 16px, 16px 16px, 100% 100%; max-width:100%; padding: 80px 40px;">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-label">// QUESTIONS</div>
-    <h2 class="section-title">COMMON QUESTIONS</h2>
-    <div class="faq-list">
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <div class="faq-q">What version of Minecraft do I need?</div>
-        <div class="faq-a">EVBM PK CIV runs on Minehut and supports Minecraft Java Edition. Most recent versions work — just add evbm.minehut.gg and connect.</div>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <div class="faq-q">Is it free to play?</div>
-        <div class="faq-a">Yes — 100% free. Every rank, every course, every battle is earned through gameplay. No pay-to-win. The grind is the reward.</div>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <div class="faq-q">What is a parkour battle?</div>
-        <div class="faq-a">Two players face off. Player 1 attempts a jump. If they land it, Player 2 must match it. Miss and you lose a life. Three lives each — last one standing wins.</div>
-      </div>
-      <div class="faq-item" onclick="this.classList.toggle('open')">
-        <div class="faq-q">Is progress saved when I log off?</div>
-        <div class="faq-a">Absolutely. Your rank, achievements, and progress are permanently saved. Log off and come back whenever — your civilization waits.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HOW TO JOIN -->
-<div style="background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(92,58,30,0.06) 15px, rgba(92,58,30,0.06) 16px), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(92,58,30,0.15) 0%, transparent 70%), rgba(15,14,11,0.35); max-width:100%; padding: 80px 40px;">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-label">// GET STARTED</div>
-    <h2 class="section-title">HOW TO JOIN</h2>
-    <p class="section-sub">Three steps. That's all it takes.</p>
-    <div class="how-grid">
-      <div class="how-step">
-        <span class="step-num">1</span>
-        <h3>OPEN MINECRAFT</h3>
-        <p>Launch Minecraft and head to Multiplayer.</p>
-      </div>
-      <div class="how-step">
-        <span class="step-num">2</span>
-        <h3>ADD THE SERVER</h3>
-        <p>Click "Add Server" and enter <strong style="color:var(--gold);">evbm.minehut.gg</strong> as the address.</p>
-      </div>
-      <div class="how-step">
-        <span class="step-num">3</span>
-        <h3>START RUNNING</h3>
-        <p>Jump in, hit the courses, earn achievements, and start climbing the ranks.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA -->
-<div id="cta">
+<div class="perks-section">
   <div class="inner">
-    <h2 class="cta-title">READY TO JOIN<br />THE CIVILIZATION?</h2>
-    <p class="cta-sub">
-      Thousands of players are already running, earning, and battling.<br />
-      Your civilization awaits. Copy the IP and log in now.
-    </p>
+    <div class="section-label">// PROGRESSION</div>
+    <h2 class="section-title">WHAT EACH RANK UNLOCKS</h2>
+    <p class="section-sub">Every rank opens new doors. Here's what's waiting for you.</p>
+    <div class="perks-grid">
+      <div class="perk-card perk-noob">
+        <span class="perk-rank-label">NOOB</span>
+        <ul class="perk-list">
+          <li>When you die, you go to prison</li>
+          <li>Collect tickets from the Ticket Temple</li>
+          <li>Use tickets to rank up to Pro</li>
+        </ul>
+      </div>
+      <div class="perk-card perk-pro">
+        <span class="perk-rank-label">PRO</span>
+        <ul class="perk-list">
+          <li>When you die, you rank down</li>
+          <li>Collect keys from the Key Temple</li>
+          <li>Use keys to rank up to Master</li>
+          <li>Access to the Build Area</li>
+          <li>Access to the Pro area</li>
+          <li>Unlocks commands: /steak &amp; /ticket</li>
+        </ul>
+      </div>
+      <div class="perk-card perk-master">
+        <span class="perk-rank-label">MASTER</span>
+        <ul class="perk-list">
+          <li>When you die, you become Pro</li>
+          <li>Access to the Legend Temples</li>
+          <li>No items needed to enter Legend Temples</li>
+          <li>Access to the Master area and arena</li>
+          <li>Unlocks commands: /goldencarrot &amp; /key</li>
+        </ul>
+      </div>
+      <div class="perk-card perk-legend">
+        <span class="perk-rank-label">LEGEND</span>
+        <ul class="perk-list">
+          <li>Death no longer ranks you down</li>
+          <li>Access to the Lore</li>
+        </ul>
+      </div>
+      <div class="perk-card perk-captain">
+        <span class="perk-rank-label">CAPTAIN</span>
+        <ul class="perk-list">
+          <li>Earned by defeating a Captain in a battle</li>
+          <li>Access to the Palace</li>
+          <li>Weekly quota: battle 3 Masters or 1 Legend</li>
+        </ul>
+      </div>
+      <div class="perk-card perk-champion">
+        <span class="perk-rank-label">CHAMPION</span>
+        <ul class="perk-list">
+          <li>No weekly battle quota</li>
+          <li>Can promote and demote players</li>
+          <li>Become staff</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="ip-box">
+<!-- STATS -->
+<div id="stats">
+  <div class="inner">
+    <div class="section-label">// PLAYERS</div>
+    <h2 class="section-title">PLAYER STATS</h2>
+    <p class="section-sub" style="margin-bottom:0;">Enter any Minecraft username to view their stats.</p>
+
+    <div class="stats-search-wrap">
+      <input class="mc-input" id="mc-username-input" type="text" placeholder="YourUsername" maxlength="16"
+             onkeydown="if(event.key==='Enter')lookupPlayer()">
+      <button class="stats-btn" id="lookup-btn" onclick="lookupPlayer()">LOOK UP</button>
+    </div>
+    <div class="stats-error" id="login-error"></div>
+
+    <div class="stats-profile" id="stats-profile">
+      <div class="profile-header">
+        <img class="player-avatar" id="player-avatar" src="" alt="avatar">
+        <div class="player-info">
+          <div class="player-name" id="player-name"></div>
+          <div class="rank-badge" id="player-rank-badge"></div>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-playtime">--</span>
+          <span class="stat-box-label">PLAYTIME (MIN)</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-jumps">--</span>
+          <span class="stat-box-label">JUMPS</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-coins">--</span>
+          <span class="stat-box-label">COINS</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-box-num" id="stat-rank-num">--</span>
+          <span class="stat-box-label">RANK</span>
+        </div>
+      </div>
+      <button class="switch-btn" onclick="switchPlayer()">SWITCH PLAYER</button>
+    </div>
+
+    <div class="ip-box" style="margin-top:60px;">
       <div class="ip-label">SERVER IP</div>
       <div class="ip-value" id="serverIP" onclick="copyIP()">evbm.minehut.gg</div>
       <div class="ip-copy" onclick="copyIP()">COPY</div>
-    </div>
-
-    <br />
-    <a href="#features" class="btn-primary">EXPLORE FEATURES</a>
-    <div style="display:flex; flex-direction:row; gap:32px; justify-content:center; margin-top:40px;">
-      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
-        <img src="https://minotar.net/helm/em24431/140" alt="em24431" style="width:140px; height:140px; image-rendering: pixelated; border: 4px solid var(--brown-mid); box-shadow: 0 0 20px rgba(245,212,121,0.2);" />
-      </div>
-      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
-        <img src="https://minotar.net/helm/wafflesMC_/140" alt="wafflesMC_" style="width:140px; height:140px; image-rendering: pixelated; border: 4px solid var(--red-mid); box-shadow: 0 0 20px rgba(224,85,85,0.2);" />
-      </div>
     </div>
   </div>
 </div>
@@ -1669,7 +931,7 @@
 
 <!-- ACHIEVEMENT -->
 <div class="achievement" id="achievement">
-  <div class="ach-icon">🏆</div>
+  <div class="ach-icon">&#127942;</div>
   <div>
     <div class="ach-title">ACHIEVEMENT UNLOCKED</div>
     <div class="ach-sub">Found the Civilization</div>
@@ -1677,7 +939,7 @@
 </div>
 
 <script>
-  // ---- Cycling Minecraft tips ----
+  // ---- Cycling tips ----
   const mcTips = [
     '<span class="tip-key">Tip:</span> Use a ticket to rank up to Pro, a key to reach Master!',
     '<span class="tip-key">Tip:</span> As a Noob, death sends you to prison.',
@@ -1692,32 +954,27 @@
   let tipIdx = 0;
   function cycleTip() {
     tipEl.style.opacity = '0';
-    setTimeout(() => {
-      tipEl.innerHTML = mcTips[tipIdx % mcTips.length];
-      tipEl.style.opacity = '1';
-      tipIdx++;
-    }, 400);
+    setTimeout(() => { tipEl.innerHTML = mcTips[tipIdx % mcTips.length]; tipEl.style.opacity = '1'; tipIdx++; }, 400);
     setTimeout(cycleTip, 5000);
   }
   setTimeout(cycleTip, 1000);
 
+  // ---- Achievement ----
   const achEl = document.getElementById('achievement');
   function showAch(icon, text, duration) {
     if (icon) { achEl.querySelector('.ach-icon').textContent = icon; achEl.querySelector('.ach-sub').textContent = text; }
     achEl.classList.add('show');
     setTimeout(() => achEl.classList.remove('show'), duration);
   }
-
   setTimeout(() => showAch(null, null, 4000), 1200);
 
-  // ---- Konami code easter egg ----
+  // ---- Konami code ----
   let kSeq = [];
   const kCode = [38,38,40,40,37,39,37,39,66,65];
   document.addEventListener('keydown', e => {
-    kSeq.push(e.keyCode);
-    kSeq = kSeq.slice(-10);
+    kSeq.push(e.keyCode); kSeq = kSeq.slice(-10);
     if (kSeq.join() === kCode.join()) {
-      showAch('🎮', 'Cheat Code Activated', 3000);
+      showAch('&#127918;', 'Cheat Code Activated', 3000);
       for (let i = 0; i < 40; i++) {
         setTimeout(() => {
           const px = document.createElement('div');
@@ -1745,26 +1002,7 @@
     setTimeout(() => toast.classList.remove('show'), 2000);
   }
 
-  // ---- Pixel Art Grid ----
-  const colors = [
-    '#5C3A1E','#8B5E3C','#C4845A','#5C1A1A','#B83232',
-    '#E05555','#3A3020','#6B5530','#1a1a1e','#141418',
-    '#2A1A0E','#7A4020','#D4A017','#3D1A1A','#4A2A2A',
-  ];
-
-  const grid = document.getElementById('pixelGrid');
-  if (grid) {
-    for (let i = 0; i < 64; i++) {
-      const block = document.createElement('div');
-      block.className = 'pixel-block';
-      block.style.background = colors[Math.floor(Math.random() * colors.length)];
-      block.style.animationDelay = (Math.random() * 4) + 's';
-      block.style.animationDuration = (3 + Math.random() * 4) + 's';
-      grid.appendChild(block);
-    }
-  }
-
-  // ---- Typewriter on hero tagline ----
+  // ---- Typewriter ----
   const tagline = document.querySelector('.hero-tagline');
   const originalHTML = tagline.innerHTML;
   tagline.innerHTML = '';
@@ -1773,7 +1011,6 @@
   const plain = originalHTML.replace(/<[^>]+>/g, '');
   function typeNext() {
     if (charIndex <= plain.length) {
-      // rebuild with span highlight on "Battle."
       const typed = plain.slice(0, charIndex);
       tagline.innerHTML = typed.replace('Battle.', '<span>Battle.</span>') + (charIndex < plain.length ? '█' : '');
       charIndex++;
@@ -1781,27 +1018,6 @@
     }
   }
   setTimeout(typeNext, 600);
-
-  // ---- Animated stat counters ----
-  const statNums = document.querySelectorAll('.stat-num[data-target]');
-  const statObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const target = parseInt(el.dataset.target);
-      const duration = 1800;
-      const start = performance.now();
-      function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(eased * target).toLocaleString();
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      statObserver.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  statNums.forEach(el => statObserver.observe(el));
 
   // ---- Click pixel burst ----
   const burstColors = ['#F5D479','#FF7070','#C4845A','#6FF0FF','#C060FF','#60D060'];
@@ -1830,13 +1046,26 @@
       }
     });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.feature-card, .rank-badge, .how-step').forEach(el => {
+  document.querySelectorAll('.feature-card, .rank-badge, .how-step, .perk-card, .dev-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+
+  // ---- Active nav link ----
+  const navLinks = document.querySelectorAll('nav ul a[data-section]');
+  const sections = ['home','about','features','ranks','stats'];
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.dataset.section === e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+  sections.forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
 
   // ---- Fire particles ----
   (function() {
@@ -1873,63 +1102,17 @@
 
   // ---- Airtable config ----
   const AIRTABLE_TOKEN   = 'patpAbTIZAn653X4z.bd16c3aca7caa386b94ae94fb5f98ca8c3bb56da18b71a2783e8c99cfa933695';
-  const AIRTABLE_BASE_ID = 'appAfsgy3OfESbXcT'; // must start with app...
+  const AIRTABLE_BASE_ID = 'appAfsgy3OfESbXcT';
   const AIRTABLE_TABLE   = 'Players';
-
-  // ---- Live server status ----
-  const statEl = document.querySelector('.stat-num[data-target]');
-  let lastCount = -1;
-  let statusFetching = false;
-
-  async function fetchServerStatus() {
-    if (statusFetching) return;
-    statusFetching = true;
-    try {
-      const res  = await fetch('https://api.mcsrvstat.us/3/evbm.minehut.gg');
-      const data = await res.json();
-      const count = (data.online && data.players && data.players.online) ? data.players.online : 0;
-      if (count !== lastCount && statEl) {
-        lastCount = count;
-        statEl.dataset.target = count;
-        statEl.textContent = count.toLocaleString();
-      }
-    } catch (err) {
-      console.warn('Server status fetch failed:', err);
-    } finally {
-      statusFetching = false;
-    }
-  }
-
-  fetchServerStatus();
-  setInterval(fetchServerStatus, 3000);
-
-  // ---- Player stats modal ----
   const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION' };
 
-  // Cached modal elements
-  const statsOverlay   = document.getElementById('stats-overlay');
-  const loginView      = document.getElementById('stats-login-view');
-  const profileView    = document.getElementById('stats-profile-view');
-  const usernameInput  = document.getElementById('mc-username-input');
-  const lookupBtn      = document.getElementById('lookup-btn');
-  const loginError     = document.getElementById('login-error');
-  const playerAvatar   = document.getElementById('player-avatar');
-  const playerNameEl   = document.getElementById('player-name');
-  const playerRankEl   = document.getElementById('player-rank-badge');
-  const navStatsBtn    = document.getElementById('nav-stats-btn');
-
-  function showLoginView()   { loginView.style.display = ''; profileView.style.display = 'none'; setTimeout(() => usernameInput.focus(), 50); }
-  function showProfileView() { loginView.style.display = 'none'; profileView.style.display = ''; }
-
-  function openStatsModal() {
-    statsOverlay.classList.add('open');
-    if (localStorage.getItem('mc_username')) showProfile(localStorage.getItem('mc_username'), true);
-    else showLoginView();
-  }
-
-  function closeStatsModal() { statsOverlay.classList.remove('open'); }
-
-  function overlayClick(e) { if (e.target === statsOverlay) closeStatsModal(); }
+  const usernameInput = document.getElementById('mc-username-input');
+  const lookupBtn     = document.getElementById('lookup-btn');
+  const loginError    = document.getElementById('login-error');
+  const statsProfile  = document.getElementById('stats-profile');
+  const playerAvatar  = document.getElementById('player-avatar');
+  const playerNameEl  = document.getElementById('player-name');
+  const playerRankEl  = document.getElementById('player-rank-badge');
 
   async function lookupPlayer() {
     const name = usernameInput.value.trim();
@@ -1949,29 +1132,22 @@
       loginError.textContent = 'Player not found. Check the username and try again.';
     } finally {
       lookupBtn.disabled = false;
-      lookupBtn.textContent = 'LOOK UP STATS';
+      lookupBtn.textContent = 'LOOK UP';
     }
   }
 
   async function showProfile(username, fromCache, knownUuid) {
-    showProfileView();
+    statsProfile.style.display = 'block';
     let uuid = knownUuid || localStorage.getItem('mc_uuid');
     if (!uuid) {
       try {
         const res  = await fetch(`https://playerdb.co/api/player/minecraft/${encodeURIComponent(username)}`);
         const data = await res.json();
-        if (data.success) {
-          uuid = data.data.player.id;
-          username = data.data.player.username;
-          localStorage.setItem('mc_uuid', uuid);
-          localStorage.setItem('mc_username', username);
-        }
-      } catch { /* use whatever we have */ }
+        if (data.success) { uuid = data.data.player.id; username = data.data.player.username; localStorage.setItem('mc_uuid', uuid); localStorage.setItem('mc_username', username); }
+      } catch {}
     }
-    playerAvatar.src = uuid ? `https://crafatar.com/avatars/${uuid}?size=64&overlay=true` : '';
+    playerAvatar.src = uuid ? `https://crafatar.com/avatars/${uuid}?size=80&overlay=true` : '';
     playerNameEl.textContent = username;
-    navStatsBtn.textContent  = username.toUpperCase();
-    navStatsBtn.classList.add('logged-in');
     loadPlayerStats(uuid);
   }
 
@@ -1979,7 +1155,7 @@
     document.getElementById('stat-playtime').textContent = '...';
     document.getElementById('stat-jumps').textContent    = '...';
     document.getElementById('stat-coins').textContent    = '...';
-    document.getElementById('stat-rank').textContent     = '...';
+    document.getElementById('stat-rank-num').textContent = '...';
     try {
       const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}?filterByFormula=${encodeURIComponent(`{UUID}="${uuid}"`)}`;
       const res  = await fetch(url, { headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` } });
@@ -1988,41 +1164,35 @@
       if (rec) {
         const f = rec.fields;
         const mins = Math.floor((f.Playtime || 0) / 60);
-        document.getElementById('stat-playtime').textContent = mins >= 60 ? `${Math.floor(mins/60)}h ${mins%60}m` : `${mins}m`;
+        document.getElementById('stat-playtime').textContent = mins.toLocaleString();
         document.getElementById('stat-jumps').textContent    = (f.Jumps  || 0).toLocaleString();
         document.getElementById('stat-coins').textContent    = (f.Coins  || 0).toLocaleString();
-        document.getElementById('stat-rank').textContent     = f.Rank || '--';
+        document.getElementById('stat-rank-num').textContent = f.Rank || '--';
         const rankKey = (f.Rank || 'noob').toLowerCase();
         playerRankEl.textContent = RANK_LABELS[rankKey] || f.Rank || 'NOOB';
         playerRankEl.className   = `rank-badge rank-${rankKey}`;
       } else {
-        document.getElementById('stat-playtime').textContent = '--';
-        document.getElementById('stat-jumps').textContent    = '--';
-        document.getElementById('stat-coins').textContent    = '--';
-        document.getElementById('stat-rank').textContent     = '--';
+        ['stat-playtime','stat-jumps','stat-coins','stat-rank-num'].forEach(id => document.getElementById(id).textContent = '--');
+        playerRankEl.textContent = 'NOT FOUND';
+        playerRankEl.className   = 'rank-badge rank-noob';
       }
     } catch {
-      document.getElementById('stat-playtime').textContent = 'ERR';
-      document.getElementById('stat-jumps').textContent    = 'ERR';
-      document.getElementById('stat-coins').textContent    = 'ERR';
-      document.getElementById('stat-rank').textContent     = 'ERR';
+      ['stat-playtime','stat-jumps','stat-coins','stat-rank-num'].forEach(id => document.getElementById(id).textContent = 'ERR');
     }
   }
 
   function switchPlayer() {
     localStorage.removeItem('mc_username');
     localStorage.removeItem('mc_uuid');
-    navStatsBtn.textContent = 'MY STATS';
-    navStatsBtn.classList.remove('logged-in');
-    usernameInput.value    = '';
+    usernameInput.value = '';
     loginError.textContent = '';
-    showLoginView();
+    statsProfile.style.display = 'none';
+    usernameInput.focus();
   }
 
-  // Restore nav label if already logged in
+  // Auto-load if cached
   const _saved = localStorage.getItem('mc_username');
-  if (_saved) { navStatsBtn.textContent = _saved.toUpperCase(); navStatsBtn.classList.add('logged-in'); }
-
-
+  if (_saved) { usernameInput.value = _saved; showProfile(_saved, true); }
 </script>
 </body>
+</html>
