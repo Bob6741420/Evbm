@@ -278,39 +278,88 @@
     .section-title { font-size: clamp(1rem, 3vw, 1.8rem); color: var(--gold); text-shadow: 3px 3px 0 var(--brown-dark); margin-bottom: 16px; line-height: 1.4; }
     .section-sub { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--gray); max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
 
-    /* ---- SHARED PAGE BACKGROUND ---- */
+    /* ---- SHARED PAGE BACKGROUND (stone brick) ---- */
     #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard {
-      background-color: #222228;
+      background-color: #1c1c20;
       background-image:
-        /* Brand color atmosphere */
-        radial-gradient(ellipse 90% 50% at 50% 0%,   rgba(184,90,30,0.55)  0%, transparent 55%),
-        radial-gradient(ellipse 55% 45% at 0%  100%,  rgba(184,40,40,0.4)   0%, transparent 50%),
-        radial-gradient(ellipse 45% 35% at 100% 60%,  rgba(184,150,0,0.3)   0%, transparent 50%),
-        /* Horizontal mortar lines every 48px */
-        repeating-linear-gradient(
-          0deg,
-          transparent 0px, transparent 46px,
-          #0d0d10 46px, #0d0d10 48px
-        ),
-        /* Vertical mortar lines every 48px */
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px, transparent 46px,
-          #0d0d10 46px, #0d0d10 48px
-        ),
-        /* Subtle inner block texture */
-        repeating-linear-gradient(
-          45deg,
-          rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px,
-          transparent 2px, transparent 10px
-        );
-      background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px, 10px 10px;
+        repeating-linear-gradient(0deg,   transparent 0px, transparent 46px, #0a0a0c 46px, #0a0a0c 48px),
+        repeating-linear-gradient(90deg,  transparent 0px, transparent 46px, #0a0a0c 46px, #0a0a0c 48px),
+        repeating-linear-gradient(45deg,  rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 2px, transparent 2px, transparent 10px);
+      background-size: 48px 48px, 48px 48px, 10px 10px;
+      padding: 48px max(40px, 7vw);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ---- SCROLL ---- */
+    .scroll-wrap {
+      width: 100%;
+      max-width: 1100px;
+      background: rgba(10, 8, 5, 0.93);
+      border-left:  4px solid var(--brown-mid);
+      border-right: 4px solid var(--brown-mid);
+      box-shadow: 0 0 0 1px rgba(245,212,121,0.08), 0 0 80px rgba(0,0,0,0.8), inset 0 0 60px rgba(0,0,0,0.4);
+      position: relative;
+      padding: 52px 56px 56px;
+    }
+    /* Scroll rollers top & bottom */
+    .scroll-wrap::before, .scroll-wrap::after {
+      content: '';
+      position: absolute;
+      left: -12px; right: -12px;
+      height: 22px;
+      background: linear-gradient(to right, var(--brown-dark) 0%, var(--brown-mid) 20%, var(--brown-light) 50%, var(--brown-mid) 80%, var(--brown-dark) 100%);
+      border: 3px solid var(--brown-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7), inset 0 2px 0 rgba(255,255,255,0.12);
+      border-radius: 3px;
+    }
+    .scroll-wrap::before { top: -19px; }
+    .scroll-wrap::after  { bottom: -19px; }
+    .scroll-wrap .inner  { max-width: 100%; margin: 0; }
+
+    /* ---- TORCHES ---- */
+    .page-torch {
+      position: fixed;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      z-index: 150;
+      gap: 0;
+    }
+    .page-torch.show { display: flex; }
+    .torch-glow {
+      width: 48px; height: 48px;
+      background: radial-gradient(circle, rgba(255,180,0,0.45) 0%, transparent 70%);
+      position: absolute;
+      top: -8px; left: 50%;
+      transform: translateX(-50%);
+      animation: torchFlicker 0.5s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .torch-flame {
+      width: 10px; height: 14px;
+      background: radial-gradient(ellipse at 50% 80%, #FFE000 0%, #FF8800 55%, transparent 100%);
+      border-radius: 50% 50% 30% 30%;
+      animation: torchFlicker 0.5s ease-in-out infinite alternate;
+      position: relative; z-index: 1;
+    }
+    .torch-head {
+      width: 10px; height: 6px;
+      background: var(--brown-light);
+      position: relative; z-index: 2;
+    }
+    .torch-body {
+      width: 6px; height: 32px;
+      background: linear-gradient(to bottom, var(--brown-light) 0%, var(--brown-dark) 100%);
+    }
+    @keyframes torchFlicker {
+      from { transform: translateX(-50%) scaleX(1);   opacity: 0.85; }
+      to   { transform: translateX(-50%) scaleX(0.8); opacity: 1; }
     }
 
     /* ---- FEATURES PAGE ---- */
-    #page-features {
-      padding: 60px 40px;
-    }
+    #page-features { padding: 48px max(40px, 7vw); }
     #page-features .inner { max-width: 1200px; margin: 0 auto; }
 
     .features-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 20px; }
@@ -342,9 +391,7 @@
     .feature-tag { display: inline-block; margin-top: 16px; font-size: 0.35rem; background: var(--red-dark); color: var(--red-bright); padding: 6px 10px; border: 2px solid var(--red-mid); letter-spacing: 1px; }
 
     /* ---- ABOUT PAGE ---- */
-    #page-about {
-      padding: 60px 40px;
-    }
+    #page-about { padding: 48px max(40px, 7vw); }
     #page-about .inner { max-width: 1200px; margin: 0 auto; }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 80px; }
@@ -371,9 +418,7 @@
     .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
 
     /* ---- RANKS PAGE ---- */
-    #page-ranks {
-      padding: 60px 40px;
-    }
+    #page-ranks { padding: 48px max(40px, 7vw); }
     #page-ranks .inner { max-width: 1200px; margin: 0 auto; }
 
     .ranks-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
@@ -435,9 +480,7 @@
     .perk-champion{ border-color: #00B8D4; }
 
     /* ---- STATS PAGE ---- */
-    #page-stats {
-      padding: 60px 40px;
-    }
+    #page-stats { padding: 48px max(40px, 7vw); }
     #page-stats .inner { max-width: 600px; margin: 0 auto; }
 
     .stats-search-wrap { display: flex; gap: 12px; margin: 32px 0 16px; }
@@ -554,9 +597,7 @@
     .news-text { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
 
     /* ---- LEADERBOARD PAGE ---- */
-    #page-leaderboard {
-      padding: 60px 40px;
-    }
+    #page-leaderboard { padding: 48px max(40px, 7vw); }
     #page-leaderboard .inner { max-width: 1000px; margin: 0 auto; }
 
     .lb-tabs { display: flex; gap: 0; margin: 32px 0 0; border-bottom: 3px solid var(--brown-dark); }
@@ -753,7 +794,7 @@
 
 <!-- ========== ABOUT PAGE ========== -->
 <div class="page" id="page-about">
-  <div class="inner">
+  <div class="scroll-wrap"><div class="inner">
     <div class="about-grid">
       <div class="about-text">
         <div class="section-label">// ABOUT</div>
@@ -808,7 +849,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div><!-- end scroll-wrap -->
 
   <div class="page-footer" style="margin-top:80px;">
     <div class="footer-logo">
@@ -821,7 +862,7 @@
 
 <!-- ========== FEATURES PAGE ========== -->
 <div class="page" id="page-features">
-  <div class="inner">
+  <div class="scroll-wrap"><div class="inner">
     <div class="section-label">// GAMEPLAY</div>
     <h2 class="section-title">WHAT AWAITS YOU</h2>
     <p class="section-sub">Four pillars. One civilization. Your legacy starts here.</p>
@@ -857,12 +898,12 @@
         <span class="feature-tag">PARKOUR BATTLE</span>
       </div>
     </div>
-  </div>
+  </div></div><!-- end scroll-wrap -->
 </div>
 
 <!-- ========== RANKS PAGE ========== -->
 <div class="page" id="page-ranks">
-  <div class="inner">
+  <div class="scroll-wrap"><div class="inner">
     <div class="section-label">// PROGRESSION</div>
     <h2 class="section-title">RANK UP THE LADDER</h2>
     <p class="section-sub">Use a ticket to reach Pro, a key to reach Master. Keep climbing.</p>
@@ -937,12 +978,12 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div><!-- end scroll-wrap -->
 </div>
 
 <!-- ========== STATS PAGE ========== -->
 <div class="page" id="page-stats">
-  <div class="inner">
+  <div class="scroll-wrap"><div class="inner">
     <div class="section-label">// PLAYERS</div>
     <h2 class="section-title">PLAYER STATS</h2>
     <p class="section-sub" style="margin-bottom:0;">Enter any Minecraft username to view their stats.</p>
@@ -988,12 +1029,12 @@
       <div class="ip-value" id="serverIP" onclick="copyIP()">evbm.minehut.gg</div>
       <div class="ip-copy" onclick="copyIP()">COPY</div>
     </div>
-  </div>
+  </div></div><!-- end scroll-wrap -->
 </div>
 
 <!-- ========== LEADERBOARD PAGE ========== -->
 <div class="page" id="page-leaderboard">
-  <div class="inner">
+  <div class="scroll-wrap"><div class="inner">
     <div class="section-label">// TOP PLAYERS</div>
     <h2 class="section-title">LEADERBOARD</h2>
     <p class="section-sub">The best runners on the civilization.</p>
@@ -1018,8 +1059,14 @@
         <tbody id="lb-playtime-body"></tbody>
       </table>
     </div>
-  </div>
+  </div></div><!-- end scroll-wrap -->
 </div>
+
+<!-- TORCHES -->
+<div class="page-torch" id="torch-tl" style="top:22%;left:2.5%;">  <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
+<div class="page-torch" id="torch-tr" style="top:22%;right:2.5%;">  <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
+<div class="page-torch" id="torch-bl" style="top:68%;left:2.5%;">  <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
+<div class="page-torch" id="torch-br" style="top:68%;right:2.5%;"> <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
 
 <!-- TOAST -->
 <div class="toast" id="toast">IP COPIED TO CLIPBOARD!</div>
@@ -1045,6 +1092,7 @@
     location.hash = name;
     if (name === 'home') resizeFire();
     if (name === 'leaderboard') loadLeaderboard();
+    document.querySelectorAll('.page-torch').forEach(t => t.classList.toggle('show', name !== 'home'));
   }
 
   // Hash-based routing on load
