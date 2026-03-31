@@ -278,10 +278,20 @@
     .section-title { font-size: clamp(1rem, 3vw, 1.8rem); color: var(--gold); text-shadow: 3px 3px 0 var(--brown-dark); margin-bottom: 16px; line-height: 1.4; }
     .section-sub { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--gray); max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
 
+    /* ---- SHARED PAGE BACKGROUND ---- */
+    #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard {
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(92,58,30,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 10% 100%, rgba(92,26,26,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 60%, rgba(92,68,0,0.12) 0%, transparent 50%),
+        linear-gradient(rgba(245,212,121,0.014) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,212,121,0.014) 1px, transparent 1px),
+        var(--bg);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
+    }
+
     /* ---- FEATURES PAGE ---- */
     #page-features {
-      background: linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px), radial-gradient(ellipse 70% 50% at 50% 50%, rgba(92,58,30,0.12) 0%, transparent 70%), var(--bg);
-      background-size: 16px 16px, 16px 16px, 100% 100%;
       padding: 60px 40px;
     }
     #page-features .inner { max-width: 1200px; margin: 0 auto; }
@@ -316,7 +326,6 @@
 
     /* ---- ABOUT PAGE ---- */
     #page-about {
-      background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(139,94,60,0.05) 15px, rgba(139,94,60,0.05) 16px), radial-gradient(ellipse 70% 60% at 25% 50%, rgba(92,58,30,0.18) 0%, transparent 65%), rgba(9,9,15,1);
       padding: 60px 40px;
     }
     #page-about .inner { max-width: 1200px; margin: 0 auto; }
@@ -346,8 +355,6 @@
 
     /* ---- RANKS PAGE ---- */
     #page-ranks {
-      background: linear-gradient(rgba(184,50,50,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184,50,50,0.03) 1px, transparent 1px), radial-gradient(ellipse 100% 80% at 50% 50%, rgba(92,26,26,0.3) 0%, transparent 70%), var(--bg);
-      background-size: 16px 16px, 16px 16px, 100% 100%;
       padding: 60px 40px;
     }
     #page-ranks .inner { max-width: 1200px; margin: 0 auto; }
@@ -412,8 +419,6 @@
 
     /* ---- STATS PAGE ---- */
     #page-stats {
-      background: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px), radial-gradient(ellipse 60% 50% at 50% 30%, rgba(92,58,30,0.15) 0%, transparent 70%), var(--bg);
-      background-size: 16px 16px, 16px 16px, 100% 100%;
       padding: 60px 40px;
     }
     #page-stats .inner { max-width: 600px; margin: 0 auto; }
@@ -533,8 +538,6 @@
 
     /* ---- LEADERBOARD PAGE ---- */
     #page-leaderboard {
-      background: linear-gradient(rgba(245,212,121,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(245,212,121,0.015) 1px, transparent 1px), radial-gradient(ellipse 80% 60% at 50% 30%, rgba(92,68,0,0.2) 0%, transparent 70%), var(--bg);
-      background-size: 16px 16px, 16px 16px, 100% 100%;
       padding: 60px 40px;
     }
     #page-leaderboard .inner { max-width: 1000px; margin: 0 auto; }
