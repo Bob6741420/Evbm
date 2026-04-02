@@ -362,44 +362,6 @@
       bottom: -10px;
     }
 
-    /* ---- WALL TORCHES ---- */
-    .wall-torch {
-      position: fixed;
-      z-index: 150;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      pointer-events: none;
-    }
-    .wall-torch.visible { display: flex; }
-    .torch-left  { left:  max(4px, calc(50% - 730px)); }
-    .torch-right { right: max(4px, calc(50% - 730px)); }
-    .torch-top { top: calc(var(--nav-h) + 15vh); }
-    .torch-bot { top: calc(var(--nav-h) + 55vh); }
-
-
-    .torch-img {
-      height: 90px;   /* 1 block height — stone brick ≈ 91px at 640px tile */
-      width: auto;
-      image-rendering: pixelated;
-      display: block;
-      position: relative;
-      z-index: 1;
-      animation: torchFlicker 1.6s ease-in-out infinite;
-    }
-
-    @keyframes torchFlicker {
-      0%   { filter: brightness(1.00); }
-      12%  { filter: brightness(1.15); }
-      25%  { filter: brightness(0.93); }
-      38%  { filter: brightness(1.08); }
-      50%  { filter: brightness(1.20); }
-      63%  { filter: brightness(0.96); }
-      76%  { filter: brightness(1.12); }
-      88%  { filter: brightness(0.94); }
-      100% { filter: brightness(1.00); }
-    }
-
     /* ---- FEATURES PAGE ---- */
     #page-features {
       padding: 60px 40px;
@@ -726,10 +688,6 @@
       #page-features > .inner, #page-about > .inner, #page-ranks > .inner,
       #page-stats > .inner, #page-leaderboard > .inner, .perks-section > .inner { padding: 28px 20px; }
       .hero-wrap { padding: 40px 20px; }
-      .torch-left  { left: 4px; }
-      .torch-right { right: 4px; }
-      .torch-img { height: 54px; width: auto; }
-      .wall-torch::before { width: 220px; height: 220px; top: -90px; }
     }
   </style>
 </head>
@@ -754,12 +712,6 @@
     <div class="nav-ip" onclick="copyIP()">COPY IP</div>
   </div>
 </nav>
-
-<!-- WALL TORCHES -->
-<div class="wall-torch torch-left  torch-top"><img class="torch-img" src="torch_nobg.png" alt=""></div>
-<div class="wall-torch torch-right torch-top"><img class="torch-img" src="torch_nobg.png" alt=""></div>
-<div class="wall-torch torch-left  torch-bot"><img class="torch-img" src="torch_nobg.png" alt=""></div>
-<div class="wall-torch torch-right torch-bot"><img class="torch-img" src="torch_nobg.png" alt=""></div>
 
 <!-- ========== HOME PAGE ========== -->
 <div class="page active" id="page-home">
@@ -1148,7 +1100,6 @@
     const link = document.querySelector('nav ul a[data-page="' + name + '"]');
     if (link) link.classList.add('active');
     location.hash = name;
-    document.querySelectorAll('.wall-torch').forEach(t => t.classList.toggle('visible', name !== 'home'));
     if (name === 'home') resizeFire();
     if (name === 'leaderboard') loadLeaderboard();
   }
