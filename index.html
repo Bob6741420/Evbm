@@ -278,88 +278,132 @@
     .section-title { font-size: clamp(1rem, 3vw, 1.8rem); color: var(--gold); text-shadow: 3px 3px 0 var(--brown-dark); margin-bottom: 16px; line-height: 1.4; }
     .section-sub { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--gray); max-width: 600px; line-height: 1.7; margin-bottom: 60px; }
 
-    /* ---- SHARED PAGE BACKGROUND (stone brick) ---- */
+    /* ---- SHARED PAGE BACKGROUND ---- */
     #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard {
-      background-color: #1c1c20;
+      background-color: #1a1a1a;
       background-image:
-        repeating-linear-gradient(0deg,   transparent 0px, transparent 46px, #0a0a0c 46px, #0a0a0c 48px),
-        repeating-linear-gradient(90deg,  transparent 0px, transparent 46px, #0a0a0c 46px, #0a0a0c 48px),
-        repeating-linear-gradient(45deg,  rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 2px, transparent 2px, transparent 10px);
-      background-size: 48px 48px, 48px 48px, 10px 10px;
-      padding: 48px max(40px, 7vw);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+        /* Torch glow: top warmth */
+        radial-gradient(ellipse 80% 40% at 50% 0%,    rgba(180,90,20,0.5)  0%, transparent 60%),
+        /* Left torch ambient (2 heights) */
+        radial-gradient(ellipse 35% 42% at 0%  22%,   rgba(255,145,0,0.28) 0%, transparent 58%),
+        radial-gradient(ellipse 28% 32% at 0%  60%,   rgba(255,125,0,0.20) 0%, transparent 52%),
+        /* Right torch ambient (2 heights) */
+        radial-gradient(ellipse 35% 42% at 100% 22%,  rgba(255,145,0,0.28) 0%, transparent 58%),
+        radial-gradient(ellipse 28% 32% at 100% 60%,  rgba(255,125,0,0.20) 0%, transparent 52%),
+        /* Overall dark vignette to deepen the stone */
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.55) 100%),
+        /* Actual Minecraft stone brick texture */
+        url("Screenshot 2026-04-01 165612.png");
+      background-size:
+        100% 100%,
+        100% 100%, 100% 100%,
+        100% 100%, 100% 100%,
+        100% 100%,
+        640px auto;
+      background-repeat:
+        no-repeat,
+        no-repeat, no-repeat,
+        no-repeat, no-repeat,
+        no-repeat,
+        repeat;
     }
 
-    /* ---- SCROLL ---- */
-    .scroll-wrap {
-      width: 100%;
-      max-width: 1100px;
-      background: rgba(10, 8, 5, 0.93);
-      border-left:  4px solid var(--brown-mid);
-      border-right: 4px solid var(--brown-mid);
-      box-shadow: 0 0 0 1px rgba(245,212,121,0.08), 0 0 80px rgba(0,0,0,0.8), inset 0 0 60px rgba(0,0,0,0.4);
+    /* ---- SCROLL FRAME ---- */
+    #page-features > .inner,
+    #page-about > .inner,
+    #page-ranks > .inner,
+    #page-stats > .inner,
+    #page-leaderboard > .inner,
+    .perks-section > .inner {
       position: relative;
-      padding: 52px 56px 56px;
+      /* Actual parchment texture from screenshot, darkened so text stays readable */
+      background:
+        linear-gradient(rgba(12,8,2,0.88), rgba(12,8,2,0.88)),
+        url("Screenshot 2026-03-31 175838.png");
+      background-size: 100% 100%, cover;
+      background-repeat: no-repeat, no-repeat;
+      background-position: top left, center center;
+      border-left: 4px solid #5C3A1E;
+      border-right: 4px solid #5C3A1E;
+      padding: 40px 48px;
+      box-shadow:
+        inset 0 0 60px rgba(0,0,0,0.3),
+        0 4px 40px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(139,94,60,0.3);
     }
-    /* Scroll rollers top & bottom */
-    .scroll-wrap::before, .scroll-wrap::after {
+    #page-features > .inner::before, #page-about > .inner::before,
+    #page-ranks > .inner::before, #page-stats > .inner::before,
+    #page-leaderboard > .inner::before, .perks-section > .inner::before,
+    #page-features > .inner::after, #page-about > .inner::after,
+    #page-ranks > .inner::after, #page-stats > .inner::after,
+    #page-leaderboard > .inner::after, .perks-section > .inner::after {
       content: '';
       position: absolute;
-      left: -12px; right: -12px;
-      height: 22px;
-      background: linear-gradient(to right, var(--brown-dark) 0%, var(--brown-mid) 20%, var(--brown-light) 50%, var(--brown-mid) 80%, var(--brown-dark) 100%);
-      border: 3px solid var(--brown-dark);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7), inset 0 2px 0 rgba(255,255,255,0.12);
+      left: -20px;
+      right: -20px;
+      height: 20px;
+      /* Oak plank roller using the same parchment texture */
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%),
+        url("Screenshot 2026-03-31 175838.png");
+      background-size: 100% 100%, 100% 100%;
+      background-repeat: no-repeat, no-repeat;
       border-radius: 3px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,210,120,0.15);
     }
-    .scroll-wrap::before { top: -19px; }
-    .scroll-wrap::after  { bottom: -19px; }
-    .scroll-wrap .inner  { max-width: 100%; margin: 0; }
+    #page-features > .inner::before, #page-about > .inner::before,
+    #page-ranks > .inner::before, #page-stats > .inner::before,
+    #page-leaderboard > .inner::before, .perks-section > .inner::before {
+      top: -10px;
+    }
+    #page-features > .inner::after, #page-about > .inner::after,
+    #page-ranks > .inner::after, #page-stats > .inner::after,
+    #page-leaderboard > .inner::after, .perks-section > .inner::after {
+      bottom: -10px;
+    }
 
-    /* ---- TORCHES ---- */
-    .page-torch {
+    /* ---- WALL TORCHES ---- */
+    .wall-torch {
       position: fixed;
+      z-index: 150;
       display: none;
       flex-direction: column;
       align-items: center;
-      z-index: 150;
-      gap: 0;
-    }
-    .page-torch.show { display: flex; }
-    .torch-glow {
-      width: 48px; height: 48px;
-      background: radial-gradient(circle, rgba(255,180,0,0.45) 0%, transparent 70%);
-      position: absolute;
-      top: -8px; left: 50%;
-      transform: translateX(-50%);
-      animation: torchFlicker 0.5s ease-in-out infinite alternate;
       pointer-events: none;
     }
-    .torch-flame {
-      width: 10px; height: 14px;
-      background: radial-gradient(ellipse at 50% 80%, #FFE000 0%, #FF8800 55%, transparent 100%);
-      border-radius: 50% 50% 30% 30%;
-      animation: torchFlicker 0.5s ease-in-out infinite alternate;
-      position: relative; z-index: 1;
+    .wall-torch.visible { display: flex; }
+    .torch-left  { left:  max(4px, calc(50% - 730px)); }
+    .torch-right { right: max(4px, calc(50% - 730px)); }
+    .torch-top { top: calc(var(--nav-h) + 15vh); }
+    .torch-bot { top: calc(var(--nav-h) + 55vh); }
+
+
+    .torch-img {
+      height: 90px;   /* 1 block height — stone brick ≈ 91px at 640px tile */
+      width: auto;
+      image-rendering: pixelated;
+      display: block;
+      position: relative;
+      z-index: 1;
+      animation: torchFlicker 1.6s ease-in-out infinite;
     }
-    .torch-head {
-      width: 10px; height: 6px;
-      background: var(--brown-light);
-      position: relative; z-index: 2;
-    }
-    .torch-body {
-      width: 6px; height: 32px;
-      background: linear-gradient(to bottom, var(--brown-light) 0%, var(--brown-dark) 100%);
-    }
+
     @keyframes torchFlicker {
-      from { transform: translateX(-50%) scaleX(1);   opacity: 0.85; }
-      to   { transform: translateX(-50%) scaleX(0.8); opacity: 1; }
+      0%   { filter: brightness(1.00); }
+      12%  { filter: brightness(1.15); }
+      25%  { filter: brightness(0.93); }
+      38%  { filter: brightness(1.08); }
+      50%  { filter: brightness(1.20); }
+      63%  { filter: brightness(0.96); }
+      76%  { filter: brightness(1.12); }
+      88%  { filter: brightness(0.94); }
+      100% { filter: brightness(1.00); }
     }
 
     /* ---- FEATURES PAGE ---- */
-    #page-features { padding: 48px max(40px, 7vw); }
+    #page-features {
+      padding: 60px 40px;
+    }
     #page-features .inner { max-width: 1200px; margin: 0 auto; }
 
     .features-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 20px; }
@@ -391,7 +435,9 @@
     .feature-tag { display: inline-block; margin-top: 16px; font-size: 0.35rem; background: var(--red-dark); color: var(--red-bright); padding: 6px 10px; border: 2px solid var(--red-mid); letter-spacing: 1px; }
 
     /* ---- ABOUT PAGE ---- */
-    #page-about { padding: 48px max(40px, 7vw); }
+    #page-about {
+      padding: 60px 40px;
+    }
     #page-about .inner { max-width: 1200px; margin: 0 auto; }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 80px; }
@@ -418,7 +464,9 @@
     .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
 
     /* ---- RANKS PAGE ---- */
-    #page-ranks { padding: 48px max(40px, 7vw); }
+    #page-ranks {
+      padding: 60px 40px;
+    }
     #page-ranks .inner { max-width: 1200px; margin: 0 auto; }
 
     .ranks-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
@@ -480,7 +528,9 @@
     .perk-champion{ border-color: #00B8D4; }
 
     /* ---- STATS PAGE ---- */
-    #page-stats { padding: 48px max(40px, 7vw); }
+    #page-stats {
+      padding: 60px 40px;
+    }
     #page-stats .inner { max-width: 600px; margin: 0 auto; }
 
     .stats-search-wrap { display: flex; gap: 12px; margin: 32px 0 16px; }
@@ -597,7 +647,9 @@
     .news-text { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
 
     /* ---- LEADERBOARD PAGE ---- */
-    #page-leaderboard { padding: 48px max(40px, 7vw); }
+    #page-leaderboard {
+      padding: 60px 40px;
+    }
     #page-leaderboard .inner { max-width: 1000px; margin: 0 auto; }
 
     .lb-tabs { display: flex; gap: 0; margin: 32px 0 0; border-bottom: 3px solid var(--brown-dark); }
@@ -670,8 +722,14 @@
     @media (max-width: 600px) {
       nav ul { gap: 0; }
       nav ul a { font-size: 0.35rem; padding: 6px 8px; }
-      #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard { padding: 40px 20px; }
+      #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard { padding: 40px 16px; }
+      #page-features > .inner, #page-about > .inner, #page-ranks > .inner,
+      #page-stats > .inner, #page-leaderboard > .inner, .perks-section > .inner { padding: 28px 20px; }
       .hero-wrap { padding: 40px 20px; }
+      .torch-left  { left: 4px; }
+      .torch-right { right: 4px; }
+      .torch-img { height: 54px; width: auto; }
+      .wall-torch::before { width: 220px; height: 220px; top: -90px; }
     }
   </style>
 </head>
@@ -696,6 +754,12 @@
     <div class="nav-ip" onclick="copyIP()">COPY IP</div>
   </div>
 </nav>
+
+<!-- WALL TORCHES -->
+<div class="wall-torch torch-left  torch-top"><img class="torch-img" src="torch_nobg.png" alt=""></div>
+<div class="wall-torch torch-right torch-top"><img class="torch-img" src="torch_nobg.png" alt=""></div>
+<div class="wall-torch torch-left  torch-bot"><img class="torch-img" src="torch_nobg.png" alt=""></div>
+<div class="wall-torch torch-right torch-bot"><img class="torch-img" src="torch_nobg.png" alt=""></div>
 
 <!-- ========== HOME PAGE ========== -->
 <div class="page active" id="page-home">
@@ -794,7 +858,7 @@
 
 <!-- ========== ABOUT PAGE ========== -->
 <div class="page" id="page-about">
-  <div class="scroll-wrap"><div class="inner">
+  <div class="inner">
     <div class="about-grid">
       <div class="about-text">
         <div class="section-label">// ABOUT</div>
@@ -849,7 +913,7 @@
         </div>
       </div>
     </div>
-  </div></div><!-- end scroll-wrap -->
+  </div>
 
   <div class="page-footer" style="margin-top:80px;">
     <div class="footer-logo">
@@ -862,7 +926,7 @@
 
 <!-- ========== FEATURES PAGE ========== -->
 <div class="page" id="page-features">
-  <div class="scroll-wrap"><div class="inner">
+  <div class="inner">
     <div class="section-label">// GAMEPLAY</div>
     <h2 class="section-title">WHAT AWAITS YOU</h2>
     <p class="section-sub">Four pillars. One civilization. Your legacy starts here.</p>
@@ -898,12 +962,12 @@
         <span class="feature-tag">PARKOUR BATTLE</span>
       </div>
     </div>
-  </div></div><!-- end scroll-wrap -->
+  </div>
 </div>
 
 <!-- ========== RANKS PAGE ========== -->
 <div class="page" id="page-ranks">
-  <div class="scroll-wrap"><div class="inner">
+  <div class="inner">
     <div class="section-label">// PROGRESSION</div>
     <h2 class="section-title">RANK UP THE LADDER</h2>
     <p class="section-sub">Use a ticket to reach Pro, a key to reach Master. Keep climbing.</p>
@@ -978,12 +1042,12 @@
         </div>
       </div>
     </div>
-  </div></div><!-- end scroll-wrap -->
+  </div>
 </div>
 
 <!-- ========== STATS PAGE ========== -->
 <div class="page" id="page-stats">
-  <div class="scroll-wrap"><div class="inner">
+  <div class="inner">
     <div class="section-label">// PLAYERS</div>
     <h2 class="section-title">PLAYER STATS</h2>
     <p class="section-sub" style="margin-bottom:0;">Enter any Minecraft username to view their stats.</p>
@@ -1029,12 +1093,12 @@
       <div class="ip-value" id="serverIP" onclick="copyIP()">evbm.minehut.gg</div>
       <div class="ip-copy" onclick="copyIP()">COPY</div>
     </div>
-  </div></div><!-- end scroll-wrap -->
+  </div>
 </div>
 
 <!-- ========== LEADERBOARD PAGE ========== -->
 <div class="page" id="page-leaderboard">
-  <div class="scroll-wrap"><div class="inner">
+  <div class="inner">
     <div class="section-label">// TOP PLAYERS</div>
     <h2 class="section-title">LEADERBOARD</h2>
     <p class="section-sub">The best runners on the civilization.</p>
@@ -1059,14 +1123,8 @@
         <tbody id="lb-playtime-body"></tbody>
       </table>
     </div>
-  </div></div><!-- end scroll-wrap -->
+  </div>
 </div>
-
-<!-- TORCHES -->
-<div class="page-torch" id="torch-tl" style="top:22%;left:2.5%;">  <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
-<div class="page-torch" id="torch-tr" style="top:22%;right:2.5%;">  <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
-<div class="page-torch" id="torch-bl" style="top:68%;left:2.5%;">  <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
-<div class="page-torch" id="torch-br" style="top:68%;right:2.5%;"> <div class="torch-glow"></div><div class="torch-flame"></div><div class="torch-head"></div><div class="torch-body"></div></div>
 
 <!-- TOAST -->
 <div class="toast" id="toast">IP COPIED TO CLIPBOARD!</div>
@@ -1090,9 +1148,9 @@
     const link = document.querySelector('nav ul a[data-page="' + name + '"]');
     if (link) link.classList.add('active');
     location.hash = name;
+    document.querySelectorAll('.wall-torch').forEach(t => t.classList.toggle('visible', name !== 'home'));
     if (name === 'home') resizeFire();
     if (name === 'leaderboard') loadLeaderboard();
-    document.querySelectorAll('.page-torch').forEach(t => t.classList.toggle('show', name !== 'home'));
   }
 
   // Hash-based routing on load
