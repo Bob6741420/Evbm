@@ -371,28 +371,14 @@
     #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard {
       background-color: #1a1a1a;
       background-image:
-        /* Torch glow: top warmth */
-        radial-gradient(ellipse 80% 40% at 50% 0%,    rgba(180,90,20,0.5)  0%, transparent 60%),
-        /* Left torch ambient (2 heights) */
-        radial-gradient(ellipse 35% 42% at 0%  22%,   rgba(255,145,0,0.28) 0%, transparent 58%),
-        radial-gradient(ellipse 28% 32% at 0%  60%,   rgba(255,125,0,0.20) 0%, transparent 52%),
-        /* Right torch ambient (2 heights) */
-        radial-gradient(ellipse 35% 42% at 100% 22%,  rgba(255,145,0,0.28) 0%, transparent 58%),
-        radial-gradient(ellipse 28% 32% at 100% 60%,  rgba(255,125,0,0.20) 0%, transparent 52%),
         /* Overall dark vignette to deepen the stone */
         radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.55) 100%),
         /* Actual Minecraft stone brick texture */
         url("Screenshot 2026-04-01 201854.png");
       background-size:
         100% 100%,
-        100% 100%, 100% 100%,
-        100% 100%, 100% 100%,
-        100% 100%,
         640px auto;
       background-repeat:
-        no-repeat,
-        no-repeat, no-repeat,
-        no-repeat, no-repeat,
         no-repeat,
         repeat;
     }
@@ -924,62 +910,6 @@
       #page-features > .inner, #page-about > .inner, #page-ranks > .inner,
       #page-stats > .inner, #page-leaderboard > .inner, .perks-section > .inner { padding: 40px 24px; }
       .hero-wrap { padding: 40px 20px; }
-    }
-    /* ---- TORCH FLICKER ---- */
-    @keyframes torchFlickerA {
-      0%   { opacity: 1;    }
-      8%   { opacity: 0.55; }
-      18%  { opacity: 0.90; }
-      29%  { opacity: 0.45; }
-      39%  { opacity: 1;    }
-      50%  { opacity: 0.65; }
-      60%  { opacity: 0.40; }
-      70%  { opacity: 0.95; }
-      81%  { opacity: 0.60; }
-      91%  { opacity: 0.50; }
-      100% { opacity: 1;    }
-    }
-    @keyframes torchFlickerB {
-      0%   { opacity: 0.70; }
-      12%  { opacity: 1;    }
-      23%  { opacity: 0.45; }
-      34%  { opacity: 0.85; }
-      44%  { opacity: 0.38; }
-      54%  { opacity: 1;    }
-      63%  { opacity: 0.55; }
-      72%  { opacity: 0.90; }
-      84%  { opacity: 0.42; }
-      94%  { opacity: 1;    }
-      100% { opacity: 0.70; }
-    }
-
-    /* Upper torch glows — flicker independently */
-    #page-features::before, #page-about::before, #page-ranks::before,
-    #page-stats::before, #page-leaderboard::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 32% 38% at 0%   22%, rgba(255,150,0,0.55) 0%, transparent 56%),
-        radial-gradient(ellipse 32% 38% at 100% 22%, rgba(255,150,0,0.55) 0%, transparent 56%);
-      animation: torchFlickerA 2.9s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Lower torch glows — offset phase so they flicker out of sync */
-    #page-features::after, #page-about::after, #page-ranks::after,
-    #page-stats::after, #page-leaderboard::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 24% 30% at 0%   64%, rgba(255,120,0,0.40) 0%, transparent 52%),
-        radial-gradient(ellipse 24% 30% at 100% 64%, rgba(255,120,0,0.40) 0%, transparent 52%);
-      animation: torchFlickerB 3.4s ease-in-out infinite;
-      animation-delay: -1.7s;
-      pointer-events: none;
-      z-index: 1;
     }
 
     /* ---- REVEAL ANIMATIONS ---- */
