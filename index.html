@@ -938,9 +938,33 @@
     .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: 320ms; }
     .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay: 400ms; }
 
+    /* ---- LOADING SCREEN ---- */
+    #loading-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg2);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      transition: opacity 0.5s ease;
+    }
+    #loading-screen.fade-out { opacity: 0; pointer-events: none; }
+    .loading-logo { width: 80px; height: 80px; image-rendering: pixelated; animation: loadingBob 1s ease-in-out infinite; }
+    @keyframes loadingBob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .loading-title { font-family: 'Press Start 2P', monospace; font-size: 1rem; color: var(--gold); letter-spacing: 2px; }
+    .loading-bar-wrap { width: 200px; height: 12px; border: 3px solid var(--brown-mid); background: var(--brown-dark); }
+    .loading-bar { height: 100%; width: 0%; background: var(--gold); animation: loadingFill 1.5s ease-out forwards; }
+    @keyframes loadingFill { to { width: 100%; } }
+
   </style>
 </head>
 <body>
+
+<div id="loading-screen">
+  <img class="loading-logo" src="logo_transparent.png" alt="EVBM">
+  <div class="loading-title">EVBM PK CIV</div>
+  <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1622,6 +1646,15 @@
   }
   fetchServerStatus();
   setInterval(fetchServerStatus, 60000);
+
+  // ---- Loading screen ----
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const ls = document.getElementById('loading-screen');
+      ls.classList.add('fade-out');
+      setTimeout(() => ls.remove(), 500);
+    }, 1500);
+  });
 
   // ---- Scroll reveal ----
   (function() {
