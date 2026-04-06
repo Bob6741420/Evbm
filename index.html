@@ -559,6 +559,12 @@
     .rank-legend:hover   { box-shadow: 0 0 0 2px var(--bg), 0 0 16px rgba(255,96,48,0.7), 0 0 32px rgba(255,96,48,0.3); }
     .rank-captain:hover  { box-shadow: 0 0 0 2px var(--bg), 0 0 16px rgba(255,104,104,0.7), 0 0 32px rgba(255,104,104,0.3); }
     .rank-champion:hover { box-shadow: 0 0 0 2px var(--bg), 0 0 24px rgba(111,240,255,0.9), 0 0 48px rgba(111,240,255,0.4); }
+    .rank-god        { color: #4AFF6A; border-color: rgba(30,180,60,0.6); background: rgba(0,60,15,0.3); text-shadow: 0 0 10px rgba(74,255,106,0.6); animation: godPulse 2s ease-in-out infinite; }
+    @keyframes godPulse {
+      0%, 100% { box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12), 0 0 8px rgba(74,255,106,0.3); }
+      50%       { box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12), 0 0 20px rgba(74,255,106,0.8), 0 0 40px rgba(74,255,106,0.3); }
+    }
+    .rank-god:hover  { box-shadow: 0 0 0 2px var(--bg), 0 0 24px rgba(74,255,106,0.9), 0 0 48px rgba(74,255,106,0.4); }
 
     .ranks-desc { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--gray); margin-top: 24px; line-height: 1.7; }
 
@@ -1488,7 +1494,7 @@
   // ---- Supabase ----
   const SUPABASE_URL  = 'https://jmetrlpdbkvwntnnasof.supabase.co';
   const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptZXRybHBkYmt2d250bm5hc29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjE4OTcsImV4cCI6MjA5MDg5Nzg5N30.rX-ZSYDIo2drQjjYGBwoV-M_Za5HPWofZ_A7RWdpdCY';
-  const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION' };
+  const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION', god:'GOD' };
 
   const usernameInput = document.getElementById('mc-username-input');
   const lookupBtn     = document.getElementById('lookup-btn');
