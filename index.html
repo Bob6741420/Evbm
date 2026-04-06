@@ -1531,7 +1531,7 @@
 
   function renderStats(username, uuid, f) {
     statsProfile.style.display = 'block';
-    playerAvatar.src = uuid ? `https://crafatar.com/avatars/${uuid}?size=80&overlay=true` : '';
+    playerAvatar.src = uuid ? `https://mc-heads.net/avatar/${uuid}/80` : '';
     playerNameEl.textContent = username;
     const rankKey = (f.rank || 'noob').toLowerCase();
     playerRankEl.textContent = RANK_LABELS[rankKey] || f.rank || 'NOOB';
@@ -1589,7 +1589,7 @@
       const rankKey = (p.rank || 'noob').toLowerCase();
       const rankLabel = RANK_LABELS[rankKey] || p.rank || 'NOOB';
       const uuid = p.uuid || '';
-      const avatar = uuid ? `https://crafatar.com/avatars/${uuid}?size=32&overlay=true` : '';
+      const avatar = uuid ? `https://mc-heads.net/avatar/${uuid}/32` : '';
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
