@@ -1276,7 +1276,7 @@
       <div class="stats-grid reveal-stagger">
         <div class="stat-box">
           <span class="stat-box-num" id="stat-playtime">--</span>
-          <span class="stat-box-label">PLAYTIME (MIN)</span>
+          <span class="stat-box-label">PLAYTIME</span>
         </div>
         <div class="stat-box">
           <span class="stat-box-num" id="stat-jumps">--</span>
@@ -1536,7 +1536,7 @@
     const rankKey = (f.rank || 'noob').toLowerCase();
     playerRankEl.textContent = RANK_LABELS[rankKey] || f.rank || 'NOOB';
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
-    document.getElementById('stat-playtime').textContent = (f.playtime || 0).toLocaleString();
+    document.getElementById('stat-playtime').textContent = Math.floor((f.playtime || 0) / 60) + ' MIN';
     document.getElementById('stat-jumps').textContent    = (f.jumps  || 0).toLocaleString();
     document.getElementById('stat-coins').textContent    = (f.coins  || 0).toLocaleString();
     document.getElementById('stat-rank-num').textContent = f.rank || '--';
@@ -1573,7 +1573,7 @@
 
       lbData = data.filter(r => r.username);
       renderLb('jumps', 'jumps', v => (v || 0).toLocaleString() + ' JMP');
-      renderLb('playtime', 'playtime', v => (v || 0).toLocaleString() + ' MIN');
+      renderLb('playtime', 'playtime', v => Math.floor((v||0)/60) + ' MIN');
       lbLoaded = true;
     } catch(e) {
       document.getElementById('lb-jumps-loading').textContent = 'Failed to load.';
