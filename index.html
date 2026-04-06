@@ -1485,10 +1485,9 @@
   }
   requestAnimationFrame(drawFire);
 
-  // ---- Airtable ----
-  const AIRTABLE_TOKEN   = 'patpAbTIZAn653X4z.bd16c3aca7caa386b94ae94fb5f98ca8c3bb56da18b71a2783e8c99cfa933695';
-  const AIRTABLE_BASE_ID = 'appAfsgy3OfESbXcT';
-  const AIRTABLE_TABLE   = 'Players';
+  // ---- Supabase ----
+  const SUPABASE_URL  = 'https://jmetrlpdbkvwntnnasof.supabase.co';
+  const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptZXRybHBkYmt2d250bm5hc29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjE4OTcsImV4cCI6MjA5MDg5Nzg5N30.rX-ZSYDIo2drQjjYGBwoV-M_Za5HPWofZ_A7RWdpdCY';
   const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION' };
 
   const usernameInput = document.getElementById('mc-username-input');
@@ -1506,18 +1505,16 @@
     lookupBtn.textContent = 'LOOKING UP...';
     loginError.textContent = '';
     try {
-      const formula = `LOWER({Username})=LOWER("${name.replace(/"/g, '')}")`;
-      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}?filterByFormula=${encodeURIComponent(formula)}`;
-      const res  = await fetch(url, { headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` } });
+      const url = `${SUPABASE_URL}/rest/v1/players?username=ilike.${encodeURIComponent(name)}&limit=1`;
+      const res  = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } });
       const data = await res.json();
-      const rec  = data.records && data.records[0];
+      const rec  = data && data[0];
       if (!rec) { loginError.textContent = 'Player not found on the server.'; return; }
-      const f        = rec.fields;
-      const username = f.Username || name;
-      const uuid     = f.UUID || '';
+      const username = rec.username || name;
+      const uuid     = rec.uuid || '';
       localStorage.setItem('mc_username', username);
       if (uuid) localStorage.setItem('mc_uuid', uuid);
-      renderStats(username, uuid, f);
+      renderStats(username, uuid, rec);
     } catch {
       loginError.textContent = 'Lookup failed. Try again.';
     } finally {
@@ -1530,13 +1527,13 @@
     statsProfile.style.display = 'block';
     playerAvatar.src = uuid ? `https://crafatar.com/avatars/${uuid}?size=80&overlay=true` : '';
     playerNameEl.textContent = username;
-    const rankKey = (f.Rank || 'noob').toLowerCase();
-    playerRankEl.textContent = RANK_LABELS[rankKey] || f.Rank || 'NOOB';
+    const rankKey = (f.rank || 'noob').toLowerCase();
+    playerRankEl.textContent = RANK_LABELS[rankKey] || f.rank || 'NOOB';
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
-    document.getElementById('stat-playtime').textContent = (f.Playtime || 0).toLocaleString();
-    document.getElementById('stat-jumps').textContent    = (f.Jumps  || 0).toLocaleString();
-    document.getElementById('stat-coins').textContent    = (f.Coins  || 0).toLocaleString();
-    document.getElementById('stat-rank-num').textContent = f.Rank || '--';
+    document.getElementById('stat-playtime').textContent = (f.playtime || 0).toLocaleString();
+    document.getElementById('stat-jumps').textContent    = (f.jumps  || 0).toLocaleString();
+    document.getElementById('stat-coins').textContent    = (f.coins  || 0).toLocaleString();
+    document.getElementById('stat-rank-num').textContent = f.rank || '--';
   }
 
   function switchPlayer() {
@@ -1564,18 +1561,13 @@
   async function loadLeaderboard() {
     if (lbLoaded) return;
     try {
-      let records = [], offset = '';
-      do {
-        const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}?pageSize=100${offset ? '&offset=' + offset : ''}`;
-        const res = await fetch(url, { headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` } });
-        const data = await res.json();
-        records = records.concat(data.records || []);
-        offset = data.offset || '';
-      } while (offset);
+      const url = `${SUPABASE_URL}/rest/v1/players?select=*&limit=1000`;
+      const res = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } });
+      const data = await res.json();
 
-      lbData = records.map(r => r.fields).filter(f => f.Username);
-      renderLb('jumps', 'Jumps', v => (v || 0).toLocaleString() + ' JMP');
-      renderLb('playtime', 'Playtime', v => (v || 0).toLocaleString() + ' MIN');
+      lbData = data.filter(r => r.username);
+      renderLb('jumps', 'jumps', v => (v || 0).toLocaleString() + ' JMP');
+      renderLb('playtime', 'playtime', v => (v || 0).toLocaleString() + ' MIN');
       lbLoaded = true;
     } catch(e) {
       document.getElementById('lb-jumps-loading').textContent = 'Failed to load.';
@@ -1588,13 +1580,13 @@
     const tbody = document.getElementById('lb-' + key + '-body');
     tbody.innerHTML = sorted.map((p, i) => {
       const numClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-      const rankKey = (p.Rank || 'noob').toLowerCase();
-      const rankLabel = RANK_LABELS[rankKey] || p.Rank || 'NOOB';
-      const uuid = p.UUID || '';
+      const rankKey = (p.rank || 'noob').toLowerCase();
+      const rankLabel = RANK_LABELS[rankKey] || p.rank || 'NOOB';
+      const uuid = p.uuid || '';
       const avatar = uuid ? `https://crafatar.com/avatars/${uuid}?size=32&overlay=true` : '';
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
-        <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.Username}</span></div></td>
+        <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
         <td><span class="rank-badge rank-${rankKey}" style="font-size:0.35rem;padding:6px 10px;">${rankLabel}</span></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
