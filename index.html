@@ -1536,7 +1536,7 @@
     const rankKey = (f.rank || 'noob').toLowerCase();
     playerRankEl.textContent = RANK_LABELS[rankKey] || f.rank || 'NOOB';
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
-    document.getElementById('stat-playtime').textContent = (f.playtime || 0) + ' MIN';
+    const _pm = f.playtime || 0; document.getElementById('stat-playtime').textContent = Math.floor(_pm/60) + 'h ' + (_pm%60) + 'm';
     document.getElementById('stat-jumps').textContent    = (f.jumps  || 0).toLocaleString();
     document.getElementById('stat-coins').textContent    = (f.coins  || 0).toLocaleString();
     document.getElementById('stat-rank-num').textContent = f.rank || '--';
@@ -1573,7 +1573,7 @@
 
       lbData = data.filter(r => r.username);
       renderLb('jumps', 'jumps', v => (v || 0).toLocaleString() + ' JMP');
-      renderLb('playtime', 'playtime', v => (v||0) + ' MIN');
+      renderLb('playtime', 'playtime', v => Math.floor((v||0)/60) + 'h ' + ((v||0)%60) + 'm');
       lbLoaded = true;
     } catch(e) {
       document.getElementById('lb-jumps-loading').textContent = 'Failed to load.';
