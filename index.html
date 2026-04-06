@@ -946,11 +946,7 @@
       transition: opacity 0.5s ease;
     }
     #loading-screen.fade-out { opacity: 0; pointer-events: none; }
-    .loading-logo { width: 80px; height: 80px; image-rendering: pixelated; animation: loadingBob 1s ease-in-out infinite; }
-    @keyframes loadingBob {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-10px); }
-    }
+    .loading-logo { width: 160px; height: 160px; image-rendering: pixelated; }
     .loading-title { font-family: 'Press Start 2P', monospace; font-size: 1rem; color: var(--gold); letter-spacing: 2px; }
     .loading-bar-wrap { width: 200px; height: 12px; border: 3px solid var(--brown-mid); background: var(--brown-dark); }
     .loading-bar { height: 100%; width: 0%; background: var(--gold); animation: loadingFill 1.5s ease-out forwards; }
