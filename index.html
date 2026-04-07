@@ -1629,7 +1629,7 @@
   const playerCountBadge = document.getElementById('player-count-badge');
   async function fetchServerStatus() {
     try {
-      const res  = await fetch('https://api.minehut.com/server/evbm');
+      const res  = await fetch('https://api.minehut.com/server/Evbm?byName=true');
       const data = await res.json();
       const srv  = data.server;
       if (srv && srv.online) {
