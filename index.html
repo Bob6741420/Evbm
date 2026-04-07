@@ -444,52 +444,23 @@
     }
     #page-features .inner { max-width: 1200px; margin: 0 auto; }
 
-    .features-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 20px; }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
     @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
-
     .feature-card {
       background: linear-gradient(160deg, rgba(25,22,16,0.98) 0%, rgba(14,12,9,0.98) 100%);
-      border: 1px solid rgba(92,58,30,0.5);
-      border-top-color: rgba(139,94,60,0.4);
-      padding: 36px 28px;
-      position: relative;
-      cursor: default;
+      border: 1px solid rgba(92,58,30,0.5); border-top-color: rgba(139,94,60,0.4);
+      padding: 36px 28px; position: relative; cursor: default;
       box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(196,132,90,0.08);
-      border-radius: 3px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; overflow: hidden;
     }
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(245,212,121,0.6) 50%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .feature-card:hover { transform: translateY(-5px); border-color: rgba(139,94,60,0.7); box-shadow: 0 12px 36px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,94,60,0.2), inset 0 1px 0 rgba(196,132,90,0.12); }
+    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(245,212,121,0.6) 50%, transparent 100%); opacity: 0; transition: opacity 0.3s; }
+    .feature-card:hover { transform: translateY(-5px); border-color: rgba(139,94,60,0.7); box-shadow: 0 12px 36px rgba(0,0,0,0.6), inset 0 1px 0 rgba(196,132,90,0.12); }
     .feature-card:hover::before { opacity: 1; }
-    .feature-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,212,121,0.05) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
-      pointer-events: none;
-    }
-    .feature-card:hover::after { opacity: 1; }
     .feature-icon { width: 56px; height: 56px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
-    .icon-ticket { background: var(--gold); width: 48px; height: 48px; clip-path: polygon(0 20%, 20% 20%, 20% 0, 80% 0, 80% 20%, 100% 20%, 100% 80%, 80% 80%, 80% 100%, 20% 100%, 20% 80%, 0 80%); box-shadow: 0 0 12px rgba(245,212,121,0.5); }
     .icon-rank { width: 48px; height: 48px; background: var(--red-light); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); box-shadow: 0 0 12px rgba(224,85,85,0.5); }
-    .icon-course { width: 48px; height: 12px; background: var(--brown-light); position: relative; box-shadow: 0 0 12px rgba(196,132,90,0.5); margin-top: 18px; }
-    .icon-course::before, .icon-course::after { content: ''; position: absolute; width: 12px; height: 24px; background: var(--brown-light); bottom: 0; }
-    .icon-course::before { left: 0; } .icon-course::after { right: 0; }
     .icon-battle { width: 44px; height: 44px; background: var(--red-bright); clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); box-shadow: 0 0 12px rgba(255,112,112,0.5); }
     .feature-card h3 { font-size: 0.65rem; color: var(--gold); margin-bottom: 14px; letter-spacing: 1px; }
     .feature-card p  { font-family: 'Inter', sans-serif; font-size: 0.875rem; color: #aaa; line-height: 1.7; }
-    .feature-tag { display: inline-block; margin-top: 16px; font-family: 'Inter', sans-serif; font-size: 0.75rem; background: rgba(92,26,26,0.6); color: var(--red-bright); padding: 5px 10px; border: 1px solid rgba(184,50,50,0.5); letter-spacing: 1px; border-radius: 2px; font-weight: 600; }
 
     /* ---- ABOUT PAGE ---- */
     #page-about {
@@ -949,7 +920,7 @@
     .loading-logo { width: 160px; height: 160px; image-rendering: pixelated; animation: loadingBob 1s ease-in-out infinite; }
     @keyframes loadingBob {
       0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-10px); }
+      50%       { transform: translateY(-4px); }
     }
     .loading-title { font-family: 'Press Start 2P', monospace; font-size: 1rem; color: var(--gold); letter-spacing: 2px; }
     .loading-bar-wrap { width: 200px; height: 12px; border: 3px solid var(--brown-mid); background: var(--brown-dark); }
@@ -1162,11 +1133,6 @@
     <p class="section-sub">Four pillars. One civilization. Your legacy starts here.</p>
     <div class="features-grid reveal-stagger">
       <div class="feature-card">
-        <div class="feature-icon"><div class="icon-ticket"></div></div>
-        <h3>TICKETS &amp; KEYS</h3>
-        <p>Complete parkour courses to collect tickets and keys. Use a ticket to rank up to Pro, or a key to rank up to Master.</p>
-      </div>
-      <div class="feature-card">
         <div class="feature-icon"><div class="icon-rank"></div></div>
         <h3>RANK UP</h3>
         <p>Start as a newcomer and grind your way to legend. Each rank unlocks new areas and exclusive perks. The climb is the game.</p>
@@ -1177,7 +1143,7 @@
         <p>Go head-to-head in parkour battles against other players. Take turns attempting jumps — miss and you lose a life. Last one standing wins.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="font-size:2rem;line-height:1;">&#127942;</div>
+        <div class="feature-icon" style="font-size:2rem;line-height:1;">&#127941;</div>
         <h3>ACHIEVEMENTS</h3>
         <p>Track your milestones as you progress through the civilization. Every accomplishment is recorded — how far can you go?</p>
       </div>
