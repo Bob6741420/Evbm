@@ -338,7 +338,11 @@
 
     /* ---- HOW TO JOIN (home) ---- */
     .how-wrap {
-      background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(92,58,30,0.06) 15px, rgba(92,58,30,0.06) 16px), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(92,58,30,0.15) 0%, transparent 70%), rgba(15,14,11,0.35);
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(58,8,0,0.8) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(92,26,26,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 100% 50%, rgba(92,26,26,0.3) 0%, transparent 60%),
+        #0a0510;
       padding: 80px 40px;
       position: relative;
       z-index: 1;
@@ -721,7 +725,11 @@
 
     /* ---- NEWS ---- */
     .news-wrap {
-      background: repeating-linear-gradient(0deg, transparent 0px, transparent 15px, rgba(92,58,30,0.04) 15px, rgba(92,58,30,0.04) 16px), var(--bg2);
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(58,8,0,0.8) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 0% 50%, rgba(92,26,26,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 100% 50%, rgba(92,26,26,0.25) 0%, transparent 60%),
+        #0a0510;
       padding: 80px 40px;
     }
     .news-wrap .inner { max-width: 1200px; margin: 0 auto; }
