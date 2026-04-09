@@ -347,7 +347,8 @@
       position: relative;
       z-index: 1;
     }
-    .how-wrap .inner { max-width: 1200px; margin: 0 auto; }
+    .how-wrap .inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .news-wrap .inner { position: relative; z-index: 1; }
 
     /* ---- SECTION SHARED ---- */
 
@@ -373,6 +374,7 @@
 
     /* ---- SHARED PAGE BACKGROUND ---- */
     #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard {
+      overflow: hidden;
       background-color: #1a1a1a;
       background-image:
         /* Overall dark vignette to deepen the stone */
@@ -935,6 +937,61 @@
     .loading-bar-wrap { width: 200px; height: 12px; border: 3px solid var(--brown-mid); background: var(--brown-dark); }
     .loading-bar { height: 100%; width: 0%; background: var(--gold); animation: loadingFill 1.5s ease-out forwards; }
     @keyframes loadingFill { to { width: 100%; } }
+
+    /* ---- BACKGROUND ANIMATIONS ---- */
+    @keyframes orbDriftA {
+      0%   { transform: translate(0%, 0%);    opacity: 0.7; }
+      33%  { transform: translate(15%, -20%); opacity: 1;   }
+      66%  { transform: translate(-10%, 15%); opacity: 0.6; }
+      100% { transform: translate(0%, 0%);    opacity: 0.7; }
+    }
+    @keyframes orbDriftB {
+      0%   { transform: translate(0%, 0%);    opacity: 0.6; }
+      33%  { transform: translate(-20%, 15%); opacity: 1;   }
+      66%  { transform: translate(10%, -10%); opacity: 0.7; }
+      100% { transform: translate(0%, 0%);    opacity: 0.6; }
+    }
+    @keyframes stoneSweep {
+      0%   { transform: translateX(-150%) skewX(-15deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateX(400%) skewX(-15deg);  opacity: 0; }
+    }
+
+    .how-wrap { overflow: hidden; }
+    .how-wrap::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 60% 60% at 20% 60%, rgba(245,212,121,0.35) 0%, transparent 70%);
+      animation: orbDriftA 12s ease-in-out infinite;
+    }
+    .how-wrap::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 50% 50% at 80% 40%, rgba(184,50,50,0.45) 0%, transparent 65%);
+      animation: orbDriftB 9s ease-in-out infinite;
+    }
+
+    .news-wrap { position: relative; overflow: hidden; }
+    .news-wrap::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 60% 60% at 75% 65%, rgba(245,212,121,0.35) 0%, transparent 70%);
+      animation: orbDriftA 10s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+    .news-wrap::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 50% 50% at 25% 35%, rgba(184,50,50,0.45) 0%, transparent 65%);
+      animation: orbDriftB 14s ease-in-out infinite;
+      animation-delay: -7s;
+    }
+
+    #page-features::before, #page-about::before,
+    #page-ranks::before, #page-stats::before, #page-leaderboard::before {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 35%;
+      pointer-events: none; z-index: 1;
+      background: linear-gradient(90deg, transparent 0%, rgba(245,212,121,0.05) 35%, rgba(245,212,121,0.13) 50%, rgba(245,212,121,0.05) 65%, transparent 100%);
+      animation: stoneSweep 20s ease-in-out infinite;
+      animation-delay: -8s;
+    }
 
   </style>
 </head>
