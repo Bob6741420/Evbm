@@ -958,37 +958,13 @@
       100% { transform: translateX(400%) skewX(-15deg);  opacity: 0; }
     }
 
-    .how-wrap { overflow: hidden; }
-    .how-wrap::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse 60% 60% at 20% 60%, rgba(245,212,121,0.35) 0%, transparent 70%);
-      animation: orbDriftA 12s ease-in-out infinite;
-    }
-    .how-wrap::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse 50% 50% at 80% 40%, rgba(184,50,50,0.45) 0%, transparent 65%);
-      animation: orbDriftB 9s ease-in-out infinite;
-    }
 
-    .news-wrap { position: relative; overflow: hidden; }
-    .news-wrap::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse 60% 60% at 75% 65%, rgba(245,212,121,0.35) 0%, transparent 70%);
-      animation: orbDriftA 10s ease-in-out infinite;
-      animation-delay: -4s;
-    }
-    .news-wrap::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse 50% 50% at 25% 35%, rgba(184,50,50,0.45) 0%, transparent 65%);
-      animation: orbDriftB 14s ease-in-out infinite;
-      animation-delay: -7s;
-    }
 
     #page-features::before, #page-about::before,
     #page-ranks::before, #page-stats::before, #page-leaderboard::before {
       content: ''; position: absolute; top: 0; bottom: 0; width: 35%;
       pointer-events: none; z-index: 1;
-      background: linear-gradient(90deg, transparent 0%, rgba(245,212,121,0.05) 35%, rgba(245,212,121,0.13) 50%, rgba(245,212,121,0.05) 65%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(245,212,121,0.02) 20%, rgba(245,212,121,0.08) 40%, rgba(245,212,121,0.11) 50%, rgba(245,212,121,0.08) 60%, rgba(245,212,121,0.02) 80%, transparent 100%);
       animation: stoneSweep 20s ease-in-out infinite;
       animation-delay: -8s;
     }
