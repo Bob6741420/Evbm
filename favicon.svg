@@ -1,31 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#0A0600"/>
-
-  <!-- E (top-left cell 0–15 x, 0–15 y) -->
-  <rect x="5" y="3"  width="6" height="2" fill="#F0B830"/>
-  <rect x="5" y="3"  width="2" height="10" fill="#F0B830"/>
-  <rect x="5" y="7"  width="4" height="2" fill="#F0B830"/>
-  <rect x="5" y="11" width="6" height="2" fill="#F0B830"/>
-
-  <!-- V (top-right cell 16–31 x, 0–15 y) -->
-  <rect x="19" y="3"  width="2" height="6" fill="#C8973A"/>
-  <rect x="27" y="3"  width="2" height="6" fill="#C8973A"/>
-  <rect x="21" y="7"  width="2" height="2" fill="#C8973A"/>
-  <rect x="25" y="7"  width="2" height="2" fill="#C8973A"/>
-  <rect x="23" y="9"  width="2" height="4" fill="#C8973A"/>
-
-  <!-- B (bottom-left cell 0–15 x, 16–31 y) -->
-  <rect x="5" y="19" width="2" height="10" fill="#C8973A"/>
-  <rect x="5" y="19" width="4" height="2"  fill="#C8973A"/>
-  <rect x="9" y="21" width="2" height="2"  fill="#C8973A"/>
-  <rect x="5" y="23" width="4" height="2"  fill="#C8973A"/>
-  <rect x="9" y="25" width="2" height="2"  fill="#C8973A"/>
-  <rect x="5" y="27" width="4" height="2"  fill="#C8973A"/>
-
-  <!-- M (bottom-right cell 16–31 x, 16–31 y) -->
-  <rect x="18" y="19" width="2" height="10" fill="#F0B830"/>
-  <rect x="28" y="19" width="2" height="10" fill="#F0B830"/>
-  <rect x="20" y="21" width="2" height="2"  fill="#F0B830"/>
-  <rect x="26" y="21" width="2" height="2"  fill="#F0B830"/>
-  <rect x="22" y="23" width="4" height="2"  fill="#F0B830"/>
+  <rect width="32" height="32" rx="4" fill="#0A0600"/>
+  <!-- Torch stick -->
+  <rect x="14" y="19" width="4" height="11" fill="#7A4A1E"/>
+  <!-- Flame outer -->
+  <path d="M10 19 C10 11 13 7 16 2 C19 7 22 11 22 19Z" fill="#F0B830"/>
+  <!-- Flame mid -->
+  <path d="M13 19 C13 13 15 10 16 6 C17 10 19 13 19 19Z" fill="#FF5500"/>
+  <!-- Flame core -->
+  <path d="M15 19 C15 15 15.5 12 16 10 C16.5 12 17 15 17 19Z" fill="#FFF0A0"/>
 </svg>
