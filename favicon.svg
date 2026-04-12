@@ -1,7 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#0A0600"/>
-  <!-- M silhouette: two outer legs + V meeting in the middle -->
-  <polygon
-    points="2,30 2,3 8,3 16,17 24,3 30,3 30,30 24,30 24,10 16,23 8,10 8,30"
-    fill="#F0B830"/>
+  <rect width="32" height="32" rx="3" fill="#0A0600"/>
+
+  <!-- Pixel M — exact W shape flipped vertically, website gold -->
+  <!-- Row 0 (top): outer leg pixels -->
+  <rect x="1"  y="1"  width="6" height="6" fill="#F0B830"/>
+  <rect x="25" y="1"  width="6" height="6" fill="#F0B830"/>
+  <!-- Row 1: legs + one step inward on each side -->
+  <rect x="1"  y="7"  width="6" height="6" fill="#F0B830"/>
+  <rect x="7"  y="7"  width="6" height="6" fill="#F0B830"/>
+  <rect x="19" y="7"  width="6" height="6" fill="#F0B830"/>
+  <rect x="25" y="7"  width="6" height="6" fill="#F0B830"/>
+  <!-- Row 2: legs + V tip meets in centre -->
+  <rect x="1"  y="13" width="6" height="6" fill="#F0B830"/>
+  <rect x="13" y="13" width="6" height="6" fill="#F0B830"/>
+  <rect x="25" y="13" width="6" height="6" fill="#F0B830"/>
+  <!-- Rows 3–4: just legs -->
+  <rect x="1"  y="19" width="6" height="6" fill="#F0B830"/>
+  <rect x="25" y="19" width="6" height="6" fill="#F0B830"/>
+  <rect x="1"  y="25" width="6" height="6" fill="#F0B830"/>
+  <rect x="25" y="25" width="6" height="6" fill="#F0B830"/>
 </svg>
