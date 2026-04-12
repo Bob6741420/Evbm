@@ -1,22 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="3" fill="#0A0600"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#0A0600"/>
 
-  <!-- Pixel M — exact W shape flipped vertically, website gold -->
-  <!-- Row 0 (top): outer leg pixels -->
-  <rect x="1"  y="1"  width="6" height="6" fill="#F0B830"/>
-  <rect x="25" y="1"  width="6" height="6" fill="#F0B830"/>
-  <!-- Row 1: legs + one step inward on each side -->
-  <rect x="1"  y="7"  width="6" height="6" fill="#F0B830"/>
-  <rect x="7"  y="7"  width="6" height="6" fill="#F0B830"/>
-  <rect x="19" y="7"  width="6" height="6" fill="#F0B830"/>
-  <rect x="25" y="7"  width="6" height="6" fill="#F0B830"/>
-  <!-- Row 2: legs + V tip meets in centre -->
-  <rect x="1"  y="13" width="6" height="6" fill="#F0B830"/>
-  <rect x="13" y="13" width="6" height="6" fill="#F0B830"/>
-  <rect x="25" y="13" width="6" height="6" fill="#F0B830"/>
-  <!-- Rows 3–4: just legs -->
-  <rect x="1"  y="19" width="6" height="6" fill="#F0B830"/>
-  <rect x="25" y="19" width="6" height="6" fill="#F0B830"/>
-  <rect x="1"  y="25" width="6" height="6" fill="#F0B830"/>
-  <rect x="25" y="25" width="6" height="6" fill="#F0B830"/>
+  <!-- Boot body -->
+  <polygon points="10,6 24,6 24,38 58,38 58,54 10,54" fill="#3DCCE0"/>
+
+  <!-- Cuff opening (hollow) -->
+  <rect x="14" y="6" width="6" height="28" fill="#0A0600"/>
+
+  <!-- Sole (darker) -->
+  <rect x="10" y="50" width="48" height="4" fill="#1A8899"/>
+
+  <!-- Highlights -->
+  <rect x="10" y="6"  width="2" height="32" fill="#7AEEFF" opacity="0.5"/>
+  <rect x="10" y="38" width="48" height="2" fill="#7AEEFF" opacity="0.4"/>
+
+  <!-- Pixel outline -->
+  <polygon points="10,6 24,6 24,38 58,38 58,54 10,54"
+           fill="none" stroke="#1A6B7A" stroke-width="1.5" stroke-linejoin="round"/>
 </svg>
