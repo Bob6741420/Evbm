@@ -595,6 +595,8 @@
       overflow: hidden;
     }
     .perk-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,94,60,0.3); border-color: rgba(139,94,60,0.6); }
+    .perk-boot-img { display: block; width: 64px; height: 64px; image-rendering: pixelated; margin: 0 auto 12px; }
+    .rank-boot-icon { width: 20px; height: 20px; image-rendering: pixelated; vertical-align: middle; margin-right: 5px; }
     .perk-rank-label { font-size: 0.55rem; letter-spacing: 2px; margin-bottom: 14px; display: block; }
     .perk-list { list-style: none; padding: 0; }
     .perk-list li { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--gray); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5; }
@@ -1331,6 +1333,7 @@
       <p class="section-sub">Every rank opens new doors. Here's what's waiting for you.</p>
       <div class="perks-grid reveal-stagger">
         <div class="perk-card perk-noob">
+          <img class="perk-boot-img" src="boots/noob.png" alt="Leather Boots">
           <span class="perk-rank-label">NOOB</span>
           <ul class="perk-list">
             <li>When you die, you go to prison</li>
@@ -1339,6 +1342,7 @@
           </ul>
         </div>
         <div class="perk-card perk-pro">
+          <img class="perk-boot-img" src="boots/pro.png" alt="Iron Boots">
           <span class="perk-rank-label">PRO</span>
           <ul class="perk-list">
             <li>When you die, you rank down</li>
@@ -1350,6 +1354,7 @@
           </ul>
         </div>
         <div class="perk-card perk-master">
+          <img class="perk-boot-img" src="boots/master.png" alt="Gold Boots">
           <span class="perk-rank-label">MASTER</span>
           <ul class="perk-list">
             <li>When you die, you become Pro</li>
@@ -1360,6 +1365,7 @@
           </ul>
         </div>
         <div class="perk-card perk-champion">
+          <img class="perk-boot-img" src="boots/champion.png" alt="Diamond Boots">
           <span class="perk-rank-label">CHAMPION</span>
           <ul class="perk-list">
             <li>No weekly battle quota</li>
@@ -1664,6 +1670,7 @@
   const SUPABASE_URL  = 'https://jmetrlpdbkvwntnnasof.supabase.co';
   const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptZXRybHBkYmt2d250bm5hc29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjE4OTcsImV4cCI6MjA5MDg5Nzg5N30.rX-ZSYDIo2drQjjYGBwoV-M_Za5HPWofZ_A7RWdpdCY';
   const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION', god:'GOD' };
+  const BOOT_IMGS   = { noob:'boots/noob.png', pro:'boots/pro.png', master:'boots/master.png', champion:'boots/champion.png', god:'boots/god.png' };
 
   const usernameInput = document.getElementById('mc-username-input');
   const lookupBtn     = document.getElementById('lookup-btn');
@@ -1703,7 +1710,7 @@
     playerAvatar.src = uuid ? `https://mc-heads.net/avatar/${uuid}/80` : '';
     playerNameEl.textContent = username;
     const rankKey = (f.rank || 'noob').toLowerCase();
-    playerRankEl.textContent = RANK_LABELS[rankKey] || f.rank || 'NOOB';
+    playerRankEl.innerHTML   = `${BOOT_IMGS[rankKey] ? `<img class="rank-boot-icon" src="${BOOT_IMGS[rankKey]}" alt="">` : ''}${RANK_LABELS[rankKey] || f.rank || 'NOOB'}`;
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
     const _pm = f.playtime || 0; document.getElementById('stat-playtime').textContent = Math.floor(_pm/60) + 'h ' + (_pm%60) + 'm';
     document.getElementById('stat-jumps').textContent    = (f.jumps  || 0).toLocaleString();
@@ -1762,7 +1769,7 @@
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
-        <td><span class="rank-badge rank-${rankKey}" style="font-size:0.35rem;padding:6px 10px;">${rankLabel}</span></td>
+        <td><span class="rank-badge rank-${rankKey}" style="font-size:0.35rem;padding:6px 10px;">${BOOT_IMGS[rankKey] ? `<img class="rank-boot-icon" src="${BOOT_IMGS[rankKey]}" alt="">` : ''}${rankLabel}</span></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
     }).join('');
