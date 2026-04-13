@@ -551,6 +551,9 @@
       letter-spacing: 2px;
       position: relative;
       overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
       border-radius: 2px;
@@ -597,7 +600,7 @@
     }
     .perk-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,94,60,0.3); border-color: rgba(139,94,60,0.6); }
     .perk-boot-img { display: block; width: 64px; height: 64px; image-rendering: pixelated; margin: 0 auto 12px; }
-    .rank-boot-icon { width: 20px; height: 20px; image-rendering: pixelated; vertical-align: middle; margin-right: 5px; }
+    .rank-boot-icon { width: 22px; height: 22px; image-rendering: pixelated; flex-shrink: 0; }
     .perk-rank-label { font-size: 0.55rem; letter-spacing: 2px; margin-bottom: 14px; display: block; }
     .perk-list { list-style: none; padding: 0; }
     .perk-list li { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--gray); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5; }
@@ -1770,7 +1773,7 @@
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
-        <td><span class="rank-badge rank-${rankKey}" style="font-size:0.35rem;padding:6px 10px;">${BOOT_IMGS[rankKey] ? `<img class="rank-boot-icon" src="${BOOT_IMGS[rankKey]}" alt="">` : ''}${rankLabel}</span></td>
+        <td><span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${BOOT_IMGS[rankKey] ? `<img class="rank-boot-icon" src="${BOOT_IMGS[rankKey]}" alt="">` : ''}${rankLabel}</span></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
     }).join('');
