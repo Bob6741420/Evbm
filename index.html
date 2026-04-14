@@ -416,20 +416,30 @@
     .perks-section > .inner {
       position: relative;
       z-index: 2;
-      /* Actual parchment texture from screenshot, darkened so text stays readable */
       background:
-        linear-gradient(rgba(12,8,2,0.88), rgba(12,8,2,0.88)),
-        url("Screenshot 2026-03-31 175838.png");
-      background-size: 100% 100%, cover;
-      background-repeat: no-repeat, no-repeat;
-      background-position: top left, center center;
-      border-left: 1px solid rgba(92,58,30,0.5);
-      border-right: 1px solid rgba(92,58,30,0.5);
+        /* Text readability overlay */
+        linear-gradient(rgba(6,3,1,0.82), rgba(6,3,1,0.82)),
+        /* Horizontal paper fibers */
+        repeating-linear-gradient(180deg,
+          transparent 0px, transparent 3px,
+          rgba(200,150,70,0.06) 3px, rgba(200,150,70,0.06) 4px),
+        /* Vertical paper fibers */
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 5px,
+          rgba(160,100,40,0.05) 5px, rgba(160,100,40,0.05) 6px),
+        /* Edge vignette + warm parchment base */
+        radial-gradient(ellipse 140% 120% at 50% 50%,
+          #b07838 0%, #8a5e24 45%, #6a4418 100%);
+      background-size: auto;
+      border-left: 2px solid rgba(120,80,30,0.7);
+      border-right: 2px solid rgba(120,80,30,0.7);
       padding: 80px 60px;
       box-shadow:
-        inset 0 0 60px rgba(0,0,0,0.3),
+        inset 4px 0 20px rgba(0,0,0,0.4),
+        inset -4px 0 20px rgba(0,0,0,0.4),
+        inset 0 0 80px rgba(0,0,0,0.35),
         0 4px 40px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(139,94,60,0.3);
+        0 0 0 1px rgba(139,94,60,0.4);
     }
     #page-features > .inner::before, #page-about > .inner::before,
     #page-ranks > .inner::before, #page-stats > .inner::before,
@@ -442,14 +452,24 @@
       left: -20px;
       right: -20px;
       height: 28px;
-      /* Oak plank roller using the same parchment texture */
+      /* Wooden roller */
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%),
-        url("Screenshot 2026-03-31 175838.png");
-      background-size: 100% 100%, 100% 100%;
-      background-repeat: no-repeat, no-repeat;
-      border-radius: 3px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,210,120,0.15);
+        /* Shine highlight */
+        linear-gradient(180deg,
+          rgba(255,210,120,0.18) 0%, rgba(255,210,120,0.06) 40%,
+          transparent 60%, rgba(0,0,0,0.3) 100%),
+        /* Wood grain lines */
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 12px,
+          rgba(0,0,0,0.12) 12px, rgba(0,0,0,0.12) 13px),
+        /* Wood base */
+        linear-gradient(180deg, #9B6B30 0%, #7A4E1E 40%, #5E3A10 65%, #7A4E1E 100%);
+      background-size: auto;
+      border-radius: 4px;
+      box-shadow:
+        0 4px 18px rgba(0,0,0,0.9),
+        inset 0 1px 0 rgba(255,210,100,0.25),
+        inset 0 -1px 0 rgba(0,0,0,0.4);
     }
     #page-features > .inner::before, #page-about > .inner::before,
     #page-ranks > .inner::before, #page-stats > .inner::before,
