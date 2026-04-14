@@ -393,10 +393,10 @@
     /* ---- SHARED PAGE BACKGROUND ---- */
     #page-features, #page-about, #page-ranks, #page-stats, #page-leaderboard {
       overflow-x: hidden;
-      background-color: #1a1a1a;
+      background-color: #3a3a3a;
       background-image:
-        /* Overall dark vignette to deepen the stone */
-        radial-gradient(ellipse 100% 100% at 50% 50%, rgba(30,10,0,0.4) 0%, transparent 50%, rgba(0,0,0,0.7) 100%),
+        /* Subtle vignette at edges */
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.35) 100%),
         /* Actual Minecraft stone brick texture */
         url("Screenshot 2026-04-01 201854.png");
       background-size:
@@ -1777,7 +1777,7 @@
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
-        <td>${BOOT_IMGS[rankKey] ? `<img src="${BOOT_IMGS[rankKey]}" alt="" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:middle;margin-right:6px;">` : ''}<span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></td>
+        <td><img src="${BOOT_IMGS[rankKey] || 'boots/noob.png'}" alt="" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:middle;margin-right:6px;"><span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
     }).join('');
