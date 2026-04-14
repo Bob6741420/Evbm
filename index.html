@@ -1405,10 +1405,12 @@
     <div class="stats-profile" id="stats-profile">
       <div class="profile-header">
         <img class="player-avatar" id="player-avatar" src="" alt="avatar">
-        <img id="player-rank-boot" src="boots/noob.png" alt="" style="width:64px;height:64px;image-rendering:pixelated;flex-shrink:0;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 3px #fff);">
         <div class="player-info">
           <div class="player-name" id="player-name"></div>
-          <div class="rank-badge" id="player-rank-badge"></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+            <img id="player-rank-boot" src="boots/noob.png" alt="" width="36" height="36" style="image-rendering:pixelated;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 3px #fff);">
+            <div class="rank-badge" id="player-rank-badge"></div>
+          </div>
         </div>
       </div>
       <div class="stats-grid reveal-stagger">
