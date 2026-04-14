@@ -417,21 +417,23 @@
       position: relative;
       z-index: 2;
       background:
-        /* Text readability overlay */
-        linear-gradient(rgba(6,3,1,0.82), rgba(6,3,1,0.82)),
-        /* Edge vignette + warm parchment base */
-        radial-gradient(ellipse 140% 120% at 50% 50%,
-          #b07838 0%, #8a5e24 45%, #6a4418 100%);
+        radial-gradient(ellipse 80% 80% at 0%   0%,   rgba(20,10,2,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 80% at 100% 0%,   rgba(20,10,2,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 80% at 0%   100%, rgba(20,10,2,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 80% at 100% 100%, rgba(20,10,2,0.55) 0%, transparent 55%),
+        linear-gradient(rgba(6,3,1,0.58), rgba(6,3,1,0.58)),
+        radial-gradient(ellipse 140% 120% at 50% 50%, #c8933e 0%, #a06828 45%, #7a4a1a 100%);
       background-size: auto;
-      border-left: 2px solid rgba(120,80,30,0.7);
-      border-right: 2px solid rgba(120,80,30,0.7);
+      border-left: 2px solid rgba(160,104,40,0.8);
+      border-right: 2px solid rgba(160,104,40,0.8);
       padding: 80px 60px;
       box-shadow:
-        inset 4px 0 20px rgba(0,0,0,0.4),
-        inset -4px 0 20px rgba(0,0,0,0.4),
-        inset 0 0 80px rgba(0,0,0,0.35),
+        inset 6px 0 28px rgba(10,5,0,0.55),
+        inset -6px 0 28px rgba(10,5,0,0.55),
+        inset 0 8px 40px rgba(10,5,0,0.45),
+        inset 0 -8px 40px rgba(10,5,0,0.45),
         0 4px 40px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(139,94,60,0.4);
+        0 0 0 1px rgba(160,104,40,0.5);
     }
     #page-features > .inner::before, #page-about > .inner::before,
     #page-ranks > .inner::before, #page-stats > .inner::before,
@@ -444,20 +446,18 @@
       left: -20px;
       right: -20px;
       height: 28px;
-      /* Wooden roller */
       background:
-        /* Shine highlight */
-        linear-gradient(180deg,
-          rgba(255,210,120,0.18) 0%, rgba(255,210,120,0.06) 40%,
-          transparent 60%, rgba(0,0,0,0.3) 100%),
-        /* Wood base */
-        linear-gradient(180deg, #9B6B30 0%, #7A4E1E 40%, #5E3A10 65%, #7A4E1E 100%);
+        radial-gradient(ellipse 70% 35% at 50% 18%,
+          rgba(255,225,140,0.55) 0%, rgba(255,200,100,0.20) 40%, transparent 70%),
+        linear-gradient(180deg, #b8813a 0%, #9c6428 22%, #7a4e1e 50%, #5e3a10 72%, #7a4e1e 100%),
+        linear-gradient(90deg, rgba(0,0,0,0.35) 0%, transparent 8%, transparent 92%, rgba(0,0,0,0.35) 100%);
       background-size: auto;
-      border-radius: 4px;
+      border-radius: 6px;
       box-shadow:
-        0 4px 18px rgba(0,0,0,0.9),
-        inset 0 1px 0 rgba(255,210,100,0.25),
-        inset 0 -1px 0 rgba(0,0,0,0.4);
+        0 6px 24px rgba(0,0,0,0.95),
+        0 8px 16px -4px rgba(0,0,0,0.7),
+        inset 0 2px 0 rgba(255,220,120,0.45),
+        inset 0 -3px 6px rgba(0,0,0,0.5);
     }
     #page-features > .inner::before, #page-about > .inner::before,
     #page-ranks > .inner::before, #page-stats > .inner::before,
@@ -697,6 +697,47 @@
     .stat-box:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 8px rgba(245,212,121,0.12); }
     .stat-box:hover .stat-box-num { text-shadow: 0 0 12px rgba(245,212,121,0.5); }
 
+    /* ---- STAT BOX ICONS ---- */
+    .stat-box-icon { display:block; margin:0 auto 10px; opacity:0.5; color:var(--brown-light); transition:opacity 0.2s,color 0.2s; }
+    .stat-box:hover .stat-box-icon { opacity:0.9; color:var(--gold); }
+
+    /* ---- STATS PROFILE REVEAL ---- */
+    @keyframes profileSlideIn { from{opacity:0;transform:translateY(16px) scale(0.97);filter:blur(2px)} to{opacity:1;transform:none;filter:none} }
+    .stats-profile.visible { animation:profileSlideIn 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+    .player-avatar { border:3px solid var(--rank-color,var(--brown-mid)); box-shadow:0 0 0 4px rgba(0,0,0,0.6),0 0 20px 4px var(--rank-glow,rgba(122,61,16,0.4)); transition:box-shadow 0.4s,border-color 0.4s; }
+    .profile-header { background:linear-gradient(135deg,rgba(92,58,30,0.12) 0%,rgba(0,0,0,0.3) 100%); border-radius:6px; padding:20px; border:1px solid rgba(92,58,30,0.35); border-bottom:3px solid var(--brown-dark); transition:background 0.4s,border-color 0.4s; }
+
+    /* ---- LB LOADING DOTS ---- */
+    .lb-loading { display:flex; align-items:center; justify-content:center; padding:48px 0; }
+    .lb-loading-dots { display:flex; gap:10px; align-items:flex-end; }
+    .lb-loading-dot { width:10px; height:10px; background:var(--gold); box-shadow:0 0 8px rgba(240,184,48,0.6); animation:lbDotBounce 0.9s ease-in-out infinite; }
+    .lb-loading-dot:nth-child(2) { animation-delay:0.18s; }
+    .lb-loading-dot:nth-child(3) { animation-delay:0.36s; }
+    @keyframes lbDotBounce { 0%,80%,100%{transform:translateY(0);opacity:0.5} 40%{transform:translateY(-14px);opacity:1} }
+
+    /* ---- LB PODIUM BORDERS ---- */
+    .lb-table tbody tr:has(.lb-rank-num.gold) td   { background:rgba(255,215,0,0.07); }
+    .lb-table tbody tr:has(.lb-rank-num.silver) td { background:rgba(192,192,192,0.06); }
+    .lb-table tbody tr:has(.lb-rank-num.bronze) td { background:rgba(205,127,50,0.07); }
+    .lb-table tbody tr:has(.lb-rank-num.gold) td:first-child   { border-left:3px solid #FFD700; box-shadow:inset 3px 0 12px rgba(255,215,0,0.2); }
+    .lb-table tbody tr:has(.lb-rank-num.silver) td:first-child { border-left:3px solid #C0C0C0; box-shadow:inset 3px 0 10px rgba(192,192,192,0.18); }
+    .lb-table tbody tr:has(.lb-rank-num.bronze) td:first-child { border-left:3px solid #CD7F32; box-shadow:inset 3px 0 10px rgba(205,127,50,0.18); }
+
+    /* ---- SECTION TITLE ANIMATED UNDERLINE ---- */
+    .section-title::after  { width:0%; transition:width 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s; }
+    .section-title::before { width:0%; transition:width 0.6s cubic-bezier(0.22,1,0.36,1) 0.35s; }
+    .page.active .section-title::after  { width:60%; }
+    .page.active .section-title::before { width:30%; }
+
+    /* ---- DISCORD CTA POLISH ---- */
+    .discord-cta { padding:40px 20px 32px; position:relative; text-align:center; margin-bottom:28px; }
+    .discord-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 100% at 50% 50%, rgba(88,101,242,0.12) 0%, transparent 70%); pointer-events:none; }
+    .discord-cta-heading { font-family:'Press Start 2P',monospace; font-size:0.55rem; color:var(--gold); letter-spacing:2px; margin-bottom:8px; display:block; }
+    .discord-cta-sub { font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--gray); margin-bottom:20px; display:block; }
+    @keyframes ctaRingPulse { 0%,100%{opacity:0.4;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.04)} }
+    .discord-cta-btn { position:relative; }
+    .discord-cta-btn::before { content:''; position:absolute; inset:-6px; border-radius:4px; border:1px solid rgba(88,101,242,0.35); animation:ctaRingPulse 2.5s ease-in-out infinite; pointer-events:none; }
+
     .switch-btn { background: none; border: 2px solid var(--brown-mid); color: var(--brown-light); font-family: 'Press Start 2P', monospace; font-size: 0.45rem; padding: 10px 16px; cursor: pointer; letter-spacing: 1px; transition: color 0.15s, border-color 0.15s; }
     .switch-btn:hover { color: var(--white); border-color: var(--white); }
 
@@ -917,9 +958,6 @@
     .lb-avatar { width: 32px; height: 32px; image-rendering: pixelated; border: 2px solid var(--brown-dark); }
     .lb-loading { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--gray); padding: 40px 0; text-align: center; }
     .lb-table tbody tr:nth-child(even) td { background: rgba(92,58,30,0.08); }
-    .lb-table tbody tr:has(.lb-rank-num.gold) td   { background: rgba(255,215,0,0.06); }
-    .lb-table tbody tr:has(.lb-rank-num.silver) td { background: rgba(192,192,192,0.05); }
-    .lb-table tbody tr:has(.lb-rank-num.bronze) td { background: rgba(205,127,50,0.06); }
     .lb-rank-num.gold, .lb-rank-num.silver, .lb-rank-num.bronze { font-size: 1rem; line-height: 1; }
 
     /* ---- TOAST ---- */
@@ -1208,6 +1246,8 @@
 
   <div class="page-footer">
     <div class="discord-cta">
+      <span class="discord-cta-heading">JOIN THE COMMUNITY</span>
+      <span class="discord-cta-sub">Chat, get updates, and meet other runners.</span>
       <a href="https://discord.gg/TqwFDmNV" target="_blank" class="discord-cta-btn">&#128172; JOIN DISCORD</a>
     </div>
     <div class="footer-logo">
@@ -1412,18 +1452,22 @@
       </div>
       <div class="stats-grid reveal-stagger">
         <div class="stat-box">
+          <span class="stat-box-icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><rect x="4" y="1" width="8" height="2"/><rect x="4" y="13" width="8" height="2"/><rect x="3" y="3" width="1" height="2"/><rect x="12" y="3" width="1" height="2"/><rect x="3" y="11" width="1" height="2"/><rect x="12" y="11" width="1" height="2"/><rect x="5" y="5" width="2" height="1"/><rect x="9" y="5" width="2" height="1"/><rect x="6" y="6" width="4" height="1"/><rect x="7" y="7" width="2" height="2"/><rect x="5" y="9" width="6" height="1"/><rect x="4" y="10" width="8" height="1"/></svg></span>
           <span class="stat-box-num" id="stat-playtime">--</span>
           <span class="stat-box-label">PLAYTIME</span>
         </div>
         <div class="stat-box">
+          <span class="stat-box-icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><rect x="7" y="2" width="2" height="2"/><rect x="5" y="4" width="6" height="2"/><rect x="3" y="6" width="10" height="2"/><rect x="7" y="8" width="2" height="6"/></svg></span>
           <span class="stat-box-num" id="stat-jumps">--</span>
           <span class="stat-box-label">JUMPS</span>
         </div>
         <div class="stat-box">
+          <span class="stat-box-icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><rect x="5" y="2" width="6" height="1"/><rect x="3" y="3" width="2" height="1"/><rect x="11" y="3" width="2" height="1"/><rect x="2" y="4" width="1" height="8"/><rect x="13" y="4" width="1" height="8"/><rect x="3" y="12" width="2" height="1"/><rect x="11" y="12" width="2" height="1"/><rect x="5" y="13" width="6" height="1"/><rect x="7" y="5" width="2" height="1"/><rect x="6" y="6" width="4" height="1"/><rect x="7" y="9" width="3" height="1"/><rect x="6" y="10" width="5" height="1"/></svg></span>
           <span class="stat-box-num" id="stat-coins">--</span>
           <span class="stat-box-label">COINS</span>
         </div>
         <div class="stat-box">
+          <span class="stat-box-icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><rect x="4" y="2" width="8" height="1"/><rect x="2" y="3" width="12" height="1"/><rect x="2" y="4" width="1" height="6"/><rect x="13" y="4" width="1" height="6"/><rect x="3" y="10" width="2" height="2"/><rect x="11" y="10" width="2" height="2"/><rect x="5" y="11" width="2" height="2"/><rect x="9" y="11" width="2" height="2"/><rect x="7" y="12" width="2" height="2"/><rect x="6" y="5" width="4" height="4"/></svg></span>
           <span class="stat-box-num" id="stat-rank-num">--</span>
           <span class="stat-box-label">RANK</span>
         </div>
@@ -1453,7 +1497,7 @@
     </div>
 
     <div class="lb-table-wrap active" id="lb-jumps">
-      <div class="lb-loading" id="lb-jumps-loading">Loading...</div>
+      <div class="lb-loading" id="lb-jumps-loading"><div class="lb-loading-dots"><div class="lb-loading-dot"></div><div class="lb-loading-dot"></div><div class="lb-loading-dot"></div></div></div>
       <table class="lb-table" id="lb-jumps-table" style="display:none">
         <thead><tr><th>#</th><th>PLAYER</th><th>RANK</th><th>JUMPS</th></tr></thead>
         <tbody id="lb-jumps-body"></tbody>
@@ -1461,7 +1505,7 @@
     </div>
 
     <div class="lb-table-wrap" id="lb-playtime">
-      <div class="lb-loading" id="lb-playtime-loading">Loading...</div>
+      <div class="lb-loading" id="lb-playtime-loading"><div class="lb-loading-dots"><div class="lb-loading-dot"></div><div class="lb-loading-dot"></div><div class="lb-loading-dot"></div></div></div>
       <table class="lb-table" id="lb-playtime-table" style="display:none">
         <thead><tr><th>#</th><th>PLAYER</th><th>RANK</th><th>PLAYTIME</th></tr></thead>
         <tbody id="lb-playtime-body"></tbody>
@@ -1469,7 +1513,7 @@
     </div>
 
     <div class="lb-table-wrap" id="lb-coins">
-      <div class="lb-loading" id="lb-coins-loading">Loading...</div>
+      <div class="lb-loading" id="lb-coins-loading"><div class="lb-loading-dots"><div class="lb-loading-dot"></div><div class="lb-loading-dot"></div><div class="lb-loading-dot"></div></div></div>
       <table class="lb-table" id="lb-coins-table" style="display:none">
         <thead><tr><th>#</th><th>PLAYER</th><th>RANK</th><th>COINS</th></tr></thead>
         <tbody id="lb-coins-body"></tbody>
@@ -1724,6 +1768,25 @@
     }
   }
 
+  function animateCount(el, end, fmt, dur) {
+    const t0 = performance.now();
+    (function f(now) {
+      const p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(end * e));
+      if (p < 1) requestAnimationFrame(f);
+    })(t0);
+  }
+
+  const RANK_COLORS = {
+    noob:    { color:'#C4845A', glow:'rgba(196,132,90,0.5)'  },
+    pro:     { color:'#D8D8D8', glow:'rgba(216,216,216,0.4)' },
+    master:  { color:'#F5D479', glow:'rgba(245,212,121,0.6)' },
+    legend:  { color:'#FF6030', glow:'rgba(255,96,48,0.55)'  },
+    captain: { color:'#FF6868', glow:'rgba(255,104,104,0.55)'},
+    champion:{ color:'#6FF0FF', glow:'rgba(111,240,255,0.7)' },
+    god:     { color:'#4AFF6A', glow:'rgba(74,255,106,0.65)' },
+  };
+
   function renderStats(username, uuid, f) {
     playerAvatar.src = uuid ? `https://mc-heads.net/avatar/${uuid}/80` : '';
     playerNameEl.textContent = username;
@@ -1731,13 +1794,18 @@
     const bootEl = document.getElementById('player-rank-boot');
     if (BOOT_IMGS[rankKey]) { bootEl.src = BOOT_IMGS[rankKey]; bootEl.style.display = ''; }
     else { bootEl.style.display = 'none'; }
-    playerRankEl.innerHTML   = RANK_LABELS[rankKey] || f.rank || 'NOOB';
-    playerRankEl.className   = `rank-badge rank-${rankKey}`;
-    const _pm = f.playtime || 0; document.getElementById('stat-playtime').textContent = Math.floor(_pm/60) + 'h ' + (_pm%60) + 'm';
-    document.getElementById('stat-jumps').textContent    = (f.jumps  || 0).toLocaleString();
-    document.getElementById('stat-coins').textContent    = (f.coins  || 0).toLocaleString();
+    playerRankEl.innerHTML = RANK_LABELS[rankKey] || f.rank || 'NOOB';
+    playerRankEl.className = `rank-badge rank-${rankKey}`;
+    const rc = RANK_COLORS[rankKey] || RANK_COLORS.noob;
+    playerAvatar.style.setProperty('--rank-color', rc.color);
+    playerAvatar.style.setProperty('--rank-glow',  rc.glow);
+    animateCount(document.getElementById('stat-jumps'),    f.jumps    || 0, v => v.toLocaleString(), 900);
+    animateCount(document.getElementById('stat-coins'),    f.coins    || 0, v => v.toLocaleString(), 900);
+    animateCount(document.getElementById('stat-playtime'), f.playtime || 0, v => Math.floor(v/60) + 'h ' + (v%60) + 'm', 900);
     document.getElementById('stat-rank-num').textContent = f.rank || '--';
+    statsProfile.classList.remove('visible');
     statsProfile.style.display = 'block';
+    requestAnimationFrame(() => statsProfile.classList.add('visible'));
   }
 
   function switchPlayer() {
