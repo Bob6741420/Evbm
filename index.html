@@ -1777,7 +1777,7 @@
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
-        <td><span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></td>
+        <td><div style="display:flex;align-items:center;gap:8px;">${BOOT_IMGS[rankKey] ? `<img src="${BOOT_IMGS[rankKey]}" alt="" style="width:24px;height:24px;image-rendering:pixelated;">` : ''}<span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></div></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
     }).join('');
