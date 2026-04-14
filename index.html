@@ -1453,6 +1453,7 @@
     <div class="lb-tabs">
       <div class="lb-tab active" onclick="switchLbTab('jumps', this)">JUMPS</div>
       <div class="lb-tab" onclick="switchLbTab('playtime', this)">PLAYTIME</div>
+      <div class="lb-tab" onclick="switchLbTab('coins', this)">COINS</div>
     </div>
 
     <div class="lb-table-wrap active" id="lb-jumps">
@@ -1468,6 +1469,14 @@
       <table class="lb-table" id="lb-playtime-table" style="display:none">
         <thead><tr><th>#</th><th>PLAYER</th><th>RANK</th><th>PLAYTIME</th></tr></thead>
         <tbody id="lb-playtime-body"></tbody>
+      </table>
+    </div>
+
+    <div class="lb-table-wrap" id="lb-coins">
+      <div class="lb-loading" id="lb-coins-loading">Loading...</div>
+      <table class="lb-table" id="lb-coins-table" style="display:none">
+        <thead><tr><th>#</th><th>PLAYER</th><th>RANK</th><th>COINS</th></tr></thead>
+        <tbody id="lb-coins-body"></tbody>
       </table>
     </div>
   </div>
@@ -1767,10 +1776,12 @@
       lbData = data.filter(r => r.username);
       renderLb('jumps', 'jumps', v => (v || 0).toLocaleString() + ' JMP');
       renderLb('playtime', 'playtime', v => Math.floor((v||0)/60) + 'h ' + ((v||0)%60) + 'm');
+      renderLb('coins', 'coins', v => (v || 0).toLocaleString() + ' 🪙');
       lbLoaded = true;
     } catch(e) {
       document.getElementById('lb-jumps-loading').textContent = 'Failed to load.';
       document.getElementById('lb-playtime-loading').textContent = 'Failed to load.';
+      document.getElementById('lb-coins-loading').textContent = 'Failed to load.';
     }
   }
 
