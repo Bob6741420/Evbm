@@ -1417,6 +1417,7 @@
           <span class="stat-box-label">COINS</span>
         </div>
         <div class="stat-box">
+          <img id="stat-rank-boot" src="" alt="" style="width:40px;height:40px;image-rendering:pixelated;display:block;margin:0 auto 6px;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 2px #fff);">
           <span class="stat-box-num" id="stat-rank-num">--</span>
           <span class="stat-box-label">RANK</span>
         </div>
@@ -1673,6 +1674,7 @@
   const SUPABASE_URL  = 'https://jmetrlpdbkvwntnnasof.supabase.co';
   const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptZXRybHBkYmt2d250bm5hc29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjE4OTcsImV4cCI6MjA5MDg5Nzg5N30.rX-ZSYDIo2drQjjYGBwoV-M_Za5HPWofZ_A7RWdpdCY';
   const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION', god:'GOD' };
+  const BOOT_IMGS   = { noob:'boots/noob.png', pro:'boots/pro.png', master:'boots/master.png', champion:'boots/champion.png', god:'boots/god.png' };
 
   const usernameInput = document.getElementById('mc-username-input');
   const lookupBtn     = document.getElementById('lookup-btn');
@@ -1718,6 +1720,7 @@
     document.getElementById('stat-jumps').textContent    = (f.jumps  || 0).toLocaleString();
     document.getElementById('stat-coins').textContent    = (f.coins  || 0).toLocaleString();
     document.getElementById('stat-rank-num').textContent = f.rank || '--';
+    document.getElementById('stat-rank-boot').src = BOOT_IMGS[rankKey] || '';
   }
 
   function switchPlayer() {
