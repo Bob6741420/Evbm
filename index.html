@@ -597,8 +597,8 @@
     }
     .perk-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,94,60,0.3); border-color: rgba(139,94,60,0.6); }
     .perk-boot-img { display: block; width: 64px; height: 64px; image-rendering: pixelated; margin: 0 auto 12px; }
-    .rank-boot-icon { width: 32px; height: 32px; image-rendering: pixelated; display: block; flex-shrink: 0; }
-    .rank-boot-icon-lg { width: 48px; height: 48px; image-rendering: pixelated; display: block; flex-shrink: 0; }
+    .rank-boot-icon { width: 32px; height: 32px; image-rendering: pixelated; display: block; flex-shrink: 0; filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 2px #fff); }
+    .rank-boot-icon-lg { width: 48px; height: 48px; image-rendering: pixelated; display: block; flex-shrink: 0; filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 3px #fff); }
     .rank-cell { display: flex; align-items: center; gap: 8px; }
     .perk-rank-label { font-size: 0.55rem; letter-spacing: 2px; margin-bottom: 14px; display: block; }
     .perk-list { list-style: none; padding: 0; }
@@ -1405,7 +1405,7 @@
     <div class="stats-profile" id="stats-profile">
       <div class="profile-header">
         <img class="player-avatar" id="player-avatar" src="" alt="avatar">
-        <img id="player-rank-boot" src="" alt="" style="display:none;width:64px;height:64px;image-rendering:pixelated;flex-shrink:0;">
+        <img id="player-rank-boot" src="boots/noob.png" alt="" style="width:64px;height:64px;image-rendering:pixelated;flex-shrink:0;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 3px #fff);">
         <div class="player-info">
           <div class="player-name" id="player-name"></div>
           <div class="rank-badge" id="player-rank-badge"></div>
@@ -1722,8 +1722,7 @@
     playerNameEl.textContent = username;
     const rankKey = (f.rank || 'noob').toLowerCase();
     const bootEl = document.getElementById('player-rank-boot');
-    if (BOOT_IMGS[rankKey]) { bootEl.src = BOOT_IMGS[rankKey]; bootEl.style.display = 'block'; }
-    else { bootEl.style.display = 'none'; }
+    bootEl.src = BOOT_IMGS[rankKey] || 'boots/noob.png';
     playerRankEl.innerHTML   = RANK_LABELS[rankKey] || f.rank || 'NOOB';
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
     const _pm = f.playtime || 0; document.getElementById('stat-playtime').textContent = Math.floor(_pm/60) + 'h ' + (_pm%60) + 'm';
@@ -1783,7 +1782,7 @@
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
-        <td><div style="display:flex;align-items:center;gap:8px;">${BOOT_IMGS[rankKey] ? `<img src="${BOOT_IMGS[rankKey]}" alt="" style="width:32px;height:32px;image-rendering:pixelated;display:block;flex-shrink:0;">` : ''}<span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></div></td>
+        <td><div style="display:flex;align-items:center;gap:8px;">${BOOT_IMGS[rankKey] ? `<img src="${BOOT_IMGS[rankKey]}" alt="" style="width:32px;height:32px;image-rendering:pixelated;display:block;flex-shrink:0;filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 2px #fff);">` : ''}<span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></div></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
     }).join('');
