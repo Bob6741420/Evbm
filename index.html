@@ -1715,8 +1715,9 @@
     playerAvatar.src = uuid ? `https://mc-heads.net/avatar/${uuid}/80` : '';
     playerNameEl.textContent = username;
     const rankKey = (f.rank || 'noob').toLowerCase().trim();
-    console.log('rank raw:', f.rank, '| rankKey:', rankKey, '| boot:', BOOT_IMGS[rankKey]);
-    document.getElementById('player-rank-boot').src = BOOT_IMGS[rankKey] || 'boots/noob.png';
+    const bootEl = document.getElementById('player-rank-boot');
+    if (BOOT_IMGS[rankKey]) { bootEl.src = BOOT_IMGS[rankKey]; bootEl.style.display = ''; }
+    else { bootEl.style.display = 'none'; }
     playerRankEl.innerHTML   = RANK_LABELS[rankKey] || f.rank || 'NOOB';
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
     const _pm = f.playtime || 0; document.getElementById('stat-playtime').textContent = Math.floor(_pm/60) + 'h ' + (_pm%60) + 'm';
@@ -1777,7 +1778,7 @@
       return `<tr>
         <td class="lb-rank-num ${numClass}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
         <td><div class="lb-player">${avatar ? `<img class="lb-avatar" src="${avatar}" alt="">` : ''}<span>${p.username}</span></div></td>
-        <td><img src="${BOOT_IMGS[rankKey] || 'boots/noob.png'}" alt="" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:middle;margin-right:6px;"><span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></td>
+        <td>${BOOT_IMGS[rankKey] ? `<img src="${BOOT_IMGS[rankKey]}" alt="" style="width:20px;height:20px;image-rendering:pixelated;vertical-align:middle;margin-right:6px;">` : ''}<span class="rank-badge rank-${rankKey}" style="font-size:0.4rem;padding:6px 10px;">${rankLabel}</span></td>
         <td>${fmt(p[field])}</td>
       </tr>`;
     }).join('');
