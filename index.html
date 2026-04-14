@@ -1696,7 +1696,7 @@
   const SUPABASE_URL  = 'https://jmetrlpdbkvwntnnasof.supabase.co';
   const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptZXRybHBkYmt2d250bm5hc29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMjE4OTcsImV4cCI6MjA5MDg5Nzg5N30.rX-ZSYDIo2drQjjYGBwoV-M_Za5HPWofZ_A7RWdpdCY';
   const RANK_LABELS = { noob:'NOOB', pro:'PRO', master:'MASTER', legend:'LEGEND', captain:'CAPTAIN', champion:'CHAMPION', god:'GOD' };
-  const BOOT_IMGS   = { noob:'boots/noob.png', pro:'boots/pro.png', master:'boots/master.png', champion:'boots/champion.png', god:'boots/god.png' };
+  const BOOT_IMGS   = { noob:'boots/noob.png', pro:'boots/pro.png', master:'boots/master.png', legend:'boots/master.png', captain:'boots/champion.png', champion:'boots/champion.png', god:'boots/god.png' };
 
   const usernameInput = document.getElementById('mc-username-input');
   const lookupBtn     = document.getElementById('lookup-btn');
@@ -1791,7 +1791,7 @@
     const tbody = document.getElementById('lb-' + key + '-body');
     tbody.innerHTML = sorted.map((p, i) => {
       const numClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-      const rankKey = (p.rank || 'noob').toLowerCase();
+      const rankKey = (p.rank || 'noob').toLowerCase().trim();
       const rankLabel = RANK_LABELS[rankKey] || p.rank || 'NOOB';
       const uuid = p.uuid || '';
       const avatar = uuid ? `https://mc-heads.net/avatar/${uuid}/32` : '';
