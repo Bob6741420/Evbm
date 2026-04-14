@@ -1714,7 +1714,8 @@
   function renderStats(username, uuid, f) {
     playerAvatar.src = uuid ? `https://mc-heads.net/avatar/${uuid}/80` : '';
     playerNameEl.textContent = username;
-    const rankKey = (f.rank || 'noob').toLowerCase();
+    const rankKey = (f.rank || 'noob').toLowerCase().trim();
+    console.log('rank raw:', f.rank, '| rankKey:', rankKey, '| boot:', BOOT_IMGS[rankKey]);
     document.getElementById('player-rank-boot').src = BOOT_IMGS[rankKey] || 'boots/noob.png';
     playerRankEl.innerHTML   = RANK_LABELS[rankKey] || f.rank || 'NOOB';
     playerRankEl.className   = `rank-badge rank-${rankKey}`;
