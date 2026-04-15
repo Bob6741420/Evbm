@@ -1090,7 +1090,7 @@
 
     #page-features::before, #page-about::before,
     #page-ranks::before, #page-stats::before, #page-leaderboard::before {
-      content: ''; position: absolute; top: -10%; bottom: -10%; width: 35%;
+      content: ''; position: fixed; top: var(--nav-h); bottom: 0; width: 35%;
       pointer-events: none; z-index: 1;
       background: linear-gradient(90deg, transparent 0%, rgba(240,184,48,0.02) 20%, rgba(240,184,48,0.09) 40%, rgba(240,184,48,0.13) 50%, rgba(240,184,48,0.09) 60%, rgba(240,184,48,0.02) 80%, transparent 100%);
       animation: stoneSweep 20s ease-in-out infinite;
