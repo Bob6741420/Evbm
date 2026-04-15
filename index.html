@@ -1102,7 +1102,8 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .hero-logo-wrap     { animation: fadeInDown 0.8s ease-out 0.1s both; }
-    .hero-tagline       { animation: fadeInUp   0.7s ease-out 0.4s both; }
+    .hero-sub           { font-family: 'Inter', sans-serif; font-size: clamp(0.85rem, 2vw, 1.1rem); color: rgba(240,220,180,0.7); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; animation: fadeInUp 0.7s ease-out 0.3s both; position: relative; z-index: 1; }
+    .hero-tagline       { animation: fadeInUp   0.7s ease-out 0.5s both; }
     .hero-buttons       { animation: fadeInUp   0.7s ease-out 0.65s both; }
     .hero-ip            { animation: fadeInUp   0.6s ease-out 0.85s both; }
     .player-count-badge { animation: fadeInUp   0.5s ease-out 1.0s both; }
@@ -1163,9 +1164,11 @@
   <canvas id="fire-canvas"></canvas>
 
   <div class="hero-wrap">
-    <div class="hero-logo-wrap" style="position:relative; z-index:1; margin-bottom:20px;">
+    <div class="hero-logo-wrap" style="position:relative; z-index:1; margin-bottom:12px;">
       <img src="logo_transparent.png" alt="EVBM PARKOUR" style="max-width: min(520px, 85vw); width: 100%; image-rendering: pixelated; animation: logoFloat 3s ease-in-out infinite;" />
     </div>
+
+    <p class="hero-sub">The Ultimate Minecraft Parkour Server.</p>
 
     <p class="hero-tagline">
       Run. Earn. <span id="tw-text"></span><span class="tw-cursor">|</span><br />
