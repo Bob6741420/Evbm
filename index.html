@@ -724,10 +724,12 @@
     .lb-table tbody tr:has(.lb-rank-num.bronze) td:first-child { border-left:3px solid #CD7F32; box-shadow:inset 3px 0 10px rgba(205,127,50,0.18); }
 
     /* ---- SECTION TITLE ANIMATED UNDERLINE ---- */
-    .section-title::after  { width:0%; transition:width 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s; }
-    .section-title::before { width:0%; transition:width 0.6s cubic-bezier(0.22,1,0.36,1) 0.35s; }
-    .page.active .section-title::after  { width:60%; }
-    .page.active .section-title::before { width:30%; }
+    .section-title::after  { width:0%; transition:width 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s; }
+    .section-title::before { width:0%; transition:width 0.6s cubic-bezier(0.22,1,0.36,1) 0.55s; }
+    .page.active .section-title:not(.reveal)::after,
+    .section-title.visible::after  { width:60%; }
+    .page.active .section-title:not(.reveal)::before,
+    .section-title.visible::before { width:30%; }
 
     /* ---- DISCORD CTA POLISH ---- */
     .discord-cta { padding:40px 20px 32px; position:relative; text-align:center; margin-bottom:28px; }
@@ -990,22 +992,40 @@
     /* ---- REVEAL ANIMATIONS ---- */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(56px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-56px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(56px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
     .reveal-stagger > * {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(48px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:   0ms; }
-    .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:  80ms; }
-    .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 160ms; }
-    .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 240ms; }
-    .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: 320ms; }
-    .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay: 400ms; }
+    .reveal-stagger.visible > *:nth-child(1)  { opacity:1; transform:none; transition-delay:   0ms; }
+    .reveal-stagger.visible > *:nth-child(2)  { opacity:1; transform:none; transition-delay: 110ms; }
+    .reveal-stagger.visible > *:nth-child(3)  { opacity:1; transform:none; transition-delay: 220ms; }
+    .reveal-stagger.visible > *:nth-child(4)  { opacity:1; transform:none; transition-delay: 330ms; }
+    .reveal-stagger.visible > *:nth-child(5)  { opacity:1; transform:none; transition-delay: 440ms; }
+    .reveal-stagger.visible > *:nth-child(6)  { opacity:1; transform:none; transition-delay: 550ms; }
+    .reveal-stagger.visible > *:nth-child(7)  { opacity:1; transform:none; transition-delay: 660ms; }
+    .reveal-stagger.visible > *:nth-child(8)  { opacity:1; transform:none; transition-delay: 770ms; }
+    .reveal-stagger.visible > *:nth-child(9)  { opacity:1; transform:none; transition-delay: 880ms; }
+    .reveal-stagger.visible > *:nth-child(10) { opacity:1; transform:none; transition-delay: 990ms; }
 
     /* ---- LOADING SCREEN ---- */
     #loading-screen {
@@ -1262,15 +1282,15 @@
 <!-- ========== ABOUT PAGE ========== -->
 <div class="page" id="page-about">
   <div class="inner">
-    <div class="about-grid reveal">
-      <div class="about-text">
+    <div class="about-grid">
+      <div class="about-text reveal-left">
 
         <h2 class="section-title"><span class="section-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M2 20v-9l4 5 6-11 6 11 4-5v9H2z"/><rect x="2" y="20" width="20" height="3"/></svg></span>BUILT ON<br />EVBO'S VISION</h2>
         <p>EVBM is inspired by <strong>Evbo's legendary Parkour Civilization</strong> series. We took everything that made it great and built a full multiplayer experience around it.</p>
         <p>Every system — tickets, ranks, courses, battles — is designed to keep you engaged and coming back. <strong>Progress never resets.</strong> Your grind is permanent.</p>
         <p>Whether you're here to speed-run courses or dominate in parkour battles, there's a path for you. <strong>The civilization grows with every player.</strong></p>
       </div>
-      <div style="display:flex; align-items:center; justify-content:center;">
+      <div class="reveal-right" style="display:flex; align-items:center; justify-content:center;">
         <img src="https://minotar.net/helm/evbo_/160" alt="evbo_" style="width:160px; height:160px; image-rendering:pixelated; border:4px solid var(--brown-mid); box-shadow:0 0 20px rgba(245,212,121,0.2);" />
       </div>
     </div>
@@ -1904,6 +1924,14 @@
   (function() {
     const pages = document.querySelectorAll('.page');
     pages.forEach(page => {
+      // Auto-tag headings and subtitles not already inside a reveal container
+      page.querySelectorAll('h2.section-title, .section-sub, .ranks-desc').forEach(el => {
+        const alreadyWrapped = el.closest('.reveal, .reveal-left, .reveal-right, .reveal-stagger');
+        if (!alreadyWrapped && !el.classList.contains('reveal')) {
+          el.classList.add('reveal');
+        }
+      });
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1911,8 +1939,9 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { root: page, threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      page.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+      }, { root: page, threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+      page.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-stagger').forEach(el => observer.observe(el));
     });
   })();
 </script>
